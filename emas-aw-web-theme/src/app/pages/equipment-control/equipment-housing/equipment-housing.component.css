@@ -1,0 +1,45 @@
+*{
+	color: #fff
+}
+  
+.searchBar{
+	height: 40px;
+}
+.itemStatus{
+	height: 20px;
+	line-height: 20px;
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 5px;
+}
+.greenBox{
+	width: 18px;
+	height: 18px;
+	display: block;
+	background-color: green;
+	margin-right: 10px;
+}
+.redBox{
+	width: 18px;
+	height: 18px;
+	display: block;
+	background-color: red;
+	margin-right: 10px;
+}
+.qResult{
+	float: right;
+	margin-top: -20px;
+	margin-right: 130px;
+}
+.active {
+    background: gray;
+}
+.search-area {
+	position: relative;
+    line-height: 40px;
+    zoom: 1;
+}
+.headerButton {
+	color: black;
+	width: 100px;
+}

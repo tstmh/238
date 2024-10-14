@@ -1,0 +1,59 @@
+<nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+	
+			<div nz-row style='padding: 5px 0;'>
+				<div nz-col [nzSpan]="24">
+					<!-- <nz-select style="width: 150px;" nzShowSearch nzAllowClear nzPlaceHolder="All">
+          <nz-option *ngFor="let option of listOfPictogram" [nzLabel]="option.pictogramId" [nzValue]="option">
+          </nz-option>
+        </nz-select> -->
+					<span style="padding-left: 15px;">Equip Type: {{ selectEuipment.equipType }} </span>
+					<span style="padding-left: 15px;">Exp Way:
+						<nz-select style="width: 150px;" [(ngModel)]="expWay">
+							<nz-option *ngFor="let option of listExpWay" [nzLabel]="option.description"
+								[nzValue]="option.value">
+							</nz-option>
+						</nz-select>
+					</span>
+					<span style="padding-left: 15px;">Category:
+						<nz-select style="width: 150px;border: none;" [nzDropdownMatchSelectWidth]="false"
+							[(ngModel)]="categoryLibrary">
+							<nz-option *ngFor="let option of vmsMsgCategory" [nzLabel]="option.description"
+								style="border: none;" [nzValue]="option.value">
+							</nz-option>
+						</nz-select>
+					</span>
+					<span style="padding-left: 55px;">
+						<button nz-button [nzType]="'default'" style="color: #000;"
+							(click)="searchVmsLibraryByExpwayCodeAndEquipTypeAndCategory()">Search</button>
+					</span>
+					<span style="padding-left: 55px;">
+						<button nz-button [nzType]="'default'" style="color: #000;"
+							(click)="getDataBySelectVmsLibrary()">Select</button>
+					</span>
+				</div>
+			</div>
+			<div nz-row style="height: 400px;overflow: scroll;">
+				<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false"
+					[nzBordered]="true" [nzData]="listOfLibrary">
+					<thead>
+						<tr style="background:cornflowerblue">
+							<ng-container *ngFor="let item of renderHeaderLibrary">
+								<th class="listTitle">
+									<div>{{ item.name }}</div>
+								</th>
+							</ng-container>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let data of basicTable.data;let idx = index"
+							[ngClass]="{'active':selectLibrary.id == data.id}" (click)='chooseLibrary(data)'>
+							<td>{{ data.displaySeq }}</td>
+							<td>{{ data.page1Text }}</td>
+							<td>{{ data.page2Text }}</td>
+						</tr>
+					</tbody>
+				</nz-table>
+			</div>
+	
+
+</nz-spin>

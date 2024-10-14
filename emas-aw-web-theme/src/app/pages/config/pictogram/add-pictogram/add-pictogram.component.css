@@ -1,0 +1,68 @@
+::ng-deep .vertical-center-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+::ng-deep .vertical-center-modal .ant-modal {
+        top: 0;
+      }
+*{
+    color: black;
+}
+
+.active {
+    background: lightblue;
+}
+
+.transfer{
+	background: white;
+	width: 150px;
+	height: 400px;
+    margin: 5px;
+    overflow-y: auto;
+}
+.transferTitle {
+	width: 250px;
+	margin: 5px;
+}
+.middleBtn button {
+	color:#000;
+	display: block;
+    margin-top: 20px;
+    margin-left: 20px;
+	width: 115px;
+}
+.active2 {
+	background: gray;
+}
+.download {
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    overflow-y: auto;
+  }
+  ::ng-deep .ant-modal-close:focus {
+      outline: unset;
+  }
+
+  /**上传图片*/
+  label{
+    position: relative;
+  }
+  #uploadImg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  #browsePictogram{
+    margin-left: 100px;
+  }
+  /* label后面的冒号 */
+::ng-deep .add-pic .ant-form-item-label>label::after {
+    content: ':';
+    position: relative;
+    top: -.5px;
+    margin: 0 8px 0 2px;
+    color: black;
+}

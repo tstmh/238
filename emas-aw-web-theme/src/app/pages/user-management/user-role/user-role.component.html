@@ -1,0 +1,96 @@
+<div style="padding: 5px;">
+	<div class="pageHeader">
+		 
+		<div nz-row class="searchBar">
+			<form
+				nz-form
+				[formGroup]="validateForm"
+				class="ant-advanced-search-form"
+				(ngSubmit)="submitForm()"
+			>
+				<div nz-row [nzGutter]="16">
+					<div nz-col [nzSpan]="6">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite"
+								>Role
+							</nz-form-label>
+							<nz-form-control>
+								<!-- <nz-select
+									style="width: 150px;"
+									nzShowSearch
+									nzAllowClear
+									nzPlaceHolder="Select a Role"
+									formControlName="role"
+									(ngModelChange)="changeRole($event)"
+									[(ngModel)]="roleSelect"
+									[compareWith]="compareFn"
+								> -->
+								<nz-select
+									style="width: 150px;"
+									nzShowSearch
+									nzAllowClear
+									nzPlaceHolder="Select a Role"
+									formControlName="role"
+									(ngModelChange)="changeRole($event)"
+									
+								>
+									<nz-option
+										*ngFor="let option of AllRoleList;let idx = index"
+										[nzLabel]="option.description"
+										[nzValue]="option.description"
+									>
+									</nz-option>
+								</nz-select>
+								<!-- <input
+            nz-input
+            placeholder="placeholder"
+            formControlName="subSystem"
+            style='color:#000'
+          /> -->
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<nz-divider></nz-divider>
+      <div nz-row>
+		<div nz-col nzSpan="8" class="transferTitle">
+			Available
+		  </div>
+		  <div nz-col nzSpan="5"></div>
+		  <div nz-col nzSpan="9" class="transferTitle">
+			Granted
+		  </div>
+	  </div>
+	  <div nz-row>
+		  <div nz-col nzSpan="8" class="transfer">
+			<ul *ngFor="let data of displayDataOfRight;let idx = index">
+				<li style="color: black;" (click)="addChoice(idx)" [ngClass]="{'active': addDataIdx == idx}">{{data.description}}</li>
+			</ul>
+		  </div>
+		  <div nz-col nzSpan="5" class="middleBtn">
+			<button nz-button [nzType]="'default'" (click)="add()" [disabled]="addStatus"><img src="../../../../assets/img/Images/SS_General/add.png" alt="add"> Add</button>
+			<button nz-button [nzType]="'default'" (click)="addAll()"><img src="../../../../assets/img/Images/SS_General/addall.png" alt="addall">Add All</button>
+			<button nz-button [nzType]="'default'" (click)="remove()" [disabled]="removeStatus"><img src="../../../../assets/img/Images/SS_General/remove.png" alt="remove">Remove</button>
+			<button nz-button [nzType]="'default'" (click)="removeAll()"><img src="../../../../assets/img/Images/SS_General/removeall.png" alt="removeAll">Remove All</button>
+		  </div>
+		  <div nz-col nzSpan="9" class="transfer">
+			<ul *ngFor="let data of grantedRoleList;let idx = index" (click)="removeChoice(idx)" [ngClass]="{'active': removeDataIdx == idx}">
+				<li style="color: black;">{{data.description}}</li>
+			</ul>
+		  </div>
+	  </div>
+    
+    
+      <div nz-row style="margin-top: 15px">
+            <div nz-col [nzSpan]="2" class="search-area" style="margin-right:25px" (click)="submitAssign()">
+                <button nz-button [nzType]="'default'" style="color:#000"  ><img src="../../../../assets/img/Images/SS_General/assign.png" class="assign">Assign</button>
+              </div>
+        
+            <div nz-col [nzSpan]="2" class="search-area" (click)="submitCancel()">
+                <button nz-button [nzType]="'default'" style="color:#000" ><img src="../../../../assets/img/Images/SS_General/cancel.jpg" class="cancel">Cancel</button>
+			  </div>
+	  </div>
+</div>

@@ -1,0 +1,253 @@
+<div style="padding: 5px;">
+    <div class="pageHeader">
+       
+      <div nz-row>
+        <form
+          nz-form
+          [formGroup]="validateForm"
+          class="ant-advanced-search-form"
+          (ngSubmit)="submitForm()"
+        >
+          <div nz-row [nzGutter]="24">
+              <div nz-col nzSpan="8">
+                  <nz-form-item nzFlex>
+                      <div nz-col [nzSpan]="6">
+                      <nz-form-label class="colorWhite"
+                        >Start Date
+                      </nz-form-label>
+                      </div>
+                  <div nz-col [nzSpan]="10">
+                      <nz-form-control>
+                        <nz-date-picker
+                          [nzDisabledDate]="disabledStartDate"
+                          nzShowTime
+                          nzFormat="dd/MM/yyyy HH:mm:ss a"
+                          formControlName="startDate"
+                          nzPlaceHolder="Start Date"
+                          (ngModelChange)="onStartChange($event)"
+                          (nzOnOpenChange)="
+                            handleStartOpenChange($event)
+                          "
+                        >
+                        </nz-date-picker>
+                        <!-- <input
+                        nz-input
+                        placeholder="placeholder"
+                        formControlName="fromDate"
+                        style='color:#000'
+                      /> -->
+                      </nz-form-control>
+                    </div>
+                    </nz-form-item>
+              </div>
+  
+            <div nz-col [nzSpan]="8">
+              <nz-form-item nzFlex>
+                <div nz-col [nzSpan]="6">
+                <nz-form-label class="colorWhite"
+                  >End Date
+                </nz-form-label>
+                </div>
+                <div nz-col [nzSpan]="10">
+                <nz-form-control>
+                  <nz-date-picker
+                    [nzDisabledDate]="disabledEndDate"
+                    nzShowTime
+                    nzFormat="dd/MM/yyyy HH:mm:ss a"
+                    formControlName="endDate"
+                    nzPlaceHolder="End Date"
+                    [nzOpen]="endOpen"
+                    (ngModelChange)="onEndChange($event)"
+                    (nzOnOpenChange)="
+                      handleEndOpenChange($event)
+                    "
+                  >
+                  </nz-date-picker>
+                  <!-- <input
+                      nz-input
+                      placeholder="placeholder"
+                      formControlName="toDate"
+                      style='color:#000'
+                    /> -->
+                </nz-form-control>
+                </div>
+              </nz-form-item>
+            </div>
+          </div>
+        <div nz-row [nzGutter]="24">
+            <div nz-col [nzSpan]="8">
+                <nz-form-item nzFlex>
+                 <div nz-col nzSpan="6">
+                    <nz-form-label class="colorWhite"
+                    >Equip Type
+                  </nz-form-label>
+                 </div>
+               <div nz-col nzSpan="10">
+                  <nz-form-control>
+                      <nz-select
+                        style="width: 150px;"
+                        nzShowSearch
+                        nzAllowClear
+                        nzPlaceHolder="Select a equipType"
+                        formControlName="equipType"
+                      >
+                        <nz-option
+                          *ngFor="let option of listEquipType"
+                          [nzLabel]="option.label"
+                          [nzValue]="option.value"
+                        >
+                        </nz-option>
+                      </nz-select>
+                      <!-- <input
+                      nz-input
+                      placeholder="placeholder"
+                      formControlName="userId"
+                      style='color:#000'
+                    /> -->
+                    </nz-form-control>
+               </div>
+                </nz-form-item>
+              </div>
+              <div nz-col [nzSpan]="8">
+                  <nz-form-item nzFlex>
+                    <div nz-col nzSpan="6">
+                        <nz-form-label class="colorWhite"
+                        >Alarm Desc
+                      </nz-form-label>
+                    </div>
+                   <div nz-col nzSpan="10">
+                      <nz-form-control>
+                          <nz-select
+                            style="width: 150px;"
+                            nzShowSearch
+                            nzAllowClear
+                            nzPlaceHolder="Select a alarmDesc"
+                            formControlName="alarmDesc"
+                          >
+                            <nz-option
+                              *ngFor="let option of listAlarmDesc"
+                              [nzLabel]="option.label"
+                              [nzValue]="option.value"
+                            >
+                            </nz-option>
+                          </nz-select>
+                          <!-- <input
+                          nz-input
+                          placeholder="placeholder"
+                          formControlName="userId"
+                          style='color:#000'
+                        /> -->
+                        </nz-form-control>
+                   </div>
+                  </nz-form-item>
+              </div>
+        </div>
+        <div nz-row [nzGutter]="24">
+            <div nz-col [nzSpan]="8">
+                <nz-form-item nzFlex>
+                  <div nz-col nzSpan="6">
+                      <nz-form-label class="colorWhite"
+                      >Equip ID
+                    </nz-form-label>
+                  </div>
+               <div nz-col nzSpan="10">
+                  <nz-form-control>
+                      <nz-select
+                        style="width: 150px;"
+                        nzShowSearch
+                        nzAllowClear
+                        nzPlaceHolder="Select a ID"
+                        formControlName="equipID"
+                      >
+                        <nz-option
+                          *ngFor="let option of listEquipID"
+                          [nzLabel]="option.label"
+                          [nzValue]="option.value"
+                        >
+                        </nz-option>
+                      </nz-select>
+                      <!-- <input
+                      nz-input
+                      placeholder="placeholder"
+                      formControlName="userId"
+                      style='color:#000'
+                    /> -->
+                    </nz-form-control>
+               </div>
+                </nz-form-item>
+              </div>
+              <div nz-col [nzSpan]="8">
+                  <nz-form-item nzFlex>
+                    <div nz-col nzSpan="6">
+                        <nz-form-label class="colorWhite"
+                        >Exp Way
+                      </nz-form-label>
+                    </div>
+                   <div nz-col nzSpan="10">
+                      <nz-form-control>
+                          <nz-select
+                            style="width: 150px;"
+                            nzShowSearch
+                            nzAllowClear
+                            nzPlaceHolder="Select a expWay"
+                            formControlName="expWay"
+                          >
+                            <nz-option
+                              *ngFor="let option of listExpWay"
+                              [nzLabel]="option.label"
+                              [nzValue]="option.value"
+                            >
+                            </nz-option>
+                          </nz-select>
+                          <!-- <input
+                          nz-input
+                          placeholder="placeholder"
+                          formControlName="userId"
+                          style='color:#000'
+                        /> -->
+                        </nz-form-control>
+                   </div>
+                  </nz-form-item>
+              </div>
+        </div>
+        </form>
+      </div>
+    </div>
+    <nz-table
+      #basicTable
+      id="nzTable"
+      [nzShowPagination]="false"
+      [nzFrontPagination]="false"
+      [nzData]="listOfData"
+    >
+      <thead>
+        <tr style="background:cornflowerblue">
+          <ng-container *ngFor="let item of renderHeader">
+            <th class="listTitle">
+              <div>{{ item.name }}</div>
+            </th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let data of basicTable.data;let idx = index">
+            <td>{{ data.ackTime }}</td>
+            <td>{{ data.ackTime }}</td>
+            <td>{{ data.ackTime }}</td>
+            <td>{{ data.ackTime }}</td>
+            <td>{{ data.ackTime }}</td>
+            <td>{{ data.ackTime | date:'dd/MM/yyyy hh:mm:ss a' }}</td>
+            <td>{{ data.ackTime | date:'dd/MM/yyyy hh:mm:ss a' }}</td>
+            <td>{{ data.ackTime | date:'dd/MM/yyyy hh:mm:ss a' }}</td>
+            <td>{{ data.ackTime }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td [attr.colspan]="renderHeader.length+1" style="padding: 10px;">
+            </td>
+          </tr>
+        </tfoot>
+    </nz-table>
+  </div>
+  

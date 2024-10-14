@@ -1,0 +1,437 @@
+<div style="padding: 5px;">
+	<div class="pageHeader">
+
+		<div nz-row class="searchBar">
+			<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+				<div nz-row [nzGutter]="16">
+					<div nz-col [nzSpan]="6">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Equip Type
+							</nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 300px;" nzShowSearch nzAllowClear
+									nzPlaceHolder="Select a equipType" formControlName="equipType"
+									[(ngModel)]="equipSelect" (ngModelChange)='equipSearch()'>
+									<nz-option *ngFor="let option of equipTypeList" [nzLabel]="option.description"
+										[nzValue]="option.description">
+									</nz-option>
+								</nz-select>
+								<!-- <input nz-input placeholder="placeholder" formControlName="subSystem"
+									style='color:#000' /> -->
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- <nz-divider></nz-divider> -->
+	<div style="width: 100%;height: 1px;background: white;margin:0 0 24px 0"></div>
+	<!-- 新增grid 布局 -->
+	<div nz-row>
+		<div nz-col nzSpan="16">
+			<div class="leftPicture" style="background: url(../../../../assets/img/Images/Screenshots_EquipmentControlTab//fire.png) 
+			center top no-repeat;background-size: 100%;">
+				<!-- ID: 205, 100 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 4.6%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 205" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 205" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 100" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 100" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 204, 101 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 1.6%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 204" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 204" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -2%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 101" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 101" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 203, 102 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 1.6%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 203" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 203" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 102" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 102" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 202, 103 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 1.1%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 202" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 202" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.8%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 103" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 103" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 210, 201, 104, 111, 112 -->
+				<div style="display: flex; margin-left: 43.5%; margin-top: 3.3%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 210" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 210" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 55.3%; margin-top: -3.3%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 201" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 201" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 104" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 104" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 76.7%; margin-top: -2.6%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 111" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 111" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 76.7%; margin-top: 0.7%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 112" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 112" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 200, 105 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 1.4%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 200" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 200" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.8%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 105" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 105" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 410, 300 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 1.4%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 410" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 410" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.8%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 300" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 300" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 409, 301 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 3.1%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 409" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 409" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 301" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 301" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 408, 302, 321, 320 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 3.1%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 408" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 408" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -2%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 302" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 302" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 72.3%; margin-top: -1.7%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 321" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 321" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 75.3%; margin-top: -1.8%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 320" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 320" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 407, 303 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 0.8%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 407" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 407" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.8%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 303" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 303" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 406, 304 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 1%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 406" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 406" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 304" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 304" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 405, 305 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 0.6%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 405" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 405" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 305" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 305" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 452, 432, 404, 306, 340 -->
+				<div style="display: flex; margin-left: 41.7%; margin-top: 1%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 452" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 452" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 49.2%; margin-top: -1.2%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 432" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 432" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 55.3%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 404" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 404" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 306" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 306" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 82.3%; margin-top: -2.2%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 340" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 340" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 451, 442, 441, 431. 403, 307, 331, 332, 341 -->
+				<div style="display: flex; margin-left: 41%; margin-top: 4.3%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 451" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 451" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 46%; margin-top: -3.8%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 442" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 442" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 46%; margin-top: 0%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 441" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 441" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 49.2%; margin-top: -4.8%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 431" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 431" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 55.3%; margin-top: -1.6%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 403" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 403" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 307" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 307" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 76.7%; margin-top: -2.6%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 331" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 331" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 76.7%; margin-top: 1.4%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 332" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 332" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 82.3%; margin-top: -4.4%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 341" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 341" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 450, 421, 402. 308, 333, 342 -->
+				<div style="display: flex; margin-left: 41%; margin-top: 4.1%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 450" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 450" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 47.7%; margin-top: -3.3%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 421" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 421" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 55.3%; margin-top: -1.4%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 402" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 402" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 308" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 308" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 76.7%; margin-top: -2.3%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 333" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 333" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 79.1%; margin-top: -0.2%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 342" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 342" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 401, 309 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 0.8%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 401" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 401" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 309" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 309" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<!-- ID: 400, 310 -->
+				<div style="display: flex; margin-left: 55.3%; margin-top: 0.5%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 400" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 400" class="cancelImg" src=" ">
+					</div>
+				</div>
+				<div style="display: flex; margin-left: 66.7%; margin-top: -1.9%;">
+					<div *ngFor="let data of displayListOfData">
+						<img *ngIf="data == 310" class="cancelImg"
+							src="../../../../assets/img/Images/SS_General/cancel.jpg">
+						<img *ngIf="data != 310" class="cancelImg" src=" ">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div nz-col nzSpan="8">
+			<ec-pubilc-table [listOfData]="listOfData" [equipSelect]="equipSelect"></ec-pubilc-table>
+
+		</div>
+	</div>
+	<!-- <div nz-row>
+		<div nz-col nzSpan="12"></div>
+		<div nz-col nzSpan="12">
+			<p class='itemStatus'><span class='greenBox'></span> Operational</p>
+			<p class='itemStatus'><span class='redBox'></span>Not Operational</p>
+		</div>
+	</div>
+</div> -->

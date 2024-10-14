@@ -1,0 +1,175 @@
+<!-- <nz-spin [nzSpinning]="isSpinning" nzTip="Command Sending..."> -->
+<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzMaskClosable="false" [nzTitle]="modalTitle"
+    [nzContent]="modalContent" [(nzVisible)]="isVisibleMiddle" [nzFooter]="modalFooter" (nzOnCancel)="close()"
+    nzWidth="600px">
+
+    <ng-template #modalTitle>
+        <img src="../../../../../assets/img/Images/SS_LoginLogout/ExpresswayLogo.png" alt="" style="width: 16px;">
+        Show Equipment Status Window
+    </ng-template>
+
+    <ng-template #modalContent>
+        <div class="standard-font">
+            <div style="font-size: 16px;">Equip ID: {{selectItem.equipId}}</div>
+            <nz-divider nzText="Equipment Current Status" nzOrientation="left"></nz-divider>
+            <div style="margin-left: 18px;">
+                <div class="message">
+                    <div>Operational State(ope):</div>
+                    <div *ngIf="selectItem.operationalState === 2">Operational</div>
+                    <div *ngIf="selectItem.operationalState === 0">Not Operational</div>
+                    <div *ngIf="selectItem.operationalState !== 0 && selectItem.operationalState !== 2">Unknown Status</div>
+                </div>
+                <div *ngIf="thisEquipType == 'lus'" class="message2">
+                    <div>Current Graphics Code:</div>
+                    <div>
+                        <img [src]="imgMap[selectItem.currentGraphicsCode]">
+                    </div>
+                </div>
+                <div *ngIf="thisEquipType == 'lus'" class="message">
+                    <div>Photo Sensor:</div>
+                    <div>{{ selectItem.photoSensor }}</div>
+                </div>
+                <div *ngIf="thisEquipType == 'lus'" class="message">
+                    <div>Sign Temperature:</div>
+                    <div>{{ selectItem.signTemperature }}</div>
+                </div>
+                <div *ngIf="thisEquipType == 'lus'" class="message">
+                    <div>Flash Rate On Time:</div>
+                    <div>{{ selectItem.flashRateOn }}</div>
+                </div>
+                <div *ngIf="thisEquipType == 'lus'" class="message">
+                    <div>Flash Rate Off Time:</div>
+                    <div>{{ selectItem.flashRateOff }}</div>
+                </div>
+                <nz-divider *ngIf="thisEquipType == 'lus'" nzText="Dimming" nzOrientation="left"></nz-divider>
+                <div *ngIf="thisEquipType == 'lus'" class="message3">
+                    <div>Mode: {{ selectItem.dimmingMode }}</div>
+                    <div>Level: {{ selectItem.dimmingLevel }}</div>
+                    <div>Value: {{ selectItem.dimmingValue }}</div>
+                </div>
+            </div>
+            <div style="margin-left: 18px; padding: 2px; margin-top: -10px;">
+                <nz-divider nzText="Alarms" nzOrientation="left"></nz-divider>
+                <div *ngIf="this.alarmList.length != 0" style="margin-right: 3.0rem;">
+                    <nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false"
+                        [nzBordered]="true" [nzData]="alarmList" nzSize="small">
+                        <thead>
+                            <tr>
+                                <th class="listTitle" style="background:cornflowerblue">Alarm Description</th>
+                                <th class="listTitle" style="background:cornflowerblue">Alarm Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of basicTable.data;let idx = index">
+                                <td>{{ data.description }}</td>
+                                <td>{{ data.startDate }}</td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+                <div *ngIf="this.alarmList.length == 0" style="margin-right: 3.0rem; border-width: 1px; border-style:solid; 
+					border-color: #dfdada; padding: 5px; height: 50px;">
+                    <span style="color: #bdbdbd;">No Alarms</span>
+                </div>
+            </div>
+            <nz-divider *ngIf="thisEquipType == 'lus'" nzText="Remote Control" nzOrientation="left"></nz-divider>
+            <div *ngIf="thisEquipType == 'lus'" style="margin-left: 18px;">
+                <div style="display: flex; font-size: 14px; align-items: center; margin-left:22px;">
+                    <div style="margin-right: 20px; width: 25%;">LUS Message:{{ messageResultRec }}</div>
+                    <div>
+                        <span style='float: right; cursor: pointer;' (click)="setMessageMode()"
+                            *ngIf="isEditable"><i nz-icon nzType="edit" nzTheme="outline"></i></span>
+                    </div>
+                </div>
+                <div style="display: flex; font-size: 14px; align-items: center; margin-left:22px;">
+                    <div style="margin-right: 20px; width: 25%;">Dimming:{{ dimmingResultRec }}</div>
+                    <div>
+                        <span style='float: right; cursor: pointer;' (click)="setDimmingMode()"
+                            *ngIf="isEditable"><i nz-icon nzType="edit" nzTheme="outline"></i></span>
+                    </div>
+                </div>
+                <div style="display: flex; font-size: 14px; align-items: center; margin-left:22px;">
+                    <div style="margin-right: 20px; width: 25%;">Flash Rate:{{ flashResultRec }}</div>
+                    <div>
+                        <span style='float: right; cursor: pointer;' (click)="setFlashMode()"
+                            *ngIf="isEditable"><i nz-icon nzType="edit" nzTheme="outline"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #modalFooter>
+        <div class="bottomBtn">
+            <button nz-button nzType="default" (click)="refresh()">Refresh</button>
+        </div>
+    </ng-template>
+</nz-modal>
+
+<!-- </nz-spin> -->
+<nz-modal zmMovableModal [(nzVisible)]="isApplyTemplateVisible" nzTitle="Send Command Window" 
+    [nzFooter]="modalFooter1" [nzClosable]="false" nzWidth="580px">
+    <!-- [nzFooter]="modalFooter1" (nzOnCancel)="handleApplyModeCancel()" nzWidth="580px"> -->
+    <nz-spin [nzSpinning]="isSpinning" nzTip="Command Sending...">
+    <p *ngIf="this.applyMessageWindow === 'Setting Massage'" style="padding: 10px 0;">
+        Send Remote Command:<br><br>
+		<nz-radio-group [(ngModel)]="radioValue" (ngModelChange)="radioChange($event)" style="width: 500px;">
+			<div nz-row>
+				<div nz-col nzSpan="12"><img [src]="imgMap[3]"><label nz-radio nzValue="3">Green Down Arrow</label></div>
+				<div nz-col nzSpan="12"><img [src]="imgMap[1]"><label nz-radio nzValue="1">Red Cross</label></div>
+			</div><br>
+			<div nz-row>
+				<div nz-col nzSpan="12"><img [src]="imgMap[2]"><label nz-radio nzValue="2">Amber Cross</label></div>
+				<div nz-col nzSpan="12"><img [src]="imgMap[0]"><label nz-radio nzValue="0">Blank</label></div>
+			</div><br>
+            <div nz-row>
+				<div nz-col nzSpan="12"><img [src]="imgMap[4]"><label nz-radio nzValue="4">Down-Left Arrow</label></div>
+				<div nz-col nzSpan="12"><img [src]="imgMap[5]"><label nz-radio nzValue="5">Down-Right Arrow</label></div>
+			</div><br>
+            <div nz-row>
+				<div nz-col nzSpan="12"><label nz-radio nzValue="129">Flashing Red Cross</label></div>
+				<div nz-col nzSpan="12"><label nz-radio nzValue="130">Flashing Amber Cross</label></div>
+			</div><br>
+            <div nz-row>
+				<div nz-col nzSpan="12"><label nz-radio nzValue="131">Flashing Green Arrow Down</label></div>
+			</div>
+		</nz-radio-group>
+        <!-- <br><br>
+        Set Flash:&nbsp;&nbsp;
+        <nz-select style="width: 150px;" [(ngModel)]="isFlash">
+            <nz-option *ngFor="let option of flashList" [nzLabel]="option.description" [nzValue]="option.value">
+            </nz-option>
+        </nz-select> -->
+    </p>
+    <p *ngIf="this.applyMessageWindow === 'Setting Dimming'" style="padding: 10px 0;">
+        Send Dimming Command:<br><br>
+        Dimming Mode:&nbsp;
+        <nz-select style="width: 150px;" [(ngModel)]="dimmingResult" (ngModelChange)="setDimmingLevel()">
+            <nz-option *ngFor="let option of dimmingList" [nzLabel]="option.description" [nzValue]="option.value">
+            </nz-option>
+        </nz-select>
+        <ng-container *ngIf="dimmingResult == 'D' || dimmingResult == 'N'">
+            &nbsp; Dimming Level:&nbsp;
+            <nz-select style="width: 100px;" [(ngModel)]="dimmingLevel">
+                <nz-option *ngFor="let dim of dimmingLevelList" [nzLabel]="dim.label" [nzValue]="dim.value"></nz-option>
+            </nz-select>
+            <!-- <nz-input-number [(ngModel)]="dimmingLevel" [nzMin]="1" [nzMax]="12" [nzStep]="1"
+                style="width: 120px;color: #000;"></nz-input-number> -->
+        </ng-container>
+    </p>
+    <p *ngIf="this.applyMessageWindow === 'Setting Flash'" style="padding: 10px 0;">
+        Send Flash Command:<br><br>
+        On Time:
+        <nz-input-number [(ngModel)]="flashingOnTime" [nzMin]="4" [nzMax]="255" [nzStep]="1"
+            style="width: 120px;color: #000;"></nz-input-number>
+        &nbsp;&nbsp;Off Time:
+        <nz-input-number [(ngModel)]="flashingOffTime" [nzMin]="4" [nzMax]="255" [nzStep]="1"
+            style="width: 120px;color: #000;"></nz-input-number>
+    </p>
+    <ng-template #modalFooter1>
+        <button nz-button [disabled]="disabled" nzType="default" (click)="handleApplyModeCancel()">Cancel</button>
+        <button nz-button [disabled]="disabledMsg || disabled" nzType="primary" (click)="handleApplyModeOk()">Send</button>
+    </ng-template>
+    </nz-spin>
+</nz-modal>
+<!-- <emas-apply-command [selectItem]="selectItem" [radioValue]="radioValue" [listOfData]="listOfData"></emas-apply-command> -->

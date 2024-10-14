@@ -1,0 +1,245 @@
+<nz-modal
+      nzWrapClassName="vertical-center-modal"
+      nzWidth = 1200
+      nzMaskClosable="false"
+      [nzTitle]="modalTitle"
+      [nzContent]="modalContent"
+      [(nzVisible)]="addIsVisibleMiddle"
+      [nzFooter]="modalFooter"
+      (nzOnCancel)="handleCancelMiddle()"
+      zmMovableModal
+    >
+    <ng-template #modalTitle>
+        Add New Pictogram
+      </ng-template>
+      <ng-template #modalContent>
+        <div class="add-pic">
+           <div nz-row style="background: lightblue;" >
+          <div nz-form style="width: 100%;" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+              <div nz-row>
+                <div nz-col nzSpan="6" style="margin-left: 20px;">
+                    <nz-form-item nzFlex>
+                        <nz-form-label style="color: black;"
+                          ><span>Pictogram Id</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                            <nz-input-number formControlName="pictogramId" [nzSize]="'small'" [nzMin]="0" [nzStep]="1"></nz-input-number>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>File Name</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                          {{selectItem.picFileName}}
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>Group Id</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                <nz-select
+									style="width: 150px;"
+									nzShowSearch
+									nzAllowClear
+                  formControlName="groupId"
+                  (ngModelChange)="groupIdChange()"
+								>
+									<nz-option
+										*ngFor="let option of listGroupID"
+										[nzLabel]="option.label"
+										[nzValue]="option.value"
+									>
+									</nz-option>
+								</nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nzFlex>
+                        <nz-form-label nzRequired  class="colorWhite"
+                          ><span>Description</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                            <nz-mention>
+                                <textarea nz-input [nzAutosize]="{ minRows: 4, maxRows: 4 }" formControlName="description" nzMentionTrigger style="color: black;">
+                                </textarea>
+                            </nz-mention>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>File Size(bytes)</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                            {{0}}
+                        </nz-form-control>
+                    </nz-form-item>
+                    <div>
+                      <img [src]="'data:image/png;base64,' + selectItem.graphicContents" alt="" style="height: 150px;width: 150px;">
+                    </div>
+                </div>
+                <div nz-col nzSpan="5">
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>Height(pixels)</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                            {{height || -1}}
+                        </nz-form-control>
+                    </nz-form-item>
+                    <!-- <button nz-button [nzType]="'default'" style="margin-left: 200px;" [disabled]="pencelStatu" (click)="penCilButtom()"><img src="../../../../../assets/img/Images/Screenshots_EquipmentControlTab/VMSControl/Pencil-icon.png" alt=""></button> -->
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>Width(pixels)</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                            {{width || -1}}
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>Downloaded</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                           <div class="download">
+                           
+                           </div>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <!-- <nz-upload nzAction="" [nzBeforeUpload]="beforeUpload" style="margin-left: 100px;">
+                      <button nz-button><span>Browse Pictogram</span></button>
+                    </nz-upload> -->
+                    <label for="uploadImg">
+                        <input type="button" id="browsePictogram" value="Browse Pictogram.." ><span id="text"></span>
+                        <input type="file" id="uploadImg" (change)="beforeUpload($event)">
+                    </label>
+                </div>
+                <div nz-col nzSpan="1">
+                  <button nz-button [nzType]="'default'" nzSize="small" [disabled]="pencelStatu" (click)="penCilButtom()" style="margin-top: 20px;margin-left: -50px;"><img src="../../../../../assets/img/Images/Screenshots_EquipmentControlTab/VMSControl/Pencil-icon.png" alt=""></button>
+                </div>
+                <div nz-col nzSpan="11">
+                <div nz-row>
+                    <div nz-col nzSpan="12">
+                        <nz-form-item nzFlex>
+                            <nz-form-label class="colorWhite"
+                              ><span>Exp Way</span>
+                            </nz-form-label>
+                            <nz-form-control nzSpan="12">
+                    <nz-select
+                      style="width: 150px;"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder="All"
+                      formControlName="expWay"
+                      (ngModelChange)="filterByexpWay()"
+                    >
+                      <nz-option
+                        *ngFor="let option of expWayList"
+                        [nzLabel]="option.label"
+                        [nzValue]="option.value"
+                      >
+                      </nz-option>
+                    </nz-select>
+                        </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col nzSpan="12">
+                        <nz-form-item nzFlex>
+                            <nz-form-label class="colorWhite"
+                              ><span>Equip Type</span>
+                            </nz-form-label>
+                            <nz-form-control nzSpan="12">
+                    <nz-select
+                      style="width: 150px;"
+                      nzShowSearch
+                      nzAllowClear
+                      formControlName="equipType"
+                      (ngModelChange)="filterByequipType()"
+                    >
+                      <nz-option
+                        *ngFor="let option of equipTypeList"
+                        [nzLabel]="option.label"
+                        [nzValue]="option.value"
+                      >
+                      </nz-option>
+                    </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+                <div nz-row>
+                  <div nz-col nzSpan="8" class="transfer">
+                    <ul>
+                      <li *ngFor="let data of leftTransferList;let idx = index" style="color: black;" (click)="addChoice(idx)" [ngClass]="{'active2': addDataIdx == idx}">{{data}}</li>
+                    </ul>
+                    </div>
+                    <div nz-col nzSpan="7" class="middleBtn">
+                    <button nz-button [nzType]="'default'" [disabled]="addDisabled" (click)="add()">Add<i nz-icon nzType="right" nzTheme="outline" style="font-size: 10px;"></i></button>
+                    <button nz-button [nzType]="'default'" [disabled]="addAllDisabled" (click)="addAll()" style="margin-bottom: 200px;">Add All<i nz-icon nzType="double-right" nzTheme="outline" style="font-size: 10px;"></i></button>
+                    <button nz-button [nzType]="'default'" [disabled]="removeDisabled" (click)="remove()"><i nz-icon nzType="left" nzTheme="outline" style="font-size: 10px;"></i>Remove</button>
+                    <button nz-button [nzType]="'default'" [disabled]="removeAllDisabled" (click)="removeAll()"><i nz-icon nzType="double-left" nzTheme="outline" style="font-size: 10px;"></i>Remove All</button>
+                    </div>
+                    <div nz-col nzSpan="8"  class="transfer">
+                    <ul>
+                      <li *ngFor="let data of rightTransferList;let idx = index" (click)="removeChoice(idx)" [ngClass]="{'active2': removeDataIdx == idx}" style="color: black;">{{data}}</li>
+                    </ul>
+                    </div>
+                </div>
+                </div>
+              </div>
+              <ng-container *ngIf="selectPicModel">
+                  <nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzMaskClosable="false" [nzTitle]="modalTitle"
+                  [nzContent]="modalContent" [(nzVisible)]="selectPicModel" [nzFooter]="modalFooter"
+                  (nzOnCancel)="closeSelectPicModel()">
+                  <ng-template #modalTitle>
+                    Select Pictogram
+                  </ng-template>
+                  <ng-template #modalContent>
+                    <div nz-row>
+                        <nz-form-item nzFlex>
+                            <nz-form-label class="colorWhite"
+                              ><span>Group Id:</span>
+                            </nz-form-label>
+                            <nz-form-control nzSpan="12">
+                                {{picGroupIdLabel}}
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item nzFlex>
+                            <nz-form-control nzSpan="12">
+                    <nz-select
+                      style="width: 150px;"
+                      nzShowSearch
+                      nzAllowClear
+                      formControlName="size"
+                    >
+                      <nz-option
+                        *ngFor="let option of listSize"
+                        [nzLabel]="option.label"
+                        [nzValue]="option.value"
+                      >
+                      </nz-option>
+                    </nz-select>
+                        </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                  </ng-template>
+                  <ng-template #modalFooter>
+                    <div class="bottomBtn">
+                      <button [disabled]="disabled" nz-button nzType="default" (click)="selectPicHandleOkModel()">Select</button>
+                      <button [disabled]="disabled" nz-button nzType="default" (click)="closeSelectPicModel()">Cancel</button>
+                    </div>
+                  </ng-template>
+                </nz-modal>
+              </ng-container>
+          </div>
+        </div>
+        </div>
+      </ng-template>
+      <ng-template #modalFooter>
+          <div class="bottomBtn">
+            <button nz-button nzType="default" (click)="handleOkMiddle()" [disabled]="addAckDisabled">Add</button>
+            <button nz-button nzType="default" (click)="handleCancelMiddle()">Cancel</button>
+          </div>
+      </ng-template>
+</nz-modal>
+

@@ -1,0 +1,41 @@
+*{
+	color: var(--cl);
+}
+  
+.searchBar{
+	height: 40px;
+}
+.assign{
+    width: 20px;
+    height: 20px;
+}
+.cancel{
+    width: 20px;
+    height: 20px;
+}
+.transfer{
+	background: white;
+	width: 250px;
+	height: 400px;
+	margin: 5px;
+}
+.transferTitle {
+	width: 250px;
+	margin: 5px;
+}
+.middleBtn button {
+	color:#000;
+	display: block;
+	margin: 40px 50px;
+	width: 120px;
+}
+.active {
+	background: gray;
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

@@ -1,0 +1,59 @@
+
+      *{
+        color: black;
+    }
+    ::ng-deep .tichnical-alarm .ant-form-item-label>label {
+      color: black;
+    }
+    ::ng-deep .ant-modal-close:focus {
+          outline: unset;
+      }
+    ::ng-deep .ant-modal-body {
+        padding: 0;
+        font-size: 14px;
+        line-height: 1.5;
+        word-wrap: break-word;
+    }
+    ::ng-deep .ant-btn-sm {
+      padding: 0 2px;
+    }
+    ::ng-deep .tichnical-alarm .ant-pagination-item-active {
+      color: black;
+    }
+    .topBar {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      height: 30px;
+      align-items: center;
+      background: #f8f7f7;
+    }
+    .topBar span {
+      color: black;
+      margin-left: 5px;
+    }
+    .topBar button {
+      color: black;
+    }
+    .topTitle {
+      height: 50px;
+      background: lightblue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .topTitle h4 {
+      color: black;
+      font-weight: bolder;
+    }
+    
+    .active {
+      filter: grayscale(1);
+    }
+    
+    .alarm-footer {
+      background: lightblue;
+      height: 50px;
+      display: flex;
+      align-items: center;
+    }

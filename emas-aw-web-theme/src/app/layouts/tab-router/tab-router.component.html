@@ -1,0 +1,13 @@
+<nz-content class="main-right flex-v" id = "tab-router">
+    <!-- 右侧上部tab页签 -->
+  <nz-tabset [nzType]="'card'" [(nzSelectedIndex)]="tabSvr.index">
+    <!-- 这里只使用tab页签, 而不显示任何内容, 每个页签相关视图在 router-outlet.main-content 中展示 -->
+    <nz-tab *ngFor="let tab of tabs;let i=index;" [nzTitle]="titleTemplate"  class='mytab'
+              (nzSelect)="tabSelect(tab, i)">
+      <ng-template #titleTemplate>
+        <div>
+            {{ tab.displayTitle }}<i nz-icon nzType="close" class="ant-tabs-close-x" (click)="closeTab(tab,i)"></i>
+        </div>
+      </ng-template>
+    </nz-tab>
+  </nz-tabset>

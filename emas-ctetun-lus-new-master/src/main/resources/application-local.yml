@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  jms:
+    pub-sub-domain: true
+
+stee:
+  # JMS
+  jms-receive-queue: jms/test-lus-queue
+  jms-send-queue: jms/lus-test-queue
+  jms-username: weblogic
+  jms-password: P@ssw0rd12345
+  jms-qos-enable: true
+  jms-message-time-to-live: 30000
+  jndi-jms-factory: jms/TT238ConnectionFactory
+  # JNDI
+  jndi-url: t3://54.151.175.44:7001
+
+  lus-interface-code: lus_01

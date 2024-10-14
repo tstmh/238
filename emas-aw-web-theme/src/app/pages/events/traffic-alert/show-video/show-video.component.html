@@ -1,0 +1,65 @@
+<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzWidth=850 nzMaskClosable="false" [nzTitle]="modalTitle" [nzFooter]="modalFooter"
+	[nzContent]="modalContent" [(nzVisible)]="isVisibleMiddle" [nzFooter]="null" (nzOnCancel)="handleCancelMiddle()">
+	<ng-template #modalTitle>
+    Show Video
+	</ng-template>
+	<ng-template #modalContent>
+    <div class="content">
+      <p *ngIf="!videoUrl">The video url path is not valid.</p>         
+      <!--use Flash player pulgin-->
+      <!--<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"codebase="<a href='http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0'>http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0</a>" width="800" height="600" id="Untitled-1" align="middle"> 
+        <param name="allowScriptAccess" value="sameDomain" /> 
+        <param name="movie" [value]="videoUrl" /> 
+        <param name="quality" value="high" /> 
+        <param name="bgcolor" value="#ffffff" /> 
+        <embed src="{{videoUrl}}" quality="high" bgcolor="#ffffff" width="8000" height="600"name="mymovie" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="<a href='http://www.macromedia.com/go/getflashplayer'>http://www.macromedia.com/go/getflashplayer</a>" /> 
+      </object>-->
+      <!--play at Internet Exporer and Opera,use Windows Media Player 1-->
+      <!-- <object *ngIf="isAVI" id="MediaPlayer" classid="clsid:22D6F312-B0F6-11D0-94AB-0080C74C7E95" width="800" standby="Loading Windows Media Player components…" type="application/x-oleobject" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112">
+        <param name="FileName" value="{{videoUrl}}">
+        <param name="AutoStart" value="true">
+        <param name="ShowControls" value="true">
+        <param name="BufferingTime" value="2">
+        <param name="ShowStatusBar" value="true">
+        <param name="AutoSize" value="true">
+        <param name="InvokeURLs" value="false">
+        <param name="AnimationatStart" value="1">
+        <param name="TransparentatStart" value="1">
+        <param name="Loop" value="1">
+        <embed type="application/x-mplayer2" src="{{videoUrl}}" name="MediaPlayer" autostart="1" showstatusbar="1" showdisplay="1" showcontrols="1" loop="0" videoborder3d="0" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" width="800"/>
+      </object> -->
+      <!--play at Google Chrome and Fire Fox-->
+      <video *ngIf="!isAVI" autoplay="antoplay" controls="controls" width=800>
+        <source *ngIf="videoUrl" [src]="videoUrl" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <p *ngIf="!isAVI && videoUrl" style="width: 750px;">
+        If the video does not autoplay, please click 
+        <a [href]="videoUrl" target="_blank">here</a> to allow browser to load.
+      </p>
+      <!--for testing MediaPlayer 2-->
+      <!--<object id="MediaPlayer1" codeBase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701standby=Loading" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6" width="800" height="600" type="application/x-oleobject" VIEWASTEXT>
+        <PARAM NAME="URL" VALUE="{{videoUrl}}">
+        <PARAM NAME="rate" VALUE="1">
+        <PARAM NAME="balance" VALUE="0">
+        <PARAM NAME="currentPosition" VALUE="-1">
+        <PARAM NAME="playCount" VALUE="1">
+        <PARAM NAME="autoStart" VALUE="1">
+        <PARAM NAME="currentMarker" VALUE="1">
+        <PARAM NAME="invokeURLs" VALUE="-1">
+      </object>-->      
+      <p *ngIf="isAVI && videoUrl" style="height: 350px; width: 800px;">
+        <nz-result [nzIcon]="'frown-twotone'" nzTitle="This video is AVI format."></nz-result>
+        Chrome does not support video playback in AVI format.<br>
+        You can click 
+        <a [href]="videoUrl" target="_blank">here</a>
+        to download the video file and play.
+      </p>
+    </div>
+  </ng-template>
+  <ng-template #modalFooter>
+      <div class="bottomBtn">
+        <button nz-button nzType="default" (click)="handleCancelMiddle()">OK</button>
+      </div>
+  </ng-template>
+</nz-modal>

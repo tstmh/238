@@ -1,0 +1,50 @@
+/* *{
+	color: #fff
+} */
+  
+.itemStatus{
+	height: 20px;
+	line-height: 20px;
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 5px;
+	color: var(--cl);
+}
+.greenBox{
+	width: 18px;
+	height: 18px;
+	display: block;
+	background-color: green;
+	margin-right: 10px;
+}
+.redBox{
+	width: 18px;
+	height: 18px;
+	display: block;
+	background-color: red;
+	margin-right: 10px;
+}
+/* .active {
+	background: gray;
+} */
+.active{
+	background: #8D8D8D !important;
+}
+.leftPicture {
+	height: 65.5vh;
+	width: 90%;
+	/* overflow-y: scroll;
+	overflow-x: hidden; */
+	overflow: scroll;
+}
+
+.labelText {
+	color: var(--cl);
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

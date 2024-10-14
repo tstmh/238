@@ -1,0 +1,22 @@
+*{
+	color: var(--cl);
+}
+  
+.searchBar{
+	height: 40px;
+}
+.qResult{
+	float: right;
+	margin-top: -20px;
+	margin-right: 130px;
+}
+.ant-calendar-picker>>>.ant-calendar-picker-icon,.ng-star-inserted>>>.antion,.ng-tns-c16-3,.anticon-calendar>>>.ng-tns-c16-3{
+	margin-top:-10px
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

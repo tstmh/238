@@ -1,0 +1,52 @@
+::ng-deep .vertical-center-modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+::ng-deep .vertical-center-modal .ant-modal {
+	top: 0;
+}
+
+/* label后面的冒号 */
+::ng-deep .update-pic .ant-form-item-label>label::after {
+	content: ':';
+	position: relative;
+	top: -.5px;
+	margin: 0 8px 0 2px;
+	color: black;
+}
+
+* {
+	color: black;
+}
+
+.active {
+	background: lightblue;
+}
+
+.download {
+	width: 100px;
+	height: 100px;
+	background: #fff;
+	overflow-y: auto;
+}
+
+.upImg {
+	margin-left: 100px;
+}
+
+label {
+	position: relative;
+}
+
+#uploadImg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
+
+#browsePictogram {
+	margin-left: 100px;
+}

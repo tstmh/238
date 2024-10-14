@@ -1,0 +1,64 @@
+::ng-deep .vertical-center-modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+::ng-deep .vertical-center-modal .ant-modal {
+	top: 0;
+}
+:host ::ng-deep .ant-modal-body{
+	min-height: 400px;
+}
+:host ::ng-deep .ant-modal-header {
+	background-color: #83a5bd4f;
+}
+
+.message {
+	padding: 5px;
+	font-size: 14px;
+	display: flex;
+	justify-content: space-between;
+}
+.message>div{
+	font-size: 14px;
+}
+.message :nth-child(2){
+	width: 50%;
+	background: #fffff0;
+}
+
+.statuslabel {
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-items: center;
+}
+
+.standard-font {
+	font-size: 14px;
+}
+
+.standard-font * {
+	font-size: 14px;
+}
+
+/* 单选框样式 */
+nz-radio-group img {
+	width: 25px;
+	height: 25px;
+	margin-right: 5px;
+}
+
+/* nz-radio-group>div {
+	margin-bottom: 15px;
+	width: 400px;
+} */
+
+.bottomBtn {
+	display: flex;
+	justify-content: center;
+}
+/* ::ng-deep nz-radio-group nz-row{
+	width: 100%;
+} */

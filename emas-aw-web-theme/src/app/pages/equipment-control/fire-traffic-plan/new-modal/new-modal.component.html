@@ -1,0 +1,92 @@
+<!-- <nz-modal [(nzVisible)]="visible" nzTitle="" (nzOnCancel)="handleCancel()" (nzOnOk)="submitForm()"
+	[nzOkLoading]="isOkLoading" nzWidth="5.55rem" nzWrapClassName="vertical-center-modal" nzOkDisabled="false"
+	[nzStyle]="{ top: '2.4rem' }" nzOkText="Save" nzCancelText="Cancel">
+	<p>Content one</p>
+	<p>Content two</p>
+	<p>Content three</p>
+</nz-modal> -->
+
+<nz-modal zmMovableModal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent"
+	[nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzWidth="700px">
+
+	<ng-template #modalTitle>
+		Predefined Plan Details
+	</ng-template>
+
+	<ng-template #modalContent>
+		<nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+			<div style="font-size: 16px;margin-bottom: 10px;">{{this.selectItem.description}}</div>
+			<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false"
+				[nzData]="listOfData" [nzScroll]="{y: '460px'}" nzBordered="true">
+				<thead (nzSortChange)="sort($event,'listOfData')" nzSingleSort>
+					<tr style="background:cornflowerblue;">
+						<ng-container *ngFor="let item of renderHeader">
+							<th nzWidth="150px" class="listTitle" nzShowSort [nzSortKey]="item.key">
+								<div>{{ item.name }}</div>
+							</th>
+						</ng-container>
+					</tr>
+					<!-- <tr style="display: flex;background:cornflowerblue">
+						<th style="min-width: 65px">S.NO</th>
+						<th style="min-width: 110px">Control Type</th>
+						<th style="min-width: 100px">Equipment</th>
+						<th>Command Parameter</th>
+					</tr> -->
+				</thead>
+				<tbody>
+					<tr *ngFor="let data of basicTable.data;index as i" (click)="cliclTr(i,data)"
+						[class.active]="data.active">
+						<td style="min-width: 143px">{{ data.NO }}</td>
+						<td style="min-width: 146px">{{ data.Control_Type }}</td>
+						<td style="min-width: 148px">{{ data.Eqiupment }}</td>
+						<td>{{ data.Command_Parameter }}</td>
+					</tr>
+				</tbody>
+				<tfoot>
+				</tfoot>
+			</nz-table>
+		</nz-spin>
+	</ng-template>
+
+	<ng-template #modalFooter>
+		<div style="display: flex;justify-content:center">
+			<button nz-button nzType="primary" (click)="Implement()" [nzLoading]="isImplement">Implement</button>
+			<button style="margin: 0 20px" nz-button nzType="default" (click)="Exit()">Exit</button>
+			<button nz-button nzType="primary" (click)="Release()" [nzLoading]="isRelease">Release</button>
+		</div>
+	</ng-template>
+</nz-modal>
+
+
+<nz-modal zmMovableModal [(nzVisible)]="isResVisible" [nzZIndex]="1100" [nzTitle]="Title"
+	[nzContent]="Content" (nzOnCancel)="isResVisible = false"
+	(nzOnOk)="isResVisible = false">
+	<!-- <nz-modal zmMovableModal [(nzVisible)]="isResVisible" [nzMaskClosable]="false" [nzZIndex]="1100"
+		nzTitle="The first Modal" (nzOnCancel)="isResVisible = false" (nzOnOk)="isResVisible = false"> -->
+	<ng-template #Title>
+		{{this.titleName}} Plan Response View
+	</ng-template>
+
+	<ng-template #Content>
+		<nz-table #basicTableRes id="nzTableRes" [nzShowPagination]="false" [nzFrontPagination]="false"
+			[nzData]="responseArray" [nzScroll]="{y: '460px'}" nzBordered="true">
+			<thead (nzSortChange)="sort($event,'responseArray')" nzSingleSort>
+				<tr style="background:cornflowerblue;">
+					<ng-container *ngFor="let item of responseHeader">
+						<th nzWidth="150px" class="listTitle" nzShowSort [nzSortKey]="item.key">
+							<div>{{ item.name }}</div>
+						</th>
+					</ng-container>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let response of basicTableRes.data;index as i">
+					<td style="min-width: 145px">{{ response.EquipId }}</td>
+					<td style="min-width: 146px">{{ response.CmdDesc }}</td>
+					<td style="min-width: 147px">{{ response.CmdStatusName }}</td>
+				</tr>
+			</tbody>
+		</nz-table>
+	</ng-template>
+
+</nz-modal>

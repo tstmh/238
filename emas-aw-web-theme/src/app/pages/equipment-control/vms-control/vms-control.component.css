@@ -1,0 +1,213 @@
+
+.searchBar {
+	height: 40px;
+}
+
+.leftPart {
+	height: 36rem;
+	border-right: 1px solid #000;
+}
+
+.centerPart {
+	color: #000;
+	height: 36rem;
+}
+
+.rightPart {
+	color: #000;
+	background: white;
+	height: 48.6rem;
+}
+
+.leftTemplate {
+	color: #000;
+	font-size: 14px;
+	padding: 15px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.centerPart .content {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+/* .centerPart .content .incidentMsg {
+	width: 100%;
+	background-color: #000;
+	height: 65%;
+}
+
+.incidentMsg {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.incidentMsg .incidentPic {
+	width: 20%;
+}
+
+.incidentMsg .inputGroup {
+	width: 50%;
+} */
+
+.incidentMsg .inputGroup .inputText {
+	color: #fff;
+	/* height: 60px; */
+	width: 100%;
+	height: 100%;
+	border: none;
+	background-color: initial;
+	font-size: 30px;
+	padding: 4px 0;
+	text-align: center;
+}
+
+.incidentMsg .inputGroup .active {
+	border: 1px solid red;
+	background: transparent !important;
+}
+
+.rightPart {
+	padding: 5px;
+}
+
+.rightPart .boxBorder {
+	border: 1px solid #999;
+	text-align: center;
+	color: #999;
+}
+.rightPart .btnBox {
+	border: 1px solid #000;
+	text-align: center;
+	color: #000;
+}
+
+.rightPart .btnBox:hover {
+	border: 1px solid #007bff;
+	background-color: #007bff;
+	text-align: center;
+	color: #fff;
+}
+
+.rightPart .sendMsg {
+	width: 100%;
+	height: 130px;
+	line-height: 130px;
+}
+
+.rightPart .midBox {
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+}
+
+.rightPart .library {
+	margin-top: 10px;
+}
+
+.rightPart .longBox {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 10px;
+}
+
+.infoSet {
+	margin-top: 30px;
+}
+
+.infoSet>ul>li {
+	color: #000;
+	min-height: 25px;
+	line-height: 25px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.detail {
+	padding-bottom: 50px;
+}
+
+.detail li {
+	padding: 10px;
+	font-size: 12px;
+	color: white;
+	font-weight: bold;
+}
+::ng-deep .ant-modal-close:focus {
+	outline: unset;
+}
+
+::ng-deep .vertical-center-modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+::ng-deep .vertical-center-modal .ant-modal {
+	top: 0;
+}
+.ant-modal-body {
+	padding: 24px 0
+}
+
+.middleBtn button {
+	color: #000;
+	display: block;
+	margin: 40px 50px;
+	width: 115px;
+}
+
+.center-title {
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.content {
+	display: flex;
+	justify-content: center
+}
+
+.content_table {
+	border: 1px solid gray;
+	height: 450px;
+	width: 220px;
+	overflow-y: scroll
+}
+.btnBox{
+	-webkit-touch-callout: none;
+
+	-webkit-user-select: none;
+
+	-khtml-user-select: none;
+
+	-moz-user-select: none;
+
+	-ms-user-select: none;
+
+	user-select: none;
+}
+.li {
+	height: 30px;
+	font-size: 14px;
+	line-height: 30px
+}
+.active{
+	background: #E5F3FB !important;
+}
+
+.text {
+	font-size: 14px;
+    color: var(--cl);
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

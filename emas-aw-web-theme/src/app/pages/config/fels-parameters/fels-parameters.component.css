@@ -1,0 +1,27 @@
+*{
+	color: var(--cl)
+}
+  
+.searchBar{
+	height: 20px;
+}
+.update{
+    width: 20px;
+    height: 20px;
+}
+.cancel{
+    width: 20px;
+    height: 20px;
+}
+
+.controlBg {
+    background: var(--cbg);
+}
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+    --cbg: #f0f0f0;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+    --cbg: #e0f0ffa2;
+}

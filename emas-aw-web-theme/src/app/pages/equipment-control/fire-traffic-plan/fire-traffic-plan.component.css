@@ -1,0 +1,54 @@
+/* *{
+	color: #fff
+} */
+  
+.leftPicture {
+	height: 76.5vh;
+	width: 95%;
+	overflow: auto;
+}
+.active{
+	background: #8D8D8D !important;
+}
+.ant-advanced-search-form .ant-form-item{
+	margin-bottom: 0px
+}
+/* .ant-table-tbody>tr:nth-child(2n){
+	background: transparent
+} */
+::ng-deep .itmp-dialog-content[_ngcontent-axg-c26]{
+	font-size: 16px;
+}
+.cancelImg {
+	height: 10px;
+    animation: scaleDraw 5s ease-in-out infinite;
+}
+.active{
+	background: #8D8D8D !important;
+}
+
+@keyframes scaleDraw {  /*定义关键帧、scaleDrew是需要绑定到选择器的关键帧名称*/
+    0%{
+        transform: scale(1);  /*开始为原始大小*/
+    }
+    25%{
+        transform: scale(1.5); /*放大1.5倍*/
+    }
+    50%{
+        transform: scale(1);
+    }
+    75%{
+        transform: scale(1.5);
+    }
+}
+
+.labelText {
+	color: var(--cl);
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

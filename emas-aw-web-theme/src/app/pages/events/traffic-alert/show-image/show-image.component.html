@@ -1,0 +1,17 @@
+<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzWidth=850 nzMaskClosable="false" [nzTitle]="modalTitle" [nzFooter]="modalFooter"
+	[nzContent]="modalContent" [(nzVisible)]="isVisibleMiddle" [nzFooter]="null" (nzOnCancel)="handleCancelMiddle()">
+	<ng-template #modalTitle>
+    Show Image
+	</ng-template>
+	<ng-template #modalContent>
+    <div class="content">
+      <p *ngIf="!imgUrl">The image url path is not valid</p>
+      <img *ngIf="imgUrl" [src]="imgUrl" alt="The image url path is not valid">
+    </div>
+  </ng-template>
+  <ng-template #modalFooter>
+      <div class="bottomBtn">
+        <button nz-button nzType="default" (click)="handleCancelMiddle()">OK</button>
+      </div>
+  </ng-template>
+</nz-modal>

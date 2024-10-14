@@ -1,0 +1,11 @@
+<button nz-button nzType="link" nzSize="small" title="print" (click)="reportPrint()"><img style="height: 20px;"
+		src="../../../../../assets/img/print.png" alt=""></button>
+<button nz-button nzType="link" nzSize="small" title="print" nz-dropdown [nzDropdownMenu]="menu"><img
+		style="height: 20px;" src="../../../../../assets/img/save.png" alt=""></button>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+	<ul nz-menu nzSelectable>
+		<li nz-menu-item (click)="download()">Excel</li>
+		<li nz-menu-item (click)="reportPrint(true)">PDF</li>
+		<li nz-menu-item (click)="download(true)">Word</li>
+	</ul>
+</nz-dropdown-menu>

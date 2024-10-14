@@ -1,0 +1,35 @@
+*{
+	color: #fff
+}
+  
+.searchBar{
+	height: 40px;
+}
+
+.equipId {
+	height: 300px;
+	width: 200px;
+	background: white;
+	overflow-y: auto;
+	line-height: 1.5rem;
+}
+
+.equipId ul li {
+	color: black;
+	height: 30px;
+}
+
+ul li:hover {
+	background: lightblue;
+}
+.active{
+	background-color:lightgray;
+	color:black
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

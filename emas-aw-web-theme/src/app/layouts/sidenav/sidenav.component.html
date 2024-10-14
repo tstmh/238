@@ -1,0 +1,79 @@
+<!-- <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzWidth]="320" class="navbar" [nzTrigger]="triggerTemplate">
+	<div class="logo flex flex-row flex-items-center flex-justify-around">
+
+		<a [href]="hostName" class="logo-link">
+			<img class="logo-image" width="80" src="/content/images/centrac-logo.png" alt="logo" />
+			ITMP SYSTEM
+		</a>
+		<i class="nav-menu-trigger iconfont icon-menu--fill font-22 cur-p color-fff"
+		   (click)="switchTrigger()"></i>
+
+	</div>
+	<ul class="nav-menu user-select" nz-menu [nzMode]="'inline'" nzTheme="dark" [nzInlineCollapsed]="isCollapsed"
+		[nzSelectable]="false">
+
+		<ng-container *ngFor="let menu of menuList;index as i"> -->
+
+			<!-- 点击子菜单就跳路由版本,手风琴模式 -->
+			<!-- <ng-container *ngIf="menu.children?.length > 0">
+				<li nz-submenu [id]="menu.id" #submenuRef [nzOpen]="menu.exponded" [class.active]="menu.active">
+					<a class="router-link-cover" [routerLink]="menu.route"
+						(click)="expandMenu(i,submenuRef,false)"></a>
+					<span title class="main-menu-title flex flex-row" [class.flex-justify-center]="isCollapsed">
+						<i [ngClass]="menu?.icon" style="font-size:24px"></i>
+						<a class="font-16 nav-text" style="margin-left:10px">{{menu.title | translate}}</a>
+					</span>
+					<ul class="nav-submenu">
+						<ng-container *ngFor="let submenu of menu.children; index as k">
+							<li nz-menu-item [class.active]="srla.isActive" class="submenu-item">
+								<a class="router-link-cover" routerLinkActive #srla="routerLinkActive" [id]="'link-' + k + '-' + menu.id"
+									[routerLink]="submenu.route" (click)="expandMenu(i,submenuRef,true)"></a>
+								<div title class="sub-menu-title">
+									<a class="font-14">{{submenu.title | translate}}</a>
+								</div>
+							</li>
+						</ng-container>
+					</ul>
+				</li>
+			</ng-container> -->
+
+			<!-- 点击菜单不会跳路由,非手风琴模式 -->
+			<!-- <ng-container *ngIf="menu.children?.length > 0">
+				<li nz-submenu [id]="menu.id" #submenuRef [nzOpen]="menu.exponded" [class.active]="menu.active">
+					<a class="router-link-cover"
+						(click)="expandMenu(i,submenuRef,false)"></a>
+					<span title class="main-menu-title flex flex-row" [class.flex-justify-center]="isCollapsed">
+						<i [ngClass]="menu?.icon" style="font-size:24px"></i>
+						<a class="font-16 nav-text" style="margin-left:10px">{{menu.title | translate}}</a>
+					</span>
+					<ul class="nav-submenu">
+						<ng-container *ngFor="let submenu of menu.children; index as k">
+							<li nz-menu-item [class.active]="srla.isActive" class="submenu-item">
+								<a class="router-link-cover" routerLinkActive #srla="routerLinkActive" [id]="'link-' + k + '-' + menu.id"
+									[routerLink]="submenu.route" (click)="expandMenu(i,submenuRef,true)"></a>
+								<div title class="sub-menu-title">
+									<a class="font-14">{{submenu.title | translate}}</a>
+								</div>
+							</li>
+						</ng-container>
+					</ul>
+				</li>
+			</ng-container>
+			
+			<ng-container *ngIf="!menu.children">
+				<li [class.active]="mrla.isActive" nz-menu-item nz-tooltip nzPlacement="right"
+					[nzTitle]="isCollapsed ? (menu.title | translate) : ''" (click)="expandMenu(i)">
+					<a class="router-link-cover" [routerLink]="menu.route" routerLinkActive
+					   #mrla="routerLinkActive"></a>
+					<span title class="main-menu-title flex flex-row" [class.flex-justify-center]="isCollapsed">
+						<i [ngClass]="menu?.icon" style="font-size:24px"></i>
+						<a class="nav-text font-16" style="margin-left:10px">{{menu.title | translate}}</a>
+					</span>
+				</li>
+			</ng-container>
+
+		</ng-container>
+
+
+	</ul>
+</nz-sider> -->

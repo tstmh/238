@@ -1,0 +1,172 @@
+<div style="padding: 5px;">
+		<nz-spin nzTip="Loading..." [nzSpinning]="isSpinning">
+	<div class="pageHeader">
+
+		<div nz-row>
+				<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+					<div nz-row nzGutter="16">
+						<div nz-col nzSpan="8">
+							<div nz-row [nzGutter]="16">
+								<div nz-col [nzSpan]="24">
+									<nz-form-item nzFlex>
+										<div nz-col [nzSpan]="8">
+											<nz-form-label class="colorWhite">Subsystem
+											</nz-form-label>
+										</div>
+										<nz-form-control>
+											<div nz-col [nzSpan]="8">
+												<nz-select style="width: 150px;" nzShowSearch nzAllowClear
+													nzPlaceHolder="Select a subSystem" formControlName="subSystem"
+													(ngModelChange)="changeEquip()" >
+													<nz-option *ngFor="let option of listSubSystem"
+														[nzLabel]="option.label" [nzValue]="option.value">
+													</nz-option>
+												</nz-select>
+											</div>
+										</nz-form-control>
+									</nz-form-item>
+								</div>
+							</div>
+							<div nz-row [nzGutter]="16">
+								<div nz-col [nzSpan]="24">
+									<nz-form-item nzFlex>
+										<div nz-col [nzSpan]="8">
+											<nz-form-label class="colorWhite">Location
+											</nz-form-label>
+										</div>
+										<nz-form-control>
+											<div nz-col [nzSpan]="8">
+												<nz-select style="width: 150px;" nzShowSearch nzAllowClear
+													nzPlaceHolder="Select a location" formControlName="location"
+													(ngModelChange)="changeEquip()" >
+													<nz-option *ngFor="let option of listLocation"
+														[nzLabel]="option.label" [nzValue]="option.value">
+													</nz-option>
+												</nz-select>
+											</div>
+										</nz-form-control>
+									</nz-form-item>
+								</div>
+							</div>
+							<div nz-row [nzGutter]="16">
+								<div nz-col [nzSpan]="24">
+									<nz-form-item nzFlex>
+										<div nz-col [nzSpan]="8">
+											<nz-form-label class="colorWhite">Exp Way
+											</nz-form-label>
+										</div>
+										<nz-form-control>
+											<div nz-col [nzSpan]="8">
+												<nz-select style="width: 150px;" nzShowSearch nzAllowClear
+													nzPlaceHolder="Select a expWay" formControlName="expWay"
+													[nzDisabled]="validateForm.value.location===1" (ngModelChange)="changeEquip()">
+													<nz-option *ngFor="let option of listExpWay"
+														[nzLabel]="option.label" [nzValue]="option.value">
+													</nz-option>
+												</nz-select>
+											</div>
+										</nz-form-control>
+									</nz-form-item>
+								</div>
+							</div>
+							<div nz-row [nzGutter]="16">
+								<div nz-col [nzSpan]="24">
+									<nz-form-item nzFlex>
+										<div nz-col [nzSpan]="8">
+											<nz-form-label class="colorWhite">Equip Type
+											</nz-form-label>
+										</div>
+										<nz-form-control>
+											<div nz-col [nzSpan]="8">
+												<nz-select style="width: 150px;" nzShowSearch nzAllowClear
+													nzPlaceHolder="No Data" formControlName="equipType"
+													(ngModelChange)="changeEquip(true)" >
+													<nz-option *ngFor="let option of listEquipType"
+														[nzLabel]="option.label" [nzValue]="option.label">
+													</nz-option>
+												</nz-select>
+											</div>
+										</nz-form-control>
+									</nz-form-item>
+								</div>
+							</div>
+						</div>
+						<div nz-col nzSpan="8">
+							<div nz-row nzGutter="16">
+								<div nz-col [nzSpan]="24">
+									<nz-form-item nzFlex>
+										<nz-form-label class="colorWhite">Equip ID
+										</nz-form-label>
+										<nz-form-control>
+											<div class="equipId">
+												<ul>
+													<li *ngFor="let item of listEquipID; let idx = index"
+														(click)="clickTr(item,$event)"
+														[ngClass]="{'active':item.ischecked == true}">{{item.equipId}}
+													</li>
+												</ul>
+											</div>
+										</nz-form-control>
+									</nz-form-item>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div nz-row [nzGutter]="16">
+						<div nz-col [nzSpan]="8">
+							<nz-form-item nzFlex>
+								<div nz-col [nzSpan]="8">
+									<nz-form-label class="colorWhite">From Date
+									</nz-form-label>
+								</div>
+								<nz-form-control>
+									<div>
+										<nz-date-picker nzShowTime nzFormat="dd/MM/yyyy HH:mm:ss a"
+											formControlName="fromDate" nzPlaceHolder="Start"
+											(ngModelChange)="fromDateChange($event)">
+										</nz-date-picker>
+									</div>
+								</nz-form-control>
+							</nz-form-item>
+						</div>
+						<div nz-col [nzSpan]="8">
+							<nz-form-item nzFlex>
+								<nz-form-label class="colorWhite">To Date
+								</nz-form-label>
+								<nz-form-control>
+									<nz-date-picker nzShowTime nzFormat="dd/MM/yyyy HH:mm:ss a" formControlName="toDate"
+										nzPlaceHolder="End" (ngModelChange)="toDateChange($event)">
+									</nz-date-picker>
+								</nz-form-control>
+							</nz-form-item>
+						</div>
+					</div>
+					<div nz-row [nzGutter]="16">
+						<div nz-col [nzSpan]="8">
+
+						</div>
+						<div nz-col [nzSpan]="8">
+							<nz-form-item nzFlex>
+								<nz-form-label class="colorWhite">with chart
+								</nz-form-label>
+								<nz-form-control>
+									<label nz-checkbox formControlName="withChart">
+										<span></span>
+									</label>
+								</nz-form-control>
+							</nz-form-item>
+						</div>
+					</div>
+					<div nz-col [nzSpan]="2" class="search-area">
+						<button nz-button [disabled]="Generate" [nzType]="'default'" style="color: #000;"
+							(click)="GenerateClick()"><img src="../../../../assets/img/Images/SS_General/export.png">Generate Report</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</nz-spin>
+</div>
+<emas-alarm-modal *ngIf="isVisibleMiddle" [isVisibleMiddle]="isVisibleMiddle" [reportValue]="reportValue"
+	(closeModal)="closeModal()" [listData]='listData' [withChart]='withChart'></emas-alarm-modal>

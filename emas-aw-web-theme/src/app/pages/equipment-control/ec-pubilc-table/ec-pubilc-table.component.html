@@ -1,0 +1,57 @@
+<div>
+	<div style="display: flex;margin-bottom: 10px">
+		<!-- <p style="font-size: 16px">Query Result:</p>
+				<div style="width:5px"></div>
+				<p style="color:#0A0CFF;font-size: 16px">{{basicTable.data.length}} Records Found</p> -->
+		<p style="margin-bottom: 15px;font-size: 14px;" class="labelText">Query Result: {{basicTable.data.length}}
+			Records Found</p>
+	</div>
+	<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false" [nzData]="listOfData"
+		[nzScroll]="{ y: '460px' }" nzBordered="true">
+		<thead (nzSortChange)="sort($event)" nzSingleSort>
+			<!-- <tr style="background:cornflowerblue">
+						<ng-container *ngFor="let item of renderHeader">
+							<th class="listTitle" *ngFor="let item of renderHeader">
+								<div>{{ item.name }}</div>
+							</th>
+						</ng-container>
+          </tr> -->
+			<tr style="background:cornflowerblue">
+				<th style="width: 295px" nzShowSort nzSortKey='Equip ID And Location'>Equip ID And Location</th>
+				<th style="width: 125px" nzShowSort nzSortKey='Status'>Status</th>
+				<th style="flex: 1;" nzShowSort nzSortKey='Time'>Time</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let data of basicTable.data;let idx = index" (click)="clickTr(data)"
+				[ngClass]="{'active': data.equipmentId == selectItem['equipmentId']}">
+				<td style="width: 295px">{{ data.idAndLoc || data.idAndLoca }}</td>
+				<td style="width: 125px" *ngIf="data.attrValue === '2'">
+					<p class='itemStatus'><span class='greenBox'></span></p>
+				</td>
+				<td style="width: 125px" *ngIf="data.attrValue !== '2'">
+					<p class='itemStatus'><span class='redBox'></span></p>
+				</td>
+				<td>{{ data.lastModified | date:'dd/MM/yyyy hh:mm:ss a' }}</td>
+				
+			</tr>
+		</tbody>
+		<tfoot>
+		</tfoot>
+	</nz-table>
+
+
+
+	<div style="margin-top: 1.5vh;" nz-row>
+		<div nz-col nzSpan="18">
+			<p class='itemStatus'><span class='greenBox'></span> Operational</p>
+			<p class='itemStatus'><span class='redBox'></span>Not Operational</p>
+		</div>
+		<div nz-col nzSpan="4" class="search-area">
+			<button nz-button [disabled]="disableSelect" [nzType]="'default'" (click)="select()" style="color:#000">Select</button>
+		</div>
+	</div>
+
+</div>
+<emas-send-modal *ngIf='isVisibleMiddle' [isVisibleMiddle]="isVisibleMiddle" (closeModal)='closeModal($event)'
+	[selectItem]="selectItem" [listOfData]="listOfData" [equipType]="equipSelect"></emas-send-modal>

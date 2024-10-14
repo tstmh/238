@@ -1,0 +1,45 @@
+<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzWidth=850 nzMaskClosable="false"
+		  [nzTitle]="modalTitle"
+		  [nzContent]="modalContent" [(nzVisible)]="isVisibleMiddle" [nzFooter]="null"
+		  (nzOnCancel)="handleCancelMiddle()">
+	<ng-template #modalTitle>
+		TemplateDetailWindowView
+	</ng-template>
+	<ng-template #modalContent>
+		<div nz-row style="background-color: rgba(0,0,0,.65);">
+			<div nz-col nzSpan="8" style="border-right: 2px solid #fff;">
+				<ul class="detail">
+					<li>Template: {{selectItem.templateName}}</li>
+					<li>Template Id: {{selectItem.templateId}}</li>
+					<li>Height: {{selectItem.height}}</li>
+					<li>Width: {{selectItem.width}}</li>
+					<li>Equip Type: {{selectItem.equipType}}</li>
+				</ul>
+			</div>
+			<div nz-col nzSpan="16">
+
+				<div [ngStyle]="rightPartStyles">
+					<div *ngFor="let item of imgList; let indx = index" [ngStyle]="item" style="display: flex;align-items: center;justify-content: center;">
+						<ng-container *ngIf="item.width == item.height">
+							<img style="width: 99%;height: 99%;position: absolute;"
+							 [src]="'data:image/png;base64,' + selectItem.vmsTemplatePicConfigDtoList[indx].vmsPictogramConfigDto.graphicContents"
+							 [title]="indx + 1">
+						</ng-container>
+						<ng-container *ngIf="item.width !== item.height">
+							<img style="max-width: 99%;max-height: 99%;position: absolute;"
+							 [src]="'data:image/png;base64,' + selectItem.vmsTemplatePicConfigDtoList[indx].vmsPictogramConfigDto.graphicContents"
+							 [title]="indx + 1">
+						</ng-container>
+					</div>
+					<!-- <img *ngFor="let item of imgList; let indx = index" [ngStyle]="item"
+						[src]="'data:image/png;base64,' + selectItem.vmsTemplatePicConfigDtoList[indx].vmsPictogramConfigDto.graphicContents"
+            alt=""> -->
+					<ul *ngFor="let item of textList; let indx = index" [ngStyle]="item">
+						<li *ngFor="let item of 'x'.repeat(textBox[indx]).split('')" [ngStyle]="textBoxStyle[indx]"
+							class="redBorder"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</ng-template>
+</nz-modal>

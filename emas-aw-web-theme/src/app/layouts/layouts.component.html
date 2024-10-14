@@ -1,0 +1,166 @@
+<!-- <nz-layout> -->
+<!-- sider start -->
+<!-- <sj-sidenav></sj-sidenav> -->
+<!-- <div>slider</div> -->
+<!-- sider end -->
+<!-- <nz-layout> -->
+<!-- <main class="flex-auto" style="height:100vh;"> -->
+<!-- <sj-header></sj-header> -->
+<!-- <div style="height: calc(100vh - 80px);overflow: auto"> -->
+<!-- <router-outlet></router-outlet> -->
+<!-- </div> -->
+<!-- <sj-footer></sj-footer> -->
+<!-- </main> -->
+<!-- </nz-layout> -->
+<!-- </nz-layout> -->
+
+<nz-layout>
+	<sj-header #header></sj-header>
+	<nz-layout>
+		<nz-sider [(nzCollapsed)]="isCollapsed" [nzWidth]="250" class="navbar" *ngIf="header.showSider">
+			<ul class="nav-menu user-select" nz-menu [nzMode]="'inline'" [nzTheme]="theme ? 'dark' : 'light'"
+				[nzInlineCollapsed]="isCollapsed" [nzSelectable]="false" *ngIf="notFirstTime">
+				<ng-container *ngFor="let menu of menuList;index as i">
+					<!-- 点击子菜单就跳路由版本,手风琴模式 -->
+					<!-- <ng-container *ngIf="menu.children?.length > 0">
+						<li nz-submenu [id]="menu.id" #submenuRef [nzOpen]="menu.exponded" [class.active]="menu.active">
+							<a class="router-link-cover" [routerLink]="menu.route"
+								(click)="expandMenu(i,submenuRef,false)"></a>
+							<span title class="main-menu-title flex flex-row" [class.flex-justify-center]="isCollapsed">
+								<i [ngClass]="menu?.icon" style="font-size:24px"></i>
+								<a class="font-16 nav-text" style="margin-left:10px">{{menu.title | translate}}</a>
+							</span>
+							<ul class="nav-submenu">
+								<ng-container *ngFor="let submenu of menu.children; index as k">
+									<li nz-menu-item [class.active]="srla.isActive" class="submenu-item">
+										<a class="router-link-cover" routerLinkActive #srla="routerLinkActive" [id]="'link-' + k + '-' + menu.id"
+											[routerLink]="submenu.route" (click)="expandMenu(i,submenuRef,true)"></a>
+										<div title class="sub-menu-title">
+											<a class="font-14">{{submenu.title | translate}}</a>
+										</div>
+									</li>
+								</ng-container>
+							</ul>
+						</li>
+					</ng-container> -->
+					<!-- 点击菜单不会跳路由,非手风琴模式 -->
+					<ng-container *ngIf="menu.children?.length > 0">
+						<li nz-submenu [id]="menu.id" #submenuRef [nzOpen]="menu.exponded" [class.active]="menu.active">
+							<a class="router-link-cover" (click)="expandMenu(i,'one')"></a>
+							<span title class="main-menu-title flex flex-row" [class.flex-justify-center]="isCollapsed">
+								<i [ngClass]="menu?.icon" style="font-size:24px"></i>
+								<a class="font-16 nav-text" style="margin-left:10px">{{menu.title | translate}}</a>
+							</span>
+							<ul class="nav-submenu">
+								<ng-container *ngFor="let submenu of menu.children; index as k">
+									<!-- 二级菜单存在子集的情况 -->
+									<ng-container *ngIf="submenu.children">
+										<nz-divider nzDashed></nz-divider>
+										<li nz-submenu [class.active]="submenu.active" [nzOpen]="submenu.exponded">
+											<a class="router-link-cover" (click)="expandMenu(i, 'two', k)"
+											routerLinkActive #srla="routerLinkActive" [routerLink]="submenu.route"></a>
+											<div title class="sub-menu-title">
+												<a class="font-14">{{submenu.title | translate}}</a>
+											</div>
+											
+											<ul class="nav-submenu">
+												<ng-container *ngFor="let thrla of submenu.children;">
+													<nz-divider nzDashed></nz-divider>
+													<li nz-menu-item [class.active]="thrla.isActive"
+														class="submenu-item" title="{{thrla.toostip}}">
+														<a class="router-link-cover" routerLinkActive
+															#thrla="routerLinkActive"
+															[routerLink]="thrla.route"></a>
+														<div title class="sub-menu-title">
+															<i nz-icon nzType="right" nzTheme="outline" style="font-size:10px"></i>
+															<a class="font-14">{{thrla.title | translate}}</a>
+														</div>																		
+													</li>
+												</ng-container>
+
+												<!--<ng-container *ngFor="let thrla of submenu.children; index as p">-->
+													<!-- 三级菜单存在子集的情况 -->
+													<!--<ng-container *ngIf="thrla.children">
+														<nz-divider nzDashed></nz-divider>
+														<li nz-menu-item [class.active]="thrla.active"  [nzOpen]="thrla.exponded">
+															<a class="router-link-cover" (click)="expandMenu(i, 'three', p)"
+															routerLinkActive #thrla="routerLinkActive" [routerLink]="thrla.route"></a>
+															<div title class="sub-menu-title">																
+																<a class="font-14">{{thrla.title | translate}}</a>
+															</div>
+
+															<ul class="nav-submenu">
+																<ng-container *ngFor="let fourla of thrla.children;">
+																	<nz-divider nzDashed></nz-divider>
+																	<li nz-menu-item [class.active]="fourla.isActive"
+																		class="submenu-item" title="{{fourla.toostip}}">
+																		<a class="router-link-cover" routerLinkActive
+																			#thrla="routerLinkActive"
+																			[routerLink]="fourla.route"></a>
+																		<div title class="sub-menu-title">
+																			<i nz-icon nzType="right" nzTheme="outline" style="font-size:10px"></i>
+																			<a class="font-14">{{fourla.title | translate}}</a>
+																		</div>																		
+																	</li>
+																</ng-container>
+															</ul>
+														</li>
+													</ng-container>-->
+													<!-- 三级菜单不存子集的情况 -->
+													<!--<ng-container *ngIf="!thrla.children">													
+														<nz-divider nzDashed></nz-divider>
+														<li nz-menu-item routerLinkActive="active" class="submenu-item"
+														 [class.active]="thrla.active" title="{{thrla.toostip}}">
+															<a class="router-link-cover" [routerLink]="thrla.route"></a>
+															<div title class="sub-menu-title">
+																<i nz-icon nzType="right" nzTheme="outline"	style="font-size:10px"></i>
+																<a class="font-14">{{thrla.title | translate}}</a>
+															</div>
+														</li>
+													</ng-container>
+												</ng-container>-->
+											</ul>
+										</li>
+									</ng-container>
+									<!-- 二级菜单不存子集的情况 -->
+									<ng-container *ngIf="!submenu.children">
+										<nz-divider nzDashed></nz-divider>
+										<li nz-menu-item routerLinkActive="active" class="submenu-item"
+										[class.active]="submenu.active" title="{{submenu.toostip}}">
+											<a class="router-link-cover" [routerLink]="submenu.route"></a>
+											<div title class="sub-menu-title">
+												<i nz-icon nzType="right" nzTheme="outline" style="font-size:10px"></i>
+												<a class="font-14">{{submenu.title | translate}}</a>
+											</div>
+										</li>
+									</ng-container>
+
+								</ng-container>
+
+							</ul>
+						</li>
+						<nz-divider nzDashed></nz-divider>
+					</ng-container>
+					<ng-container *ngIf="!menu.children">
+						<li [class.active]="mrla.isActive" nz-menu-item nz-tooltip nzTooltipPlacement="right"
+							[nzTooltipTitle]="isCollapsed ? (menu.title | translate) : ''" (click)="expandMenu(i)">
+							<a class="router-link-cover" [routerLink]="menu.route" routerLinkActive
+								#mrla="routerLinkActive"></a>
+							<span title class="main-menu-title flex flex-row" [class.flex-justify-center]="isCollapsed">
+								<i [ngClass]="menu?.icon" style="font-size:24px"></i>
+								<a class="nav-text font-16" style="margin-left:10px">{{menu.title | translate}}</a>
+							</span>
+						</li>
+					</ng-container>
+				</ng-container>
+			</ul>
+		</nz-sider>
+		<!-- <nz-content style='background-color:rgba(0,0,0,.65)'> -->
+		<nz-content class="content">
+			<tab-router></tab-router>
+			<router-outlet></router-outlet>
+			<!-- <sj-footer [navigationEnd]="navigationEnd"></sj-footer> -->
+		</nz-content>
+	</nz-layout>
+	<sj-footer [navigationEnd]="navigationEnd"></sj-footer>
+</nz-layout>

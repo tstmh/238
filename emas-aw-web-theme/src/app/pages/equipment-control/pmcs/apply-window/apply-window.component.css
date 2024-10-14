@@ -1,0 +1,46 @@
+::ng-deep .ant-modal-close:focus {
+	outline: unset;
+}
+
+::ng-deep .vertical-center-modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ant-modal-body {
+	padding: 24px 0
+}
+
+.middleBtn button {
+	color: #000;
+	display: block;
+	margin: 40px 50px;
+	width: 115px;
+}
+
+.center-title {
+	text-align: center;
+	font-size: 16px
+}
+
+.content {
+	display: flex;
+	justify-content: space-between
+}
+
+.content_table {
+	border: 1px solid gray;
+	height: 450px;
+	width: 220px;
+	overflow-y: scroll
+}
+
+.li {
+	height: 30px;
+	font-size: 14px;
+	line-height: 30px
+}
+.active{
+	background: #E5F3FB
+}

@@ -1,0 +1,17 @@
+.active {
+	background: #8D8D8D !important;
+}
+
+::ng-deep .ant-modal-title{
+	width: 270px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+::ng-deep .ant-modal-close:focus {
+	outline: unset;
+}
+::ng-deep .itmp-dialog-content[_ngcontent-axg-c26]{
+	font-size: 16px;
+}

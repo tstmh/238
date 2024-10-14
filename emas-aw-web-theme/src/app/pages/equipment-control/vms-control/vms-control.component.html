@@ -1,0 +1,833 @@
+<nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+	<div style="padding: 5px;">
+		<div class="pageHeader">
+
+			<div nz-row class="searchBar">
+				<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+					<div nz-row [nzGutter]="16">
+						<div nz-col [nzSpan]="4">
+							<nz-form-item nzFlex>
+								<nz-form-label class="colorWhite">Exp Way
+								</nz-form-label>
+								<nz-form-control>
+									<nz-select style="width: 150px;" formControlName="expWay"
+										(ngModelChange)="filterChange()">
+										<nz-option *ngFor="let option of listExpWaySearch"
+											[nzLabel]="option.description" [nzValue]="option.value">
+										</nz-option>
+									</nz-select>
+									<!-- <input
+              nz-input
+              placeholder="placeholder"
+              formControlName="subSystem"
+              style='color:#000'
+            /> -->
+								</nz-form-control>
+							</nz-form-item>
+						</div>
+						<div nz-col [nzSpan]="4">
+							<nz-form-item nzFlex>
+								<nz-form-label class="colorWhite">*Equip type
+								</nz-form-label>
+								<nz-form-control>
+									<nz-select style="width: 150px;"  
+										nzPlaceHolder="Select a equipType" formControlName="equipType"
+										(ngModelChange)="filterChange()">
+										<nz-option *ngFor="let option of vmsEquipTypeListSearch"
+											[nzLabel]="option.value" [nzValue]="option.value">
+										</nz-option>
+									</nz-select>
+									<!-- <input
+              nz-input
+              placeholder="placeholder"
+              formControlName="equipType"
+              style='color:#000'
+            /> -->
+								</nz-form-control>
+							</nz-form-item>
+						</div>
+						<div nz-col [nzSpan]="4">
+							<nz-form-item nzFlex>
+								<nz-form-label class="colorWhite">*Equip Id
+								</nz-form-label>
+								<nz-form-control>
+									<nz-select style="width: 150px;" nzShowSearch
+										nzPlaceHolder="Select a equipID" formControlName="equipID">
+										<nz-option *ngFor="let option of listDisplayEquipIDSearch"
+											[nzLabel]="option.equipId" [nzValue]="option">
+										</nz-option>
+									</nz-select>
+									<!-- <input
+                nz-input
+                placeholder="placeholder"
+                formControlName="equipType"
+                style='color:#000'
+              /> -->
+								</nz-form-control>
+							</nz-form-item>
+						</div>
+						<div nz-col nzOffset="9" [nzSpan]="3" class="search-area">
+							<button nz-button [nzType]="'default'" style="color: #000;" (click)="searchEquipId()"><img
+									src="../../../../assets/img/Images/SS_General/find.png" class="">Search</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<nz-divider></nz-divider>
+		<div nz-row>
+			<div nz-col [nzSpan]="20">
+				<div nz-row>
+					<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+						<div nz-row [nzGutter]="24">
+							<div nz-col [nzSpan]="5">
+								<nz-form-item nzFlex>
+									<nz-form-label class="colorWhite">Equip Type</nz-form-label>
+									<nz-form-control>
+										<nz-form-text class="text">{{ selectEuipment.equipType }}</nz-form-text>
+									</nz-form-control>
+								</nz-form-item>
+							</div>
+							<div nz-col [nzSpan]="5">
+								<nz-form-item nzFlex>
+									<nz-form-label class="colorWhite">Equip Id</nz-form-label>
+									<nz-form-control>
+										<nz-input-group>
+											<nz-form-text class="text">{{ selectEuipment.equipId }}
+											</nz-form-text>
+										</nz-input-group>
+									</nz-form-control>
+								</nz-form-item>
+							</div>
+							<div nz-col [nzSpan]="5">
+								<nz-form-item nzFlex>
+									<nz-form-label class="colorWhite">IP Address</nz-form-label>
+									<nz-form-control>
+										<nz-input-group>
+											<nz-form-text class="text">{{ selectEuipment.ipAddress }}
+											</nz-form-text>
+										</nz-input-group>
+									</nz-form-control>
+								</nz-form-item>
+							</div>
+							<div nz-col [nzSpan]="9">
+								<nz-form-item nzFlex>
+									<nz-form-label class="colorWhite">Toggle Mode</nz-form-label>
+									<nz-form-control>
+										<nz-select style="width: 300px;" formControlName="toggle_mode"
+											[disabled]="!isEditable" (ngModelChange)="modeChange()">
+											<nz-option *ngFor="let option of toggleModeList"
+												[nzLabel]="option.description" [nzValue]="option.value">
+											</nz-option>
+										</nz-select>
+									</nz-form-control>
+								</nz-form-item>
+							</div>
+						</div>
+						<div nz-row [nzGutter]="24">
+							<div nz-col [nzSpan]="5">
+								<nz-form-item nzFlex>
+									<nz-form-label class="colorWhite">Phase</nz-form-label>
+									<nz-form-control>
+										<nz-input-group>
+											<nz-form-text class="text">{{ selectEuipment.phase }}</nz-form-text>
+										</nz-input-group>
+									</nz-form-control>
+								</nz-form-item>
+							</div>
+							<div nz-col [nzSpan]="5">
+								<nz-form-item nzFlex>
+									<nz-form-label class="colorWhite">Exp Way</nz-form-label>
+									<nz-form-control>
+										<nz-input-group>
+											<nz-form-text class="text">{{ selectEuipment.expWay }}
+											</nz-form-text>
+										</nz-input-group>
+									</nz-form-control>
+								</nz-form-item>
+							</div>
+							<div nz-col [nzSpan]="5">
+								<nz-form-item nzFlex>
+									<nz-form-label class="colorWhite">Update Time</nz-form-label>
+									<nz-form-control>
+										<nz-input-group>
+											<nz-form-text class="text">
+												{{ vmsMsgSource.dateTime | date:'dd/MM/yyyy hh:mm:ss'  }}
+											</nz-form-text>
+										</nz-input-group>
+									</nz-form-control>
+								</nz-form-item>
+							</div>
+							<div nz-col [nzSpan]="9">
+								<nz-form-item nzFlex>
+									<nz-form-label class="colorWhite">Display Mode</nz-form-label>
+									<nz-form-control>
+										<nz-select style="width: 300px;" formControlName="display_mode" (ngModelChange)="modeChange()">
+											<nz-option *ngFor="let option of displayModeList"
+												[nzLabel]="option.description" [nzValue]="option.value">
+											</nz-option>
+										</nz-select>
+									</nz-form-control>
+								</nz-form-item>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div nz-row style="background: white;width: 99.9%;">
+					<ng-container>
+						<nz-tabset [(nzSelectedIndex)]="vmsMsgSource.page" (nzSelectChange)="this.setRightPartStyles()" (nzSelectedIndexChange)="tabChange($event)">
+								<nz-tab [nzTitle]="pages+1" *ngFor='let vmsMsgPage of vmsMsgSource?.vmsMsgPageDtoList; let pages = index'>
+									<div nz-row >
+										<div nz-col [nzSpan]="6" class="leftPart" *ngIf="tabShow">
+											<p class="leftTemplate">Template:
+												{{vmsMsgPage.vmsTemplateConfigDto.templateName}}
+												<span (click)="selectTemplate()" *ngIf="isEditable"><i nz-icon
+														nzType="edit" style="color: #000;" nzTheme="outline"></i></span>
+											</p>
+											<p class="leftTemplate">Template Id:
+												{{vmsMsgPage.vmsTemplateConfigDto.templateId}}
+											</p>
+											<p class="leftTemplate">Height:
+												{{vmsMsgPage.vmsTemplateConfigDto.height}}</p>
+											<p class="leftTemplate">Width:
+												{{vmsMsgPage.vmsTemplateConfigDto.width}}</p>
+											<p class="leftTemplate">Page Mode:
+												<nz-select style="width: 180px;" [(ngModel)]="pageMode"
+													[disabled]="!isEditable">
+													<nz-option *ngFor="let option of pageModeList"
+														[nzLabel]="option.description" [nzValue]="option.value">
+													</nz-option>
+												</nz-select>
+											</p>
+											<p class="leftTemplate">Toggle Time:
+												<nz-input-number [(ngModel)]="toggleTimeNum" [nzMin]="2" [nzMax]="60"
+													[nzStep]="1" style="width: 120px;color: #000;"
+													[disabled]="!isEditable"></nz-input-number>
+											</p>
+											<div nz-row>
+												<div nz-col [nzSpan]="8"><button nz-button nzType="default"
+														style="color: #000;" [disabled]="!isEditable"
+														(click)="addTemplate('before')">
+														<< Add</button>
+												</div>
+												<div nz-col [nzSpan]="8"><button nz-button nzType="default"
+														style="color: #000;" [disabled]="!isEditable"
+														(click)="deleteTemplate()">Delete</button>
+												</div>
+												<div nz-col [nzSpan]="8"><button nz-button nzType="default"
+														style="color: #000;" [disabled]="!isEditable"
+														(click)="addTemplate('after')">Add>></button></div>
+											</div>
+										</div>
+										<div nz-col [nzSpan]="18" class="centerPart" >
+											<div class='content' id="vms-text">
+												<div *ngIf="showOnly[pages]  " [ngStyle]="showOnly[pages].rightPartStyles" class='incidentMsg'>
+													<ng-container >
+														<div *ngFor="let item of showOnly[pages].imgList; let indx = index"
+															[ngStyle]="item" (click)="showIncidentPicModal(indx,pages)">
+															<!-- <img style="width: 99%;height: 99%;" (click)="getImgsrc(vmsMsgPage.vmsPictogramConfigDtoList[indx])" -->
+															<img style="width: 99%;height: 99%;" (click)="getImgsrc(vmsMsgPage.vmsTemplateConfigDto.vmsTemplatePicConfigDtoList[indx])"
+																*ngIf="vmsMsgPage.vmsPictogramConfigDtoList"
+																[src]="'data:image/png;base64,' + vmsMsgPage.vmsPictogramConfigDtoList[indx]?.graphicContents"
+																[title]="indx + 1">
+														</div>
+														<ul *ngFor="let item of showOnly[pages].inputSet; let textRow = index"
+															[ngStyle]="showOnly[pages].textList[textRow]" class='inputGroup'>
+															<li *ngFor="let data of item"
+																[ngStyle]="showOnly[pages].textBoxStyle[textRow]">
+																<input type="text" nz-input class='inputText'
+																	maxLength="1"
+																	[ngClass]="{'active':selectItemIdx == data.index && pages===showColorSelectPage}"
+																	[(ngModel)]="data.key"
+																	(focus)="inputTextOnFocus(data.index)"
+																	(ngModelChange)="inputFinish(data.key,vmsMsgPage,textRow)"
+																	(click)='showColorSelect(data,data.index,pages)'
+																	[ngStyle]="{'color': data.color}"
+																	[id]="'input' + data.index">
+																<ul style='width: 160px;'
+																	*ngIf="selectItemIdx === data.index && pages===showColorSelectPage">
+																	<ng-container
+																		*ngFor='let color of textColorList; let idxColor = index'>
+																		<li style="width:18px;height:18px;border: 1px solid #666;;float: left;"
+																			(click)="changeInputColor(color,idxColor,vmsMsgPage,textRow)"
+																			[ngStyle]="{'background-color': color}">
+																		</li>
+																	</ng-container>
+
+																</ul>
+															</li>
+														</ul>
+													</ng-container>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</nz-tab>
+						</nz-tabset>
+					</ng-container>
+
+				</div>
+			</div>
+			<div nz-col [nzSpan]="4" class="rightPart">
+				<div class='boxSet' *ngIf="isEditable">
+					<div nz-row nzGutter="16">
+						<div nz-col class="gutter-row" [nzSpan]="12">
+							<div class="gutter-box">
+								<div class="sendMsg boxBorder btnBox" (click)='sendMessage()'>
+									Send Msg
+								</div>
+							</div>
+						</div>
+						<div nz-col class="gutter-row" [nzSpan]="12">
+							<div class="gutter-box">
+								<div class='midBox boxBorder btnBox' (click)="loadBlankMsg()">Blank</div>
+								<div class='midBox boxBorder btnBox library' (click)="loadLibrary()">Library</div>
+							</div>
+						</div>
+					</div>
+					<div nz-row nzGutter="16">
+						<div nz-col class="gutter-row" [nzSpan]="24">
+							<div class="gutter-box">
+								<div class="longBox boxBorder btnBox" (click)="resetEquipment()">
+									Reset Equipment
+								</div>
+							</div>
+						</div>
+					</div>
+					<div nz-row nzGutter="16">
+						<div nz-col class="gutter-row" [nzSpan]="24">
+							<div class="gutter-box">
+								<div class="longBox boxBorder btnBox" (click)="requestPixelFailureBMP()">
+									Request Pixel Failure BMP
+								</div>
+							</div>
+						</div>
+					</div>
+					<div nz-row nzGutter="16">
+						<div nz-col class="gutter-row" [nzSpan]="24">
+							<div class="gutter-box">
+								<div class="longBox boxBorder btnBox" (click)="searchUploadPic()">
+									Upload Pictogram
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--no brain-->
+				<div class='boxSet' *ngIf="!isEditable">
+					<div nz-row nzGutter="16">
+						<div nz-col class="gutter-row" [nzSpan]="12">
+							<div class="gutter-box">
+								<div class="sendMsg boxBorder">
+									Send Msg
+								</div>
+							</div>
+						</div>
+						<div nz-col class="gutter-row" [nzSpan]="12">
+							<div class="gutter-box">
+								<div class='midBox boxBorder'>Blank</div>
+								<div class='midBox boxBorder library'>Library</div>
+							</div>
+						</div>
+					</div>
+					<div nz-row nzGutter="16">
+						<div nz-col class="gutter-row" [nzSpan]="24">
+							<div class="gutter-box">
+								<div class="longBox boxBorder">
+									Reset Equipment
+								</div>
+							</div>
+						</div>
+					</div>
+					<div nz-row nzGutter="16">
+						<div nz-col class="gutter-row" [nzSpan]="24">
+							<div class="gutter-box">
+								<div class="longBox boxBorder">
+									Request Pixel Failure BMP
+								</div>
+							</div>
+						</div>
+					</div>
+					<div nz-row nzGutter="16">
+						<div nz-col class="gutter-row" [nzSpan]="24">
+							<div class="gutter-box">
+								<div class="longBox boxBorder">
+									Upload Pictogram
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="infoSet">
+					<ul>
+						<li>Operational Status: {{ statusArr[0].value }}</li>
+						<li>Dimming Level: {{statusArr[3].value}}</li>
+						<li>Sign Temperature: {{statusArr[2].value}}</li>
+						<li>Fan Temp Threshold: {{statusArr[5].value}}</li>
+						<li>Photo Sensor: {{statusArr[1].value}}</li>
+						<li>Dimming:{{ dimmingResultRec }}
+							<span style='float: right;font-size: 18px;cursor: pointer;' (click)="updateDimmingMode()"
+								*ngIf="isEditable"><i nz-icon nzType="edit" nzTheme="outline"></i></span>
+						</li>
+						<li>Fan Control: {{ fancontrolResultRec }}
+							<span style='float: right;font-size: 18px;cursor: pointer;' (click)="updateFanControl()"
+								*ngIf="isEditable"><i nz-icon nzType="edit" nzTheme="outline"></i></span>
+						</li>
+						<li>Flashing Time(100 milliseconds):</li>
+						<li>On Time: {{ statusArr[7].value }} <span
+								style='float: right;font-size: 18px;cursor: pointer;' (click)="onTimeCheck()"
+								*ngIf="isEditable"><i nz-icon nzType="edit" nzTheme="outline"></i></span></li>
+						<li>Off Time: {{ statusArr[8].value }}</li>
+					</ul>
+				</div>
+				<div class="table">
+					<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false"						
+						[nzBordered]="true" [nzData]="alarmList" [nzScroll]="{y: '180px'}" nzSize="small">
+						<!-- [nzBordered]="true" [nzData]="alarmList" nzSize="small"> -->
+						<thead>
+							<tr>
+								<ng-container *ngFor="let item of renderHeader2">
+									<th class="listTitle" style="background:cornflowerblue">
+										<div>{{ item.name }}</div>
+									</th>									
+								</ng-container>
+								<th class="listTitle" style="background:cornflowerblue" nzWidth="54px">Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let data of basicTable.data;let idx = index">
+								<td>{{ data.alarmDescription }}</td>
+								<td>{{ data.startDate | date:'dd/MM/yyyy hh:mm:ss'  }}</td>
+								<td>{{ data.status }}</td>
+							</tr>
+						</tbody>
+					</nz-table>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzWidth=700 nzMaskClosable="false"
+		[nzTitle]="modalTitle" [nzContent]="modalContent" [(nzVisible)]="isVisible" [nzFooter]="null"
+		(nzOnCancel)="handleCancel()">
+		<ng-template #modalTitle>
+			Pictogram Selector
+		</ng-template>
+		<ng-template #modalContent>
+			<div nz-row style='padding: 5px 0;'>
+				<div nz-col [nzSpan]="16">
+					<nz-select style="width: 150px;" nzShowSearch nzAllowClear nzPlaceHolder="All"
+						[(ngModel)]="vmpPicGroupId" (ngModelChange)="getAllVmsPictogramConfig()">
+						<nz-option *ngFor="let option of listVMSPicGroup" [nzLabel]="option.description"
+							[nzValue]="option.value">
+						</nz-option>
+					</nz-select>
+				</div>
+				<div nz-col [nzSpan]="4">
+					<button nz-button [nzType]="'default'" style="color: #000;"
+						(click)="selectPictogramComfirm()">select</button>
+				</div>
+				<div nz-col [nzSpan]="4">
+					<button nz-button [nzType]="'default'" style="color: #000;"
+						(click)="cancelPictogramComfirm()">cancel</button>
+				</div>
+			</div>
+			<div nz-row style="background-color: rgba(0,0,0,.65);height: 400px;overflow: scroll;">
+				<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false"
+					[nzBordered]="true" [nzData]="listOfPictogram">
+					<thead thead (nzSortChange)="sortP($event)" nzSingleSort>
+						<tr style="background:cornflowerblue">
+							<ng-container *ngFor="let item of renderHeader3">
+								<th class="listTitle" nzShowSort nzSortKey="{{item.value}}">
+									<div>{{ item.name }}</div>
+								</th>
+							</ng-container>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let data of basicTable.data;let idx = index" style="color: white;"
+							[ngClass]="{'active':choosenPictogram.pictogramId == data.pictogramId}" (click)='chooseTemplatePic(data)'>
+							<td>{{ data.pictogramId }}</td>
+							<td><img [src]="'data:image/png;base64,' + data.graphicContents" alt=""></td>
+							<td>{{ data.picFileName }}</td>
+							<td>{{ data.height }}</td>
+							<td>{{ data.width }}</td>
+							<td>{{ data.pictogramDesc }}</td>
+						</tr>
+					</tbody>
+				</nz-table>
+			</div>
+		</ng-template>
+	</nz-modal>
+
+
+	<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzWidth=700 nzMaskClosable="false"
+		[nzTitle]="modalTitle1" [nzContent]="modalContent1" [(nzVisible)]="isVisibleTemplateSelect" [nzFooter]="null"
+		(nzOnCancel)="handleCancelTemplateSelect()">
+		<ng-template #modalTitle1>
+			Template Selector
+		</ng-template>
+		<ng-template #modalContent1>
+			<div nz-row style='padding: 5px 0;display: flex;justify-content: space-between;'>
+				<div nz-col [nzSpan]="16">
+					<nz-select style="width: 150px;" nzShowSearch nzPlaceHolder="Select template" [nzDropdownMatchSelectWidth]="false"
+						[(ngModel)]="selectTemplateDisplay" (ngModelChange)="changeSelectedTemplate()">
+						<nz-option *ngFor="let option of listOfTemplateDisplay" [nzLabel]="option.templateName"
+							[nzValue]="option">
+						</nz-option>
+					</nz-select>
+				</div>
+				<div nz-col [nzSpan]="4">
+					<button nz-button [nzType]="'default'" style="color: #000;"
+						(click)="selectTemplateComfirm()">select</button>
+				</div>
+				<div nz-col [nzSpan]="4">
+					<button nz-button [nzType]="'default'" style="color: #000;"
+						(click)="cancelTemplateComfirm()">cancel</button>
+				</div>
+			</div>
+			<div nz-row style="background-color: rgba(0,0,0,.65);">
+				<div nz-col nzSpan="8" style="border-right: 2px solid #fff;">
+					<ul class="detail">
+						<li>Tmeplate: {{selectItem.templateName}}</li>
+						<li>Tmeplate Id: {{selectItem.templateId}}</li>
+						<li>Height: {{selectItem.height}}</li>
+						<li>Width: {{selectItem.width}}</li>
+						<li>Equip Type: {{selectItem.equipType}}</li>
+					</ul>
+				</div>
+				<div nz-col nzSpan="16" style='height: 240px;display: flex;align-items: center;justify-content: center;' class='content0'>
+					<div [ngStyle]="selectRightPartStyles" *ngIf='selectItem'>
+						<div *ngFor="let item of imgList; let indx = index" [ngStyle]="item">
+							<img style="width: 99%;height: 99%;"
+								[src]="'data:image/png;base64,' + selectItem.vmsTemplatePicConfigDtoList[indx].vmsPictogramConfigDto?.graphicContents"
+								[title]="indx + 1">
+						</div>
+						<ul *ngFor="let item of textList; let indx = index" [ngStyle]="item">
+							<li *ngFor="let item of 'x'.repeat(textBox[indx]).split('')" [ngStyle]="textBoxStyle[indx]"
+								class="redBorder"></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</ng-template>
+	</nz-modal>
+
+	<nz-modal zmMovableModal [(nzVisible)]="isApplyTemplateVisible" [nzTitle]="modalTitle2" [nzContent]="modalContent2"
+		[nzFooter]="modalFooter2" (nzOnCancel)="handleApplyTemplateCancel()" nzStyle="" nzWidth="700px" nzMask="false">
+
+		<ng-template #modalTitle2>
+			<ng-container
+				*ngIf="this.applyMessageWindow !== 'Setting Flashing Time'&&this.applyMessageWindow !== 'Setting Dimming'&&this.applyMessageWindow !== 'Setting Fan Control'">
+				Apply Message
+			</ng-container>
+			<ng-container *ngIf="this.applyMessageWindow === 'Setting Flashing Time'">
+				Flashing Time
+			</ng-container>
+			<ng-container *ngIf="this.applyMessageWindow === 'Setting Dimming'">
+				Dimming Mode
+			</ng-container>
+			<ng-container *ngIf="this.applyMessageWindow === 'Setting Fan Control'">
+				Fan Control Mode
+			</ng-container>
+
+		</ng-template>
+
+		<ng-template #modalContent2>
+			<p class="center-title">Equipment Type:{{selectEuipment.equipType}}</p>
+			<p *ngIf="this.applyMessageWindow === 'Send Message'" style="padding: 10px 0;">
+				<nz-select style="width: 150px;" [(ngModel)]="sendExpWay" (ngModelChange)="sendExpWayChange()">
+					<nz-option *ngFor="let option of listExpWaySearch" [nzLabel]="option.description"
+						[nzValue]="option.value">
+					</nz-option>
+				</nz-select>
+			</p>
+			<p *ngIf="this.applyMessageWindow === 'Send Message'" style="padding: 10px 0;">Phase :
+				{{selectEuipment.phase}}
+			</p>
+			<p *ngIf="this.applyMessageWindow === 'Setting Flashing Time'" style="padding: 10px 0;"> On Time:
+				<nz-input-number [(ngModel)]="flashingOnTime" [nzMin]="4" [nzMax]="255" [nzStep]="1"
+					style="width: 120px;color: #000;"></nz-input-number>
+				Off Time:
+				<nz-input-number [(ngModel)]="flashingOffTime" [nzMin]="4" [nzMax]="255" [nzStep]="1"
+					style="width: 120px;color: #000;"></nz-input-number>
+			</p>
+			<p *ngIf="this.applyMessageWindow !== 'Send Message'" style="padding: 10px 0;">
+				<span>
+					Exp way:
+					<nz-select style="width: 150px;" [(ngModel)]="expWayCom" (ngModelChange)="commandExpWayChange()">
+						<nz-option *ngFor="let option of listExpWaySearch" [nzLabel]="option.description"
+							[nzValue]="option.value">
+						</nz-option>
+					</nz-select>
+				</span>
+				<span>
+					Equip Type:
+					<nz-select style="width: 150px;border: none;" [(ngModel)]="equipTypeCom"
+						(ngModelChange)="commandEquipTypeChange()">
+						<nz-option *ngFor="let option of vmsEquipTypeListSearch" [nzLabel]="option.value"
+							[nzValue]="option.value">
+						</nz-option>
+					</nz-select>
+				</span>
+			</p>
+			<p *ngIf="this.applyMessageWindow === 'Setting Fan Control'" style="padding: 10px 0;">
+				<span style="padding-right: 50px;">Fan Control Mode: {{getFancontrolResult(fancontrolResult)}}</span>
+				<ng-container *ngIf="fancontrolResult === '2'">
+					Temperature Threshold:
+					<nz-input-number [(ngModel)]="temperatureThreshold" [nzMin]="30" [nzMax]="50" [nzStep]="1"
+						style="width: 120px;color: #000;"></nz-input-number>
+				</ng-container>
+			</p>
+			<p *ngIf="this.applyMessageWindow === 'Setting Dimming'" style="padding: 10px 0;">
+
+				<span style="padding-right: 50px;">Dimming Mode: {{getDimmingResult(dimmingResult)}}</span>
+				<ng-container *ngIf="dimmingResult === '0'">
+					Dimming Level:
+					<nz-input-number [(ngModel)]="dimmingLevel" [nzMin]="1" [nzMax]="12" [nzStep]="1"
+						style="width: 120px;color: #000;"></nz-input-number>
+				</ng-container>
+				<ng-container *ngIf="dimmingResult === '2'">
+					<span style='font-size: 18px;cursor: pointer;' title="change time table" (click)="dimmingTimeSet()"
+						*ngIf="isEditable"><i nz-icon nzType="edit" nzTheme="outline"></i></span>
+					<button *ngIf="dimingTimetable.isSet" nz-button (click)="commonSend('dimmingTime')">Send</button>
+					<div *ngIf="dimingTimetable.isSet"
+						style="display: inline-block;margin-left: 4px;margin-bottom: 5px;">
+						Time1:<nz-time-picker [(ngModel)]="dimingTimetable.time1" nzFormat="HH:mm"
+							(ngModelChange)="checkDimmingTime()"></nz-time-picker>
+						<span *ngIf="dimingTimetable.time1">Level1:<nz-input-number
+								[(ngModel)]="dimingTimetable.dimmingLevel1" [nzMin]="1" [nzMax]="12" [nzStep]="1"
+								style="width: 120px;color: #000;"></nz-input-number>
+						</span>
+					</div>
+					<div>
+						<span *ngIf="dimingTimetable.time1">
+							Time2:<nz-time-picker [(ngModel)]="dimingTimetable.time2" nzFormat="HH:mm"
+								(ngModelChange)="checkDimmingTime()"></nz-time-picker>
+							<span *ngIf="dimingTimetable.time2">Level2:<nz-input-number
+									[(ngModel)]="dimingTimetable.dimmingLevel2" [nzMin]="1" [nzMax]="12" [nzStep]="1"
+									style="width: 120px;color: #000;"></nz-input-number>
+							</span>
+						</span>
+						<span *ngIf="dimingTimetable.time2">
+							Time3:<nz-time-picker [(ngModel)]="dimingTimetable.time3" nzFormat="HH:mm"
+								(ngModelChange)="checkDimmingTime()"></nz-time-picker>
+							<span *ngIf="dimingTimetable.time3">Level3:<nz-input-number
+									[(ngModel)]="dimingTimetable.dimmingLevel3" [nzMin]="1" [nzMax]="12" [nzStep]="1"
+									style="width: 120px;color: #000;"></nz-input-number>
+							</span>
+						</span>
+					</div>
+				</ng-container>
+			</p>
+			<div class="content">
+				<div>
+					<div style="font-size: 12px">Available Equipment List:</div>
+					<div class="content_table">
+						<ul *ngFor="let item of availableList;index as i" [class.active]="item.active">
+							<li class="li" (click)="addLi(i, $event)">{{item.equipId}}</li>
+						</ul>
+					</div>
+					<div style="font-size: 12px">Equipment Id And Location</div>
+				</div>
+				<div style="display:flex;justify-content:center;align-items:center">
+					<div class="middleBtn">
+						<button nz-button [disabled]="addDisabled" (click)="add()"> Add<img
+								src="../../../../assets/img/Images/SS_General/add.png" alt="add"></button>
+						<button nz-button [disabled]="addAllDisabled" (click)="addAll()"> Add All<img
+								src="../../../../assets/img/Images/SS_General/addall.png" alt="addall"></button>
+						<button nz-button [disabled]="removeDisabled" (click)="remove()"><img
+								src="../../../../assets/img/Images/SS_General/remove.png" alt="remove"> Remove</button>
+						<button nz-button [disabled]="removeAllDisabled" (click)="removeAll()"><img
+								src="../../../../assets/img/Images/SS_General/removeall.png" alt="removeAll"> Remove
+							All</button>
+					</div>
+				</div>
+				<div>
+					<div style="font-size: 16px">Selected Equipment List:</div>
+					<div class="content_table">
+						<ul *ngFor="let item of selectedList;index as i" [class.active]="item.active">
+							<li class="li" (click)="removeLi(i, $event)">{{item.equipId}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</ng-template>
+
+		<ng-template #modalFooter2>
+			<div style="display: flex;justify-content:center">
+				<button nz-button (click)="commonSend()" style="margin-right: 20px">Send</button>
+				<button nz-button (click)="handleApplyTemplateCancel()" style="margin-left: 20px">Cancel</button>
+			</div>
+		</ng-template>
+
+	</nz-modal>
+
+	<emas-view-modal [selectedList]="selectedList"></emas-view-modal>
+
+	<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzWidth=900 nzMaskClosable="false"
+		[nzTitle]="modalTitle3" [nzContent]="modalContent3" [(nzVisible)]="isSelectLibraryMsgViewVisible"
+		[nzFooter]="null" (nzOnCancel)="handleSelectLibraryMsgViewCancel()">
+		<ng-template #modalTitle3>
+			SelectLibraryMsgView
+		</ng-template>
+		<ng-template #modalContent3>
+			<emas-vms-conrtol-library *ngIf="isSelectLibraryMsgViewVisible" [listExpWay]="listExpWay" [vmsMsgCategory]="vmsMsgCategory" [selectEuipment]="selectEuipment"
+			(selectEmit)="getDataBySelectVmsLibrary($event)"></emas-vms-conrtol-library>
+		</ng-template>
+	</nz-modal>
+
+	<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzWidth=1200 nzMaskClosable="false"
+		[nzTitle]="modalTitle4" [nzContent]="modalContent4" [(nzVisible)]="isUpLoadPictogramVisible" [nzFooter]="null"
+		(nzOnCancel)="handleUpLoadPictogramCancel()">
+		<ng-template #modalTitle4>
+			Upload Pictogram
+		</ng-template>
+		<ng-template #modalContent4>
+			<nz-spin [nzSpinning]="isPicSpinning" nzTip="Loading...">
+				<div nz-row style='padding: 5px 0;'>
+					<div nz-col [nzSpan]="24">
+						<span style="padding-left: 15px;">Exp Way:
+							<nz-select style="width: 150px;" [(ngModel)]="expWay"
+								(ngModelChange)="uploadexpWayChange()">
+								<nz-option *ngFor="let option of listExpWaySearch" [nzLabel]="option.description"
+									[nzValue]="option.value">
+								</nz-option>
+							</nz-select>
+						</span>
+						<span style="padding-left: 15px;">*Equip type:
+							<nz-select style="width: 150px;border: none;" [(ngModel)]="equipTypeLibrary"
+								(ngModelChange)="uploadEquipTypeChange()">
+								<nz-option *ngFor="let option of vmsEquipTypeListSearch" [nzLabel]="option.value"
+									[nzValue]="option.value">
+								</nz-option>
+							</nz-select>
+						</span>
+						<span style="padding-left: 15px;">*Equip id:
+							<nz-select style="width: 150px;" nzShowSearch nzAllowClear nzPlaceHolder="Select a equipID"
+								[(ngModel)]="equipIDLibrary">
+								<nz-option *ngFor="let option of listUploadEquipIDSearch" [nzLabel]="option.equipId"
+									[nzValue]="option">
+								</nz-option>
+							</nz-select>
+						</span>
+						<span style="padding-left: 15px;">*Group id:
+							<nz-select style="width: 150px;border: none;" [(ngModel)]="gourpIdLibrary">
+								<nz-option *ngFor="let option of listVMSPicGroup" [nzLabel]="option.description"
+									[nzValue]="option.value">
+								</nz-option>
+							</nz-select>
+						</span>
+						<span style="padding-left: 55px;">
+							<button nz-button [nzType]="'default'" style="color: #000;"
+								(click)="getVmsPictogramConfigByGroupIdAndEquipId()">Search</button>
+						</span>
+						<!-- <span style="padding-left: 15px;">
+          <button nz-button [nzType]="'default'" style="color: #000;" (click)="handleSelectLibraryMsgViewCancel()">cancel</button>
+        </span> -->
+					</div>
+				</div>
+				<div nz-row style="height: 400px;overflow: scroll;">
+					<nz-table style="flex:1" #basicTable id="nzTable" [nzShowPagination]="false"
+						[nzFrontPagination]="false" [nzBordered]="true" [nzData]="listOfPictogramLibrary">
+						<thead>
+							<tr style="background:cornflowerblue">
+								<ng-container *ngFor="let item of renderHeader">
+									<th class="listTitle">
+										<div>{{ item.name }}</div>
+									</th>
+								</ng-container>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let data of basicTable.data;let idx = index"
+								[ngClass]="{'active':choosenPictogram.pictogramId === data.pictogramId}" (dblclick)='upLoadPic(data)'>
+								<td>{{ data.pictogramId }}</td>
+								<td>{{ data.picGroupId }}</td>
+								<td><img [src]="'data:image/png;base64,' + data.graphicContents" alt=""></td>
+								<td>{{ data.picFileName }}</td>
+								<td>{{ data.height }}</td>
+								<td>{{ data.width }}</td>
+								<td>{{ data.pictogramDesc }}</td>
+							</tr>
+						</tbody>
+					</nz-table>
+				</div>
+			</nz-spin>
+		</ng-template>
+	</nz-modal>
+
+	<nz-modal zmMovableModal [(nzVisible)]="isDeleteVisible" nzTitle="Delete Page" (nzOnCancel)="handleDeleteCancel()"
+		(nzOnOk)="handleDeleteOk()">
+		<p>Delete this page?</p>
+	</nz-modal>
+	<nz-modal zmMovableModal [(nzVisible)]="isLoadBlankVisible" nzTitle="Comfirm" (nzOnCancel)="handleLoadBlankCancel()"
+		(nzOnOk)="handleLoadBlankOk()">
+		<p>Load blank message?</p>
+	</nz-modal>
+	<nz-modal zmMovableModal [(nzVisible)]="isRequestPixelVisible" nzTitle="Comfirm"
+		(nzOnCancel)="handleRequestPixelCancel()" (nzOnOk)="handleRequestPixelOk()">
+		<p>Request pixel failure bmp file?</p>
+	</nz-modal>
+
+	<nz-modal zmMovableModal [(nzVisible)]="isFanControlVisible" nzTitle="Select fan control mode"
+		(nzOnCancel)="handleFanControlCancel()" (nzOnOk)="handleFanControlOk()">
+		<p>Select fan control mode</p>
+		<nz-select style="width: 150px;border: none;" [(ngModel)]="fancontrolResult">
+			<nz-option *ngFor="let option of fancontrolList" [nzLabel]="option.description" style="border: none;"
+				[nzValue]="option.value">
+			</nz-option>
+		</nz-select>
+	</nz-modal>
+
+	<nz-modal zmMovableModal [(nzVisible)]="isDimmingModeVisible" nzTitle="Select dimming mode"
+		(nzOnCancel)="handleDimmingModeCancel()" (nzOnOk)="handleDimmingModeOk()">
+		<p>Select dimming mode</p>
+		<nz-select style="width: 150px;" [(ngModel)]="dimmingResult">
+			<nz-option *ngFor="let option of dimmingList" [nzLabel]="option.description" [nzValue]="option.value">
+			</nz-option>
+		</nz-select>
+	</nz-modal>
+
+	<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzWidth=1200 nzMaskClosable="false"
+		[nzTitle]="modalTitle5" [nzContent]="modalContent5" [(nzVisible)]="isUpLoadPictogramDatabaseVisible"
+		[nzFooter]="null" (nzOnCancel)="handleUpLoadPictogramDatabaseCancel()">
+		<ng-template #modalTitle5>
+			Equip Id: {{ selectEuipment.equipId }} Pictogram Id: {{ picUploadItem.pictogramId }}
+		</ng-template>
+		<ng-template #modalContent5>
+			<nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+				<div nz-row style="height: 400px;overflow: scroll;">
+					<div nz-col [nzSpan]="12">
+						<p> Database :</p>
+						<img style="width: 60%; margin: 15px 10px 0"
+							[src]="'data:image/png;base64,' + picUploadItem.graphicContents" alt="">
+					</div>
+					<div nz-col [nzSpan]="12">
+						<p> Site :</p>
+						<img style="width: 60%; margin: 15px 10px 0" [src]="'data:image/png;base64,' + sitePictogram"
+							alt="">
+					</div>
+				</div>
+			</nz-spin>
+		</ng-template>
+	</nz-modal>
+
+	<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzWidth=900 nzMaskClosable="false"
+		[nzTitle]="modalTitle6" [nzContent]="modalContent6" [(nzVisible)]="isRequestPixelPageVisible" [nzFooter]="null"
+		(nzOnCancel)="handleRequestPixelPageCancel()">
+		<!-- <ng-template #modalTitle6>
+
+		</ng-template> -->
+		<ng-template #modalContent6>
+			<nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+				<div nz-row style="background-color: rgba(0,0,0,.65);height: 600px;overflow: scroll;justify-content: center;">
+						<img style="object-fit: contain; width: 100%;" [src]="'data:image/png;base64,' + sitePictogram" alt="">
+				</div>
+			</nz-spin>
+		</ng-template>
+	</nz-modal>
+
+</nz-spin>

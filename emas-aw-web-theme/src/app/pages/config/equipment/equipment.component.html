@@ -1,0 +1,74 @@
+
+<div style="padding: 5px;">
+	<div class="pageHeader">
+
+		<div nz-row class="searchBar">
+			<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+				<div nz-row [nzGutter]="16">
+					<div nz-col [nzSpan]="5">
+						<nz-form-item nzFlex>
+							<nz-form-label class="labelText">Subsystem
+							</nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 150px;" nzShowSearch nzAllowClear nzPlaceHolder="All"
+									formControlName="subSystem"
+						                  (ngModelChange)="subsystemChange()">
+									<nz-option *ngFor="let option of listSubSystem" [nzLabel]="option"
+										[nzValue]="option">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="5">
+						<nz-form-item nzFlex>
+							<nz-form-label class="labelText">Equip Type
+							</nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 150px;" nzShowSearch nzAllowClear nzPlaceHolder="All"
+									formControlName="equipType"
+									[(ngModel)]="equipType">
+									<nz-option *ngFor="let option of listEquipType" [nzLabel]="option"
+										[nzValue]="option">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="5" class="search-area" style="margin-top: 4px;">
+						<button nz-button [nzType]="'default'" style="color: #000;"><img
+								src="../../../../assets/img/Images/SS_General/find.png"
+								class="searchImg">Search</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div style="width: 100%;height: 1px;background: white;margin:16px 0 16px 0"></div>
+	<div style="display: flex;margin-bottom: 10px;float: right">
+		<p style="margin-bottom: 15px;font-size: 14px;" class="labelText">Query Result: {{this.listOfDisplayData.length}} Records Found</p>
+	</div>
+	<nz-table #basicTable id="nzTable" [nzShowPagination]="true" [nzFrontPagination]="true" [nzBordered]="true"
+		[nzData]="listOfDisplayData" (nzPageIndexChange)="pageChange($event)">
+		<thead (nzSortChange)="sort($event)" nzSingleSort>
+			<tr style="background:cornflowerblue">
+				<ng-container *ngFor="let item of renderHeader">
+					<th class="listTitle" nzShowSort nzSortKey='{{item.value}}'>
+						<div>{{ item.name }}</div>
+					</th>
+				</ng-container>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let data of basicTable.data;let idx = index" >
+				<td title="{{data.equipType}}&#10;&#10;{{data.equipDesc}}">{{ data.equipType }}</td>
+				<td title="{{data.equipType}}&#10;&#10;{{data.equipDesc}}">{{ data.equipId }}</td>
+				<td title="{{data.equipType}}&#10;&#10;{{data.equipDesc}}">{{ data.expway }}</td>
+				<td title="{{data.equipType}}&#10;&#10;{{data.equipDesc}}">{{ data.kmMarking}}</td>
+				<td title="{{data.equipType}}&#10;&#10;{{data.equipDesc}}">{{ data.direction}}</td>
+				<td title="{{data.equipType}}&#10;&#10;{{data.equipDesc}}">{{ data.firmwareVersion }}</td>
+			</tr>
+		</tbody>
+	</nz-table>
+</div>
+<!-- <iframe id="printf" src="" width="500" height="500" frameborder="0"></iframe> -->

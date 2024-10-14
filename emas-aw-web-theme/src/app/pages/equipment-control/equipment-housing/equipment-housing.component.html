@@ -1,0 +1,168 @@
+<div style="padding: 5px;">
+	<div class="pageHeader">
+		 
+		<div nz-row class="searchBar">
+			<form
+				nz-form
+				[formGroup]="validateForm"
+				class="ant-advanced-search-form"
+				(ngSubmit)="submitForm()"
+			>
+				<div nz-row [nzGutter]="16">
+					<div nz-col [nzSpan]="6">
+						<nz-form-item nzFlex>
+							<div nz-col [nzSpan]="8">
+							<nz-form-label class="colorWhite"
+								>Exp Way
+							</nz-form-label>
+							</div>
+							<nz-form-control>
+								<div nz-col [nzSpan]="8">
+								<nz-select
+									style="width: 150px;"
+									nzShowSearch
+									nzAllowClear
+									nzPlaceHolder="All"
+									formControlName="expWay"
+								>
+									<nz-option
+										*ngFor="let option of listExpWay"
+										[nzLabel]="option.label"
+										[nzValue]="option.value"
+									>
+									</nz-option>
+								</nz-select>
+								</div>
+								<!-- <input
+            nz-input
+            placeholder="placeholder"
+            formControlName="subSystem"
+            style='color:#000'
+          /> -->
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="6">
+						<nz-form-item nzFlex>
+							<div nz-col [nzSpan]="11">
+							<nz-form-label class="colorWhite"
+								>Equip Housing ID
+							</nz-form-label>
+							</div>
+							<nz-form-control>
+								<div nz-col [nzSpan]="8">
+								<nz-select
+									style="width: 150px;"
+									nzShowSearch
+									nzAllowClear
+									nzPlaceHolder="All"
+									formControlName="equipHousingID"
+								>
+									<nz-option
+										*ngFor="let option of listEquipHousingID"
+										[nzLabel]="option.label"
+										[nzValue]="option.value"
+									>
+									</nz-option>
+								</nz-select>
+								</div>
+								<!-- <input
+            nz-input
+            placeholder="placeholder"
+            formControlName="equipType"
+            style='color:#000'
+          /> -->
+							</nz-form-control>
+						</nz-form-item>
+		  </div>
+		  </div>
+		  <div nz-row [nzGutter]="16">
+          <div nz-col [nzSpan]="6">
+						<nz-form-item nzFlex>
+							<div nz-col [nzSpan]="8">
+							<nz-form-label class="colorWhite"
+								>Equip Type
+							</nz-form-label>
+							</div>
+							<nz-form-control>
+								<div nz-col [nzSpan]="8">
+								<nz-select
+									style="width: 150px;"
+									nzShowSearch
+									nzAllowClear
+									nzPlaceHolder="All"
+									formControlName="equipType"
+								>
+									<nz-option
+										*ngFor="let option of listEquipType"
+										[nzLabel]="option.label"
+										[nzValue]="option.value"
+									>
+									</nz-option>
+								</nz-select>
+								</div>
+								<!-- <input
+            nz-input
+            placeholder="placeholder"
+            formControlName="equipType"
+            style='color:#000'
+          /> -->
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="4" nzOffset="5" class="search-area">
+						<button nz-button [nzType]="'default'" class="headerButton"><img src="../../../../assets/img/Images/SS_General/find.png" class="">Search</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<nz-divider></nz-divider>
+	<div nz-row>
+		<div nz-col nzSpan="12">
+				<p class="qResult">Query Result: {{listOfData.length}} Records Found</p>
+				<nz-table
+					#basicTable
+					id="nzTable"
+					[nzShowPagination]="false"
+					[nzFrontPagination]="false"
+					[nzBordered]="true"
+					[nzData]="listOfData"
+				>
+					<thead (nzSortChange)="sort($event)" nzSingleSort>
+						<tr style="background:cornflowerblue">
+							<ng-container *ngFor="let item of renderHeader">
+								<th class="listTitle" nzShowSort nzSortKey="{{item.value}}">
+									<div>{{ item.name }}</div>
+								</th>
+							</ng-container>
+						</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let data of basicTable.data;let idx = index" (click)="choice(data)" [ngClass]="{'active':selectItemId == data.EquipID}">
+					  <td>{{ data.equipID }}</td>
+					  <td>{{ data.status }}</td>
+					  <td>{{ data.time }}</td>
+					</tr>
+				  </tbody>
+				</nz-table>
+		</div>
+	</div>
+	<div nz-row style="margin-top: 20px;">
+		<td nz-col [nzSpan]="10"  style="padding: 30px;">
+			<div>
+				<p class='itemStatus'><span class='greenBox'></span> Operational</p>
+				<p class='itemStatus'><span class='redBox'></span>Not Operational</p>
+			</div>
+		</td>
+		<td  style="padding: 30px;">
+			<div nz-col [nzSpan]="2" class="search-area">
+			<button nz-button [nzType]="'default'" style="color:#000" (click)="showModalMiddle()">Select</button>
+			</div>
+		</td>
+	</div>
+</div>
+<ng-container>
+		<emas-update-equipment *ngIf='isVisibleMiddle' [isVisibleMiddle]="isVisibleMiddle" (closeModal)='closeModal($event)' [selectItem]="selectItem"></emas-update-equipment>
+</ng-container>
+

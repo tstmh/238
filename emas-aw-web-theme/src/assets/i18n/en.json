@@ -1,0 +1,436 @@
+{
+	"Layout": {
+		"Navbar": {
+			"Data_Visualization": "Data Visualization",
+			"Overall": "Overall",
+			"Incident_Analytics": "Incident Analytics",
+			"Traffic_Analytics": "Traffic Analytics",
+			"Equipment_Analytics": "Equipment Analytics",
+			"Dissemination_Management": "Dissemination Management",
+			"Message_Library": "Message Library",
+			"Message_Category": "Message Category",
+			"Graphic": "Graphic",
+			"Message_Template": "Message Template",
+			"Traffic_Management": "Traffic Management",
+			"Traffic_Alert": "Traffic Alert",
+			"Incident_Record": "Incident Record",
+			"Incident_Logs": "Incident Logs",
+			"Equipment_Management": "Equipment Management",
+			"Equipment_List": "Equipment List",
+			"Equipment_Alarm": "Equipment Alarm",
+			"Security_Management": "Security Management",
+			"Data_Management": "Data Management",
+			"User_Management": "User Management",
+			"Manage_Users": "Manage User",
+			"Manage_Role": "Manage Role",
+			"Manage_Access_Rights": "Manage Access Right",
+			"Manage_Organization": "Manage Organization",
+			"Log_Management": "Log Management"
+		},
+		"Header": {
+			"Gis_Open_Notify": {
+				"title": "Hint",
+				"content": "Gis map has opened, already"
+			}
+		}
+	},
+	"Home": {
+		"Home": {
+			"Home": "home",
+			"Test": "Welcome to my Angular application!<br><strong>This is an amazing app which uses the latest technologies!</strong>",
+			"Test2": "test",
+			"test3": [
+				"Mon",
+				"Tue",
+				"Wed",
+				"Thu",
+				"Fri",
+				"Sat",
+				"Sun"
+			],
+			"Delete_Confirm": "Delete Confirm"
+		}
+	},
+	"Gis": {
+		"Legends": {
+			"title": "Legend",
+			"treeData": {
+				"Incident_Record": "Incident Record",
+				"Accident": "Accident",
+				"Reverse_Flow": "Reverse Flow",
+				"Roadworks": "Roadworks",
+				"Fire": "Fire",
+				"Bad_Weather": "Bad Weather",
+				"Obstacle": "Obstacle",
+				"Congestion": "Congestion",
+				"Equipment": "Equipment",
+				"CCTV": "CCTV",
+				"VMS": "VMS",
+				"VD": "VD",
+				"TSC": "TSC",
+				"Traffic_Data": "Traffic Data",
+				"Heavy_Traffic": "Heavy Traffic",
+				"Medium_Traffic": "Medium Traffic",
+				"Light_Traffic": "Light Traffic",
+				"AVL": "AVL",
+				"Normal": "Normal",
+				"Off_Line": "Off-line",
+				"Zone": "Zone",
+				"User_Define_Area": "User Define Area",
+				"Active": "Active",
+				"Failed": "Failed",
+				"Offline": "Offline"
+			}
+		},
+		"Gis": {
+			"New_Equip": "New Equipment",
+			"New_Incident": "New Incident",
+			"Zoom_Notify": {
+				"title": "Invalid Operate",
+				"content": "Please zoom in to confirm location information"
+			},
+			"Locate": "Locate",
+			"Global": "Max View",
+			"Next_View": "Next View",
+			"Prev_View": "Prev View",
+			"Search": "Search",
+			"Create_Zone": "Create Zone",
+			"Legend": "Legend",
+			"Clear": "Clear",
+			"Create_Notify": { 
+				"title": "Operation Failed",
+				"content":"Invalid geographical location information, please select other place"
+			}
+		}
+	},
+	"Data_Visualization": {
+		"Overall": {
+			"Overall": "Overall",
+			"Incident_Analytics": "Incident Analytics",
+			"Traffic_Analytics": "Traffic Analytics",
+			"Equipment_Analytics": "Equipment Analytics",
+			"Traffic_Situation": "Traffic Situation",
+			"Recent_Operational_Notifications": "Recent Operational Notifications",
+			"Incidents_Statistics": "Incidents Statistics",
+			"Alert_Statistics": "Alert Statistics"
+		}
+	},
+	"auth": {
+		"login": {
+			"login": "Login",
+			"userName": "User",
+			"password": "Password",
+			"inputUserName": "Please input your login account",
+			"inputPassword": "Please input your password",
+			"ok": "OK",
+			"rememberMe": "Remember me",
+			"forgotPassword": "Forgot password"
+		}
+	},
+	"EquipmentManagement": {
+		"EquipmentManagement": {
+			"Equipment_Management": "Equipment Management",
+			"Create": "Create",
+			"Edit": "Edit",
+			"Delete": "Delete",
+			"Create_Equipment": "Create Equipment",
+			"Edit_Equipment": "Edit Equipment",
+			"Delete_Equipment": "Delete Equipment",
+			"select_notify": {
+				"title": "warning",
+				"content": "Please Select One Equipment!"
+			},
+			"Add_Equipment": "Add Equipment",
+			"ID": "Equipment ID",
+			"IP": "IP",
+			"Type": "Equipment Type",
+			"equipment_ID": "Equipment ID",
+			"the_next_date": "The Next Date",
+			"IP_adress": "IP Adress",
+			"install_date": "Install Date",
+			"zone_ID": "Zone ID",
+			"construction_unit": "Construction Unit",
+			"longitude": "Longitude",
+			"construction_person": "Construction Person",
+			"latitude": "latitude",
+			"road_name": "Road Name",
+			"equipment_Type": "Equipment Type",
+			"supervision_Engineers": "Supervision Engineers",
+			"Name": "Name",
+			"RoadName": "Road Name",
+			"Direction": "Direction",
+			"Status": "Status",
+			"Photograph": "Photograph",
+			"The_Form_Is_Incomplete": "The Form Is Incomplete",
+			"West": "West",
+			"East": "Eest",
+			"South": "South",
+			"North": "North",
+			"OK": "OK",
+			"UNknown": "UNknown",
+			"The_input_is_not_valid": "The input is not valid!",
+			"total": "total",
+			"faulity": "faulity",
+			"Updated_Date": "Updated Date",
+			"create_notify": {
+				"title": "warning",
+				"content": "This Equipment ID Is Present!"
+			},
+			"validate_dimension": {
+				"title": "warning",
+				"content": "Image Cannot Exceed 100000*100001!"
+			},
+			"validate_size": {
+				"title": "warning",
+				"content": "Image Must Smaller Than 5MB!"
+			},
+			"validate_format": {
+				"title": "warning",
+				"content": "You Can Only Upload PNG/JPEG File!"
+			}
+		},
+		"vmsModal": {
+			"Illum_Mode": "Illum Mode",
+			"Illum_Level": "Illum Level",
+			"Illum_Num_Level": "Illum Num Level",
+			"ID": "ID",
+			"Message": "Message",
+			"Category_Name": "Category Name",
+			"Template_Name": "Template Name",
+			"Content": "Content"
+		},
+		"equipmentAlarm": {
+			"Equipment_Alarm": "Equipment Alarm",
+			"Equipment_Alarm_History": "Equipment Alarm History",
+			"Alarm_ID": "Alarm ID",
+			"Equipment_ID": "Equipment ID",
+			"Alarm_Source": "Alarm Source",
+			"Detection_Date": "Detection Date",
+			"Ack_Date": "Ack Date",
+			"Description": "Description",
+			"Zone_ID": "Zone ID",
+			"Alarm_Code": "Alarm Code",
+			"select_notify": {
+				"title": "warning",
+				"content": "Please Select One Alarm!"
+			},
+			"false_notify": {
+				"title": "warning",
+				"content": "Can Not False Acked Alarm!"
+			},
+			"clear_notify": {
+				"title": "warning",
+				"content": "Can Not False Acking Alarm!"
+			}
+		}
+	},
+	"Share": {
+		"Pagination": {
+			"Page_Num_Invaild_Notify": {
+				"title": "invalid pageNum",
+				"content": "Please input valid page number"
+			}
+		},
+		"Toolbar": {
+			"select_notify": {
+				"title": "warning",
+				"content": "Please Select One Data item!"
+			}
+		}
+	},
+	"UserManagement": {
+		"ManageRole": {
+			"Manage_Role": "Manage Role",
+			"Cancel": "Cancel",
+			"Save": "Save",
+			"Create": "Create",
+			"Edit": "Edit",
+			"Edit_Role": "Edit Role",
+			"Delete": "Delete",
+			"Delete_Content": "Are you sure you want to remove this role?",
+			"Delete_Cancel": "NO",
+			"Delete_Save": "OK",
+			"RoleName": "Role Name",
+			"CreateDate": "Created Date",
+			"UpdateDate": "Updated Date",
+			"Description": "Description",
+			"No.ofUsersWithThisRole": "No.of users with this role",
+			"Add_Role": "Add Role",
+			"Name": "Name",
+			"Role": "Role",
+			"AccessRight": "Access right",
+			"Delete_Role": "Delete Role",
+			"select_notify": {
+				"title": "warning",
+				"content": "Please select an item that needs to be edited!"
+			},
+			"delete_notify": {
+				"title": "warning",
+				"content": "Please select an item to delete!"
+			},
+			"fail_notify": {
+				"title": "fail",
+				"content": "this role is using!"
+			},
+			"MandatoryWarning": "This item cannot be empty!"
+		},
+		"ManageUser": {
+			"Manage_Users": "Manage User",
+			"Create": "Create",
+			"Edit": "Edit",
+			"Edit_User": "Edit User",
+			"Delete": "Delete",
+			"Delete_Content": "Are you sure you want to remove this user?",
+			"Delete_Cancel": "NO",
+			"Delete_Save": "OK",
+			"UserID": "User ID",
+			"Name": "User Name",
+			"Password": "Password",
+			"Role": "Role",
+			"CreateDate": "Created Date",
+			"UpdateDate": "Updated Date",
+			"Organization": "Organization",
+			"Add_User": "Add User",
+			"Delete_Role": "Delete User",
+			"select_notify": {
+				"title": "warning",
+				"content": "Please select an item that needs to be edited!"
+			},
+			"delete_notify": {
+				"title": "warning",
+				"content": "Please select an item to delete!"
+			},
+			"MandatoryWarning": "This item cannot be empty!"
+		},
+		"ManageAccessRights": {
+			"Refresh": "Refresh",
+			"Manage_Access_Rights": "Manage Access Right",
+			"Access_Right_Name": "Access Right Name",
+			"Description": "Description"
+		},
+		"ManageOrganization": {
+			"Manage_Organization": "Manage Organization",
+			"Create": "Create",
+			"Edit": "Edit",
+			"Delete": "Delete",
+			"Organization_ID": "Organization ID",
+			"Organization_Name": "Organization Name",
+			"Name": "Name",
+			"Add_Organization": "Add Organization",
+			"Edit_Organization": "Edit Organization",
+			"select_notify": {
+				"title": "warning",
+				"content": "Please select an item that needs to be edited!"
+			},
+			"delete_notify": {
+				"title": "warning",
+				"content": "Please select an item to delete!"
+			},
+			"Delete_Organization": "Delete Organization",
+			"Delete_Content": "Are you sure you want to remove this organization?",
+			"Delete_Save": "OK",
+			"Delete_Cancel": "NO",
+			"MandatoryWarning": "This item cannot be empty!",
+			"fail_notify": {
+				"title": "fail",
+				"content": "this organization is using!"
+			}
+		}
+	},
+	"LogManagement": {
+		"LogManagement": {
+			"Refresh": "Refresh",
+			"log_Id": "Log ID",
+			"userName": "User Name",
+			"operationType": "Operation Type",
+			"methodName": "Method Name",
+			"opsTime": "Ops Time",
+			"parameter": "Parameter",
+			"LogManagement": "Log Management"
+		}
+	},
+	"DisseminationManagement": {
+		"MessageLibrary": {
+			"ID": "ID",
+			"Category_Name": "Category Name",
+			"Template_Name": "Template Name",
+			"Message_Content": "Message Content",
+			"Message_Detail": "Message Detail",
+			"Message_Library": "Message Library",
+			"Display_ID": "Display ID",
+			"select_notify": {
+				"title": "warning",
+				"content": "Please select an item that needs to be edited!"
+			},
+			"delete_notify": {
+				"title": "warning",
+				"content": "Please select an item to delete!"
+			},
+			"Graphic": "Graphic",
+			"Graphics": "Graphics",
+			"Template": "Template",
+			"Icon": "Icon",
+			"Name": "Name",
+			"VMS_Library": "VMS Library",
+			"Message_Category": "Message Category",
+			"Message": "Message",
+			"Description": "Description",
+			"Content": "Content",
+			"Cancel": "Cancel",
+			"Save": "Save",
+			"Preview": "Preview",
+			"Add": "Add",
+			"VMS_Message_Info": "VMS Message Info",
+			"save_notify": {
+				"title": "warning",
+				"content": "Please Save The Editting Item first!"
+			},
+			"create_notify": {
+				"title": "warning",
+				"content": "The VMS Message Must Be Completed!"
+			},
+			"repeat_notify": {
+				"title": "warning",
+				"content": "Can Not Delete Being Used Item!"
+			},
+			"validate_category": {
+				"title": "warning",
+				"content": "Category Name Can Not Empty!"
+			},
+			"Input_Text_Hear": "Input Text Hear..."
+		},
+		"messageTemplate": {
+			"ID": "ID",
+			"Refresh": "Refresh",
+			"Equipment_Type": "Equipment Type",
+			"Template_Name": "Template Name",
+			"Message_Template": "Message Template"
+		},
+		"Graphics": {
+			"ID": "ID",
+			"Name": "Name",
+			"Type": "Type",
+			"Height": "Height",
+			"Width": "Width",
+			"Pictogram": "Pictogram",
+			"Add_Graphics": "Add Graphics",
+			"Edit_Graphics": "Edit Graphics",
+			"validate_dimension": {
+				"title": "warning",
+				"content": "Image Cannot Exceed 100*100!"
+			},
+			"validate_size": {
+				"title": "warning",
+				"content": "Image Must Smaller Than 1MB!"
+			},
+			"validate_format": {
+				"title": "warning",
+				"content": "You Can Only Upload PNG File!"
+			},
+			"Network_error": {
+				"title": "warning",
+				"content": "Network Error,Try Again Later!"
+			}
+		}
+	}
+}

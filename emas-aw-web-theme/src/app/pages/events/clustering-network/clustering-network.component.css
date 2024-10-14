@@ -1,0 +1,122 @@
+
+.content {
+    display: inline;
+    text-align: center;
+}
+.content1 {
+    display: inline;
+    text-align: center;
+}
+.content1 p {
+    color: blue;
+    }
+.content p {
+color: blue;
+}
+.content ul li {
+    display: inline-block;
+    color: blue;
+    padding: 10px;
+}
+.content1 ul li:nth-child(even) {
+    display: inline-block;
+    color: blue;
+    padding-left: 30px;
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+}
+.content1 ul li:nth-child(odd) {
+    display: inline-block;
+    color: blue;
+    padding-right: 30px;
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+}
+
+.spanNum{
+    position: absolute;
+}
+.domainSpan {
+    position: absolute;
+    margin-left: -70px;
+    margin-top: 10px;
+    color: blue;
+}
+.controlerSpan {
+    position: absolute;
+    margin-left: -70px;
+    margin-top: 25px;
+    color: blue;
+}
+.cancelImg {
+    height:15px;
+    text-align: center;
+    display: block;
+    margin-top: -24px;
+    animation: scaleDraw 5s ease-in-out infinite;
+}
+.storageCancelImg {
+    height: 15px;
+    text-align: center;
+    display: block;
+    margin-top: -15px;
+    margin-left: 20px;
+    animation: scaleDraw 5s ease-in-out infinite;
+}
+.switchCancelImg {
+    position: absolute;
+    height: 15px;
+    margin-left: -22px;
+    animation: scaleDraw 5s ease-in-out infinite;
+}
+.footerResult {
+    color: var(--cl);
+    margin-top: 20px;
+}
+.cornsilkContent {
+    border: 2px solid black;
+    background: cornsilk;
+}
+.lightblueContent {
+    border: 2px solid black;
+    background: lightblue;
+}
+.mistyroseContent {
+    border: 2px solid black;
+    background: mistyrose;
+}
+.verticalLine_1 {
+    border-left: 2px solid black;
+    height: 150px; 
+}
+.verticalLine_2 {
+    border-left: 2px solid black;
+    border-right:2px solid black;
+    height: 150px;
+}
+
+@keyframes scaleDraw {  /*定义关键帧、scaleDrew是需要绑定到选择器的关键帧名称*/
+    0%{
+        transform: scale(1);  /*开始为原始大小*/
+    }
+    25%{
+        transform: scale(1.5); /*放大1.5倍*/
+    }
+    50%{
+        transform: scale(1);
+    }
+    75%{
+        transform: scale(1.5);
+    }
+}
+
+.text {
+    color: var(--cl);
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

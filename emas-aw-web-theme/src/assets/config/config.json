@@ -1,0 +1,6 @@
+ {
+    "MaxRecordsCount" : 1250,
+    "IdleTime" : 3600,
+    "AlertCode" : "1.7",
+    "Flux" : "http://138.13.6.201:8080/"
+}

@@ -1,0 +1,227 @@
+<div style="padding: 5px;">
+	<div class="pageHeader">
+
+		<div nz-row>
+			<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+				<div nz-row [nzGutter]="24">
+					<div nz-col [nzSpan]="4">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Exp Way </nz-form-label>
+							<nz-form-control>
+								<nz-select formControlName="expWay" nzPlaceHolder="All"
+									(ngModelChange)="getEquipIdByexpWay()" style='width: 160px;'>
+									<nz-option *ngFor="let option of listExpWay" [nzValue]="option.value"
+										[nzLabel]="option.label"></nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="5">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Alert List By </nz-form-label>
+							<nz-form-control>
+								<nz-select formControlName="alertListBy" [nzPlaceHolder]="listAlertListBy[0].label"
+									style='width: 160px;' (ngModelChange)="ngModelChange()">
+									<nz-option *ngFor="let option of listAlertListBy" [nzValue]="option.value"
+										[nzLabel]="option.label">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="5">
+						<nz-form-item nzFlex *ngIf="alertListByValue==2">
+							<nz-form-label class="colorWhite">Alert Type </nz-form-label>
+							<nz-form-control>
+								<nz-select formControlName="alertType" nzPlaceHolder="" style='width: 160px;'>
+									<nz-option *ngFor="let option of listAlertType" [nzValue]="option.value"
+										[nzLabel]="option.label">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+						<nz-form-item nzFlex *ngIf="alertListByValue==1">
+							<nz-form-label class="colorWhite">Equip ID </nz-form-label>
+							<nz-form-control>
+								<nz-select formControlName="equipId" nzPlaceHolder="All" style='width: 160px;'>
+									<nz-option *ngFor="let option of listEquipID" [nzValue]="option.value"
+										[nzLabel]="option.label">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="4" class="search-area">
+						<button nz-button [nzType]="'default'" class="headerButton"><img
+								src="../../../../assets/img/Images/SS_General/find.png"
+								class="searchImg">Search</button>
+					</div>
+				</div>
+				<!-- <div nz-row [nzGutter]="24">
+				  <div nz-col [nzSpan]="5">
+					<nz-form-item nzFlex>
+					  <nz-form-label class="colorWhite">Alert List By </nz-form-label>
+					  <nz-form-control>
+						<nz-select 
+						 formControlName="alertListBy" 
+						 nzPlaceHolder="All"
+						 style='width: 160px;'
+						 (ngModelChange)="ngModelChange()"
+						 >
+						<nz-option
+							*ngFor="let option of listAlertListBy" 
+							[nzValue]="option.value"
+							[nzLabel]="option.label">
+						</nz-option>
+						</nz-select>
+					  </nz-form-control>
+					</nz-form-item>
+				  </div>
+				  <div nz-col [nzSpan]="5">
+					<nz-form-item nzFlex *ngIf="alertListByValue==2">
+					  <nz-form-label class="colorWhite">Alert Type </nz-form-label>
+					  <nz-form-control>
+							<nz-select 
+							formControlName="alertType" 
+							nzPlaceHolder="All"
+							style='width: 160px;'
+							>
+						   <nz-option 
+							   *ngFor="let option of listAlertType" 
+							   [nzValue]="option.value"
+							   [nzLabel]="option.label">
+						   </nz-option>
+						   </nz-select>
+					  </nz-form-control>
+					</nz-form-item>
+					<nz-form-item nzFlex *ngIf="alertListByValue==1">
+						<nz-form-label class="colorWhite">Equip ID </nz-form-label>
+						<nz-form-control>
+							  <nz-select 
+							  formControlName="equipId" 
+							  nzPlaceHolder="All"
+							  style='width: 160px;'
+							  >
+							 <nz-option 
+								 *ngFor="let option of listEquipID" 
+								 [nzValue]="option.value"
+								 [nzLabel]="option.label">
+							 </nz-option>
+							 </nz-select>
+						</nz-form-control>
+					  </nz-form-item>
+				  </div>
+				  <div nz-col [nzSpan]="6" class="search-area">
+					<button nz-button [nzType]="'default'" style="color: #000;"><img src="../../../../assets/img/Images/SS_General/find.png" class="searchImg">Search</button>
+				  </div>
+				</div> -->
+				<div nz-row [nzGutter]="24" *ngIf="alertListByValue==3">
+					<div nz-col [nzSpan]="5">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">From Date</nz-form-label>
+							<nz-form-control>
+								<nz-date-picker [nzDisabledDate]="disabledStartDate" nzShowTime
+									nzFormat="yyyy-MM-dd HH:mm:ss" formControlName="fromDate" nzPlaceHolder="Start Time"
+									(ngModelChange)="onStartChange($event)" (nzOnOpenChange)="
+										  handleStartOpenChange($event)
+										">
+								</nz-date-picker>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="6">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">To Date</nz-form-label>
+							<nz-form-control>
+								<nz-date-picker [nzDisabledDate]="disabledEndDate" nzShowTime
+									nzFormat="yyyy-MM-dd HH:mm:ss" formControlName="toDate" nzPlaceHolder="End Time"
+									(ngModelChange)="onEndChange($event)" (nzOnOpenChange)="
+												handleEndOpenChange($event)
+												">
+								</nz-date-picker>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<p style="margin-bottom: 15px;float: right;">Query Result: {{listOfData.length}} Records Found</p>
+
+	<!--scroll loading-->
+	<!--<nz-table #basicTable id="nzTable" nzBordered="true" [nzData]="listOfData" [nzVirtualItemSize]="20" [nzVirtualForTrackBy]="trackByIndex"
+		[nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ y: '60vh' }" > -->
+	<nz-spin [nzSpinning]="isLoading" nzTip="Loading...">
+		<nz-table #basicTable id="nzTable" nzBordered="true" [nzData]="listOfData"
+			(nzPageIndexChange)="pageChange($event)">
+			<thead (nzSortChange)="sort($event)" nzSingleSort>
+				<tr style="background:cornflowerblue">
+					<th class="listTitle">
+						<div>
+							<label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="updateAllChecked()"
+								[nzIndeterminate]="indeterminate">
+							</label>
+							Select All
+						</div>
+					</th>
+					<ng-container *ngFor="let item of renderHeader;">
+						<th class="listTitle" nzShowSort nzSortKey="{{item.value}}">
+							<div>{{item.name}}</div>
+						</th>
+					</ng-container>
+				</tr>
+			</thead>
+			<tbody>
+				<!--scroll loading-->
+				<!--<ng-template nz-virtual-scroll let-data let-index="index">-->
+				<tr *ngFor="let data of basicTable.data;let idx = index" (click)="choice(data)"
+					[ngClass]="{'active':choiceItemID == data.alertId}">
+					<td>
+						<label nz-checkbox [(ngModel)]="data.checked"
+							(ngModelChange)="updateSingleChecked(data.alertId)"></label>
+					</td>
+					<td>{{ data.equipId }}</td>
+					<td>{{ data.alertDate | date:'dd/MM/yyyy hh:mm:ss a'}}</td>
+					<td>{{ data.equipConfigDto.expWay }}</td>
+					<td>{{ data.equipConfigDto.kmMarking }}</td>
+					<td>{{ data.equipConfigDto.direction}}</td>
+					<td>{{ data.laneType}}</td>
+					<td>{{ data.laneId }}</td>
+					<td>{{ data.alertType }}</td>
+					<td>{{ data.endDate | date:'dd/MM/yyyy hh:mm:ss a'}}</td>
+					<td>
+						<button nz-button nzType="link" (click)="showModalMiddle(data.imageUrl,false)"><img
+								src="../../../../assets/img/Images/SS_EventsTab/MonitorIcon.ico"
+								alt="View Image"></button>
+					</td>
+					<td>
+						<button nz-button nzType="link" (click)="showModalMiddle(data.videoUrl,true)"><img
+								src="../../../../assets/img/Images/SS_EventsTab/MonitorIcon.ico"
+								alt="View Video"></button>
+					</td>
+					<td>{{ data.outputResult }}</td>
+					<td>{{ data.outputReason }}</td>
+				</tr>
+				<!--</ng-template> -->
+			</tbody>
+		</nz-table>
+	</nz-spin>
+	<div nz-row style="margin-top: 25px;">
+		<button nz-button [nzType]="'default'" [disabled]="buttonStatus" class="footerButton"
+			(click)="buttonAck(1)">True</button>
+		<button nz-button [nzType]="'default'" [disabled]="buttonStatus" class="footerButton"
+			(click)="buttonAck(2)">False</button>
+		<button nz-button [nzType]="'default'" [disabled]="buttonStatus" class="footerButton" style="padding: 0px;"
+			(click)="buttonAck(3)">Unidentified</button>
+	</div>
+</div>
+
+<ng-container>
+	<emas-show-video *ngIf="isVisibleMiddle && isVideo" [isVisibleMiddle]="isVisibleMiddle" (closeModal)="closeModal()"
+		[videoUrl]="videoUrl"></emas-show-video>
+</ng-container>
+
+<ng-container>
+	<emas-show-image *ngIf="isVisibleMiddle && !isVideo" [isVisibleMiddle]="isVisibleMiddle" (closeModal)="closeModal()"
+		[imgUrl]="imgUrl"></emas-show-image>
+</ng-container>

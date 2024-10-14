@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 					
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"	   
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						   http://www.springframework.org/schema/context	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+						   http://www.springframework.org/schema/task		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<!-- <task:scheduler id ="taskScheduler" pool-size="10"/>
+		<task:scheduled-tasks scheduler="taskScheduler">
+		<task:scheduled ref="monitorSelf" method="monitorSelfStatus" fixed-rate="${pingInterval}"/>
+	</task:scheduled-tasks>
+	<bean id = "monitorSelf" class="com.stee.emas.cmh.monitor.MonitorSelfStatus" />
+	<bean id = "monitorOther" class="com.stee.emas.cmh.monitor.MonitorOtherStatus" /> -->
+	
+	<!-- <bean id = "monitorOther" class="com.stee.emas.cmh.monitor.MonitorIntfStatus" /> -->
+	
+	<!-- <context:annotation-config />
+	<context:component-scan base-package="com.stee.emas"/>	
+	<context:property-placeholder location="classpath:cmh.properties" /> -->
+	
+	<bean id = "cmhMonitor" class="com.stee.emas.cmh.monitor.CmhMonitor" />
+	<!-- <bean id ="previewImageHandler" class="com.stee.emas.cmh.service.impl.PreviewImageHandler"/> -->
+	
+	<bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="applicationContextSchedulerContextKey">
+			<value>CMH-Context</value>
+		</property>
+		<property name="schedulerContextAsMap">
+			<map>
+				<entry key="cmhMonitor" value-ref="cmhMonitor"/>
+				<!-- <entry key="previewImageHandler" value-ref="previewImageHandler"/>
+				<entry key="cmhMessageSender" value-ref="cmhMessageSender"/> -->
+			</map>
+		</property>
+	</bean>
+	
+	<bean id = "scheduleManager" class="com.stee.emas.cmh.monitor.ScheduleManager" init-method="init" />
+	
+	<!-- <bean id = "jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" >
+		<property name ="targetObject" ref="monitorSelf" />
+		<property name ="targetMethod" value="monitorSelfStatus" />
+		<property name ="concurrent" value="false" /> 
+	</bean>
+		
+	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="jobDetail"/>
+		<property name="startDelay" value="1000"/>
+		<property name="repeatInterval" value="${pingInterval}"/>
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="simpleTrigger"/>
+			</list>
+		</property>
+	</bean> -->
+</beans>

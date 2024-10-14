@@ -1,0 +1,362 @@
+<div style="padding: 5px;">
+    <div class="pageHeader">
+       
+      <div nz-row>
+        <form
+          nz-form
+          [formGroup]="validateForm"
+          class="ant-advanced-search-form"
+          (ngSubmit)="submitForm()"
+        >
+        <div nz-row nzGutter="16">
+          <div nz-col nzSpan="8">
+              <div nz-row [nzGutter]="16">
+                  <div nz-col [nzSpan]="24">
+                    <nz-form-item nzFlex>
+                        <div nz-col [nzSpan]="8">
+                      <nz-form-label class="colorWhite"
+                        >Subsystem
+                      </nz-form-label>
+                        </div>
+                      <nz-form-control>
+                          <div nz-col [nzSpan]="8">
+                        <nz-select
+                          style="width: 150px;"
+                          nzShowSearch
+                          nzAllowClear
+                          nzPlaceHolder="Select a subSystem"
+                          formControlName="subSystem"
+                          (ngModelChange)="getEuipTypeBySubSystemAndLocation()"
+                        >
+                          <nz-option
+                            *ngFor="let option of listSubSystem"
+                            [nzLabel]="option.label"
+                            [nzValue]="option.value"
+                          >
+                          </nz-option>
+                        </nz-select>
+                          </div>
+                        <!-- <input
+                    nz-input
+                    placeholder="placeholder"
+                    formControlName="subSystem"
+                    style='color:#000'
+                  /> -->
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                </div>
+                <!-- <div nz-row [nzGutter]="16">
+                    <div nz-col [nzSpan]="24">
+                      <nz-form-item nzFlex>
+                          <div nz-col [nzSpan]="8">
+                        <nz-form-label class="colorWhite"
+                          >Location
+                        </nz-form-label>
+                          </div>
+                        <nz-form-control>
+                            <div nz-col [nzSpan]="8">
+                          <nz-select
+                            style="width: 150px;"
+                            nzShowSearch
+                            nzAllowClear
+                            nzPlaceHolder="Select a location"
+                            formControlName="location"
+                            (ngModelChange)="getEuipTypeBySubSystemAndLocation()"
+                          >
+                            <nz-option
+                              *ngFor="let option of listLocation"
+                              [nzLabel]="option.label"
+                              [nzValue]="option.value"
+                            >
+                            </nz-option>
+                          </nz-select>
+                            </div>
+                         
+                        </nz-form-control>
+                      </nz-form-item>
+                    </div>
+                  </div> -->
+                  
+                    <div nz-row [nzGutter]="16">
+                        <div nz-col [nzSpan]="24">
+                          <nz-form-item nzFlex>
+                              <div nz-col [nzSpan]="8">
+                            <nz-form-label class="colorWhite"
+                              >Equip Type
+                            </nz-form-label>
+                              </div>
+                            <nz-form-control>
+                                <div nz-col [nzSpan]="8">
+                              <nz-select
+                                style="width: 150px;"
+                                nzShowSearch
+                                nzAllowClear
+                                nzPlaceHolder="Select a equipType"
+                                formControlName="equipType"
+                                (ngModelChange)="getAlarmDescriptionsByEquipType()"
+                              >
+                                <nz-option 
+                                  *ngFor="let option of listEquipType"
+                                  [nzLabel]="option.value"
+                                  [nzValue]="option.value"
+                                >
+                                </nz-option>
+                              </nz-select>
+                                </div>
+                              <!-- <input
+                          nz-input
+                          placeholder="placeholder"
+                          formControlName="subSystem"
+                          style='color:#000'
+                        /> -->
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                      </div>
+                      <div nz-row [nzGutter]="16">
+                        <div nz-col [nzSpan]="24">
+                          <nz-form-item nzFlex>
+                              <div nz-col [nzSpan]="8">
+                            <nz-form-label class="colorWhite"
+                              >Exp Way
+                            </nz-form-label>
+                              </div>
+                            <nz-form-control>
+                                <div nz-col [nzSpan]="8">
+                              <nz-select
+                                style="width: 150px;"
+                                nzShowSearch
+                                nzAllowClear
+                                nzPlaceHolder="Select a expWay"
+                                formControlName="expWay"
+                                (ngModelChange)="getEquipIdByexpWayAndEquipType()"
+                                [nzDisabled]="expWayDisable"
+                              >
+                                <nz-option
+                                  *ngFor="let option of listExpWay"
+                                  [nzLabel]="option.label"
+                                  [nzValue]="option.value"
+                                >
+                                </nz-option>
+                              </nz-select>
+                                </div>
+                              <!-- <input
+                          nz-input
+                          placeholder="placeholder"
+                          formControlName="subSystem"
+                          style='color:#000'
+                        /> -->
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                      </div>
+                      
+                        <div nz-row [nzGutter]="16">
+                          <div nz-col [nzSpan]="24">
+                            <nz-form-item nzFlex>
+                                <div nz-col [nzSpan]="8">
+                              <nz-form-label class="colorWhite"
+                                >Alert Type
+                              </nz-form-label>
+                                </div>
+                              <nz-form-control>
+                                  <div nz-col [nzSpan]="8">
+                                      <div class="equipId" style="height:100px">
+                                          <ul>
+                                            <li *ngFor="let item of listAlarmDesc; let idx = index" (click)="alertType(item, $event)" [ngClass]="{'active':item.ischecked == true}" >{{item.description}}</li>
+                                          </ul>
+                                        </div>
+                                <!-- <nz-select
+                                  style="width: 150px;"
+                                  nzShowSearch
+                                  nzAllowClear
+                                  nzPlaceHolder="Select a equipType"
+                                  formControlName="alarmDsc"
+                                  
+                                >
+                                  <nz-option 
+                                    *ngFor="let option of listAlarmDesc"
+                                    [nzLabel]="option.description"
+                                    [nzValue]="option.value"
+                                  >
+                                  </nz-option>
+                                </nz-select> -->
+                                  </div>
+                                <!-- <input
+                            nz-input
+                            placeholder="placeholder"
+                            formControlName="subSystem"
+                            style='color:#000'
+                          /> -->
+                              </nz-form-control>
+                            </nz-form-item>
+                          </div>
+                        </div>
+                        
+                        <div nz-row [nzGutter]="16">
+                          <div nz-col [nzSpan]="24">
+                            <nz-form-item nzFlex>
+                                <div nz-col [nzSpan]="8">
+                              <nz-form-label class="colorWhite"
+                                >Ack Status
+                              </nz-form-label>
+                                </div>
+                              <nz-form-control>
+                                  <div nz-col [nzSpan]="8" id="statu">
+                                      <div class="equipId" style="height:100px">
+                                        <ul>
+                                          <li *ngFor="let item of listAckStatus; let idx = index" (click)="status(item, $event)" [ngClass]="{'active':item.ischecked == true}" >{{item.label}}</li>
+                                        </ul>
+                                      </div>
+                                <!-- <nz-select
+                                  style="width: 150px;"
+                                  nzShowSearch
+                                  nzAllowClear
+                                  nzPlaceHolder="Select a equipType"
+                                  formControlName="ackStatus"
+                                >
+                                  <nz-option 
+                                    *ngFor="let option of listAckStatus"
+                                    [nzLabel]="option.label"
+                                    [nzValue]="option.value"
+                                  >
+                                  </nz-option>
+                                </nz-select> -->
+                                  </div>
+                                <!-- <input
+                            nz-input
+                            placeholder="placeholder"
+                            formControlName="subSystem"
+                            style='color:#000'
+                          /> -->
+                              </nz-form-control>
+                            </nz-form-item>
+                          </div>
+                        </div>
+                        
+          </div>
+          <div nz-col nzSpan="8">
+            <div nz-row nzGutter="16">
+                <div nz-col [nzSpan]="24">
+                    <nz-form-item nzFlex>
+                      <nz-form-label class="colorWhite"
+                        >Equip ID
+                      </nz-form-label>
+                      <nz-form-control>
+                        <!-- <nz-select
+                          style="width: 150px;"
+                          nzShowSearch
+                          nzAllowClear
+                          nzPlaceHolder="Select a equipID"
+                          formControlName="equipID"
+                          [nzOpen] = "true"
+                        >
+                          <nz-option
+                            *ngFor="let option of listEquipID"
+                            [nzLabel]="option.label"
+                            [nzValue]="option.value"
+                          >
+                          </nz-option>
+                        </nz-select> -->
+                        <div class="equipId">
+                          <ul>
+                            <li *ngFor="let item of listEquipID; let idx = index" (click)="test(item, $event)" [ngClass]="{'active':item.ischecked == true}">{{item.value}}</li>
+                          </ul>
+                        </div>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+
+                  <div nz-row [nzGutter]="16">
+                      <div nz-col [nzSpan]="8">
+                        <nz-form-item nzFlex>
+                            <div nz-col [nzSpan]="8">
+                          <nz-form-label class="colorWhite"
+                            >From Date
+                          </nz-form-label>
+                            </div>
+                          <nz-form-control>
+                              <div >
+                              <nz-date-picker
+                              [nzDisabledDate]="disabledStartDate"
+                              nzShowTime
+                              nzFormat="dd/MM/yyyy HH:mm:ss a"
+                              formControlName="fromDate"
+                              nzPlaceHolder="Start"
+                              (ngModelChange)="onStartChange($event)"
+                              (nzOnOpenChange)="
+                                handleStartOpenChange($event)
+                              "
+                            >
+                            </nz-date-picker>
+                              </div>
+                            <!-- <input
+                        nz-input
+                        placeholder="placeholder"
+                        formControlName="subSystem"
+                        style='color:#000'
+                      /> -->
+                          </nz-form-control>
+                        </nz-form-item>
+                      </div>
+                      <div nz-col [nzSpan]="8">
+                          <nz-form-item nzFlex>
+                            <nz-form-label class="colorWhite"
+                              >To Date
+                            </nz-form-label>
+                            <nz-form-control>
+                                <nz-date-picker
+                                [nzDisabledDate]="disabledStartDate"
+                                nzShowTime
+                                nzFormat="dd/MM/yyyy HH:mm:ss a"
+                                formControlName="toDate"
+                                nzPlaceHolder="End"
+                                (ngModelChange)="onStartChange($event)"
+                                (nzOnOpenChange)="
+                                  handleStartOpenChange($event)
+                                "
+                              >
+                              </nz-date-picker>
+                              <!-- <input
+                          nz-input
+                          placeholder="placeholder"
+                          formControlName="subSystem"
+                          style='color:#000'
+                        /> -->
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                    </div>
+                    <div nz-row [nzGutter]="16">
+                        <div nz-col [nzSpan]="8">
+                          
+                        </div>
+                        <div nz-col [nzSpan]="8">
+                          <nz-form-item nzFlex>
+                            <nz-form-label class="colorWhite"
+                              >with chart
+                            </nz-form-label>
+                            <nz-form-control>
+                                <label nz-checkbox formControlName="withChart">
+                                    <span></span>
+                                </label>
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>
+                      </div>
+                      <div nz-col [nzSpan]="2" class="search-area">
+                          <button nz-button [nzType]="'default'" style="color: #000;" (click)="showModalMiddle()" [disabled]="generate"><img src="../../../../assets/img/Images/SS_General/export.png">Generate Report</button>
+                      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <ng-container>
+    <emas-alert-report *ngIf="isVisibleMiddle" [isVisibleMiddle]="isVisibleMiddle" [reportValue]="reportValue" [param]="param" (closeModal)="closeModal()"></emas-alert-report>
+  </ng-container>
+  

@@ -1,0 +1,174 @@
+.itmp-header {
+    height: 7vh;
+    background: var(--bg);
+    box-shadow: 0px 0px 25px 0px rgba(17, 47, 51, 0.4);
+}
+.cur-p{
+	font-size: 20px;
+}
+.file>div:hover{
+    background: #e60012;
+}
+
+.logo-box {
+    width: 210px;
+    /* margin-right: 90px ; */
+}
+
+.header-container {
+    width: 100%;
+    padding: 0.2rem 0.2rem 0.2rem 2.5rem;
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.time-box {
+    font-size: 16px;
+    color: var(--ft);
+    margin-right: 0.3rem; 
+    width: 350px;
+    max-width: 350px;
+    font-weight: 350;
+    /* font-family: SegoeUI; */
+}
+
+.tools-box {
+    color: #fff;
+    font-weight: bold;
+    margin-right: 0.3rem;
+}
+
+.tools-box i {
+    margin-right: 15px;
+}
+
+.lang-label {
+    width: 1rem;
+    height: 0.3rem;
+    background: rgba(238, 238, 238, 1);
+    border-radius: 5px;
+    color: #fff;
+    font-size: 0.14rem;
+    font-weight: bold;
+    border: 0;
+    padding: 0 0.15rem;
+}
+
+.user-head {
+    margin-right: 10px;
+}
+
+.user-head-no-login {
+	font-size: 40px;
+	color: var(--ft);
+}
+
+.user-name {
+    max-width: 200px;
+    color: var(--ft);
+    font-size: 18px;
+    margin-right: 40px;
+    /* font-weight: bold; */
+}
+
+.user-role {
+    max-width: 200px;
+    color: var(--ft);
+    font-size: 18px;
+}
+
+.user-head-down {
+    color: #d2d2d2;
+}
+
+.system-msg-box {
+    position: absolute;
+    width: 380px;
+    height: 400px;
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 0px 0px 25px 0px rgba(17, 47, 51, 0.2);
+    border-radius: 10px;
+    left: -164px;
+}
+
+.msg-hint-icon {
+    position: absolute;
+    top: -0.01rem;
+    right: -0.03rem;
+    font-size: 12px;
+    width: 0.15rem;
+    height: 0.15rem;
+    color: #fff;
+    background: #e60012;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.dropMenu li a {
+    color: black;
+}
+.dropMenu li:hover {
+    background-color: #1890ff;
+}
+.dropMenu li:hover a {
+    color: white;
+}
+.statusBarText{
+    color: red;
+    margin-left: 10px;
+}
+.lingdang {
+    transform-origin: 50% 0;
+    animation: yaolingdang 3s infinite ease;
+    display: inline-block;
+}
+@keyframes yaolingdang {
+    5%,25%,45% {
+        transform: rotate(8deg);
+    }
+    0%,10%,30%,50% {
+        transform: rotate(-8deg);
+    }
+    15%,35%,55% {
+        transform: rotate(4deg);
+    }
+    20%,40%,60% {
+        transform: rotate(-4deg);
+    }
+    65%,100% {
+        transform: rotate(0deg);
+    }
+}
+
+.measureText {
+    font-size: 16px;
+    color: red;
+}
+.icons {
+    color: var(--cl);
+    font-size: 35px;
+}
+.theme-button {
+    font-weight: bold;
+    background: var(--bg);
+    color: var(--tft);
+}
+.control-button {
+    background: var(--bg);
+}
+:host-context([data-theme-style="dark"]) {
+    --ft: white;
+    --tft: white;
+    --bg: #363636;
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --ft: black;
+    --tft: rgba(0,0,0,.65);
+    --bg: white;
+    --cl: #1890ff;
+}

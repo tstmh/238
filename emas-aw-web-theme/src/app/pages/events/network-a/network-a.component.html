@@ -1,0 +1,205 @@
+<div style="padding: 5px;">
+    <div class="pageHeader">
+      <div nz-row>
+       <h3  nz-col nzSpan="24" style="text-align: center;margin-bottom: 20px;margin-top:20px" class="text">NetWork-A Health Status Diagram</h3>
+        <div nz-col nzSpan="3" nzOffset="3">
+          <div class="transportBox">
+          <div style="margin-top: 50px;">
+            <ul>
+              <p>i-transport</p>
+            </ul>
+          </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="3">
+          <div class="emasBox">
+            <div style="margin-top: 20px;">
+              <ul>
+                <p>EMAS CSS</p>
+                <li *ngFor="let item of ecsImg; let indx = index;"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="serverCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="4" nzOffset="11">
+          <div class="emasBox">
+            <div style="margin-top: 20px;">
+              <ul>
+                <p>EMAS UPS</p>
+                <li *ngFor="let item of up2Img; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="serverCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""><span class="serverSpan">{{indx + 1}}</span></li>
+              </ul>
+            </div>
+          </div>          
+        </div>
+      </div>
+      <div nz-row class="borderRight">
+        <div nz-col [nzSpan]="4"></div>
+        <div nz-col [nzSpan]="3"></div>
+        <div nz-col [nzSpan]="14"></div>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="2" nzOffset="1">
+          <div class="nwaBox">
+            <div style="margin-top: 50px;">
+                <ul>
+                    <p>FELS Backup NW-A</p>
+                    <li *ngFor="let item of bkwImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="awCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""></li>
+                </ul>
+            </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="3">
+          <div nz-row>
+          <div class="routerBox">
+            <ul>
+              <span>Router</span>
+              <li *ngFor="let item of rouImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="awCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""></li>
+            </ul>
+          </div>            
+          </div>
+          <div nz-row>
+            <div nz-col [nzSpan]="5" style="border-right: 2px solid black;height: 20px;"></div>
+          </div>
+          <div nz-row>
+          <div class="itmsBox">
+              <ul>
+                <p>ITMS FELS</p>
+                <li *ngFor="let item of bkwImg; let indx = index"><img style="transform: rotate(90deg);" [src]="item.url" alt=""><img *ngIf="item.status == 0" class="serverCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""></li>
+              </ul>
+          </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="3">
+          <div class="yellowBox">
+           <div style="margin-top: 50px;">
+              <ul>
+                  <span>FELS NW-A Switch</span>
+                  <li *ngFor="let item of aswImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="awCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""><span>{{indx + 1}}</span></li>
+              </ul>
+           </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="3">
+          <div class="linenBox">
+              <div style="margin-top: 50px;">
+                  <ul>
+                    <p>Traffic Data Analysis Server</p>
+                    <li *ngFor="let item of tasImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="serverCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""></li>
+                  </ul>    
+              </div>    
+          </div>
+        </div>
+        <div nz-col nzSpan="2">
+          <div style="height: 150px;width:100px;background: linen;display: inline-block;text-align: center;">
+              <div style="margin-top: 50px;">
+                  <ul>
+                      <p>Backup Server</p>
+                      <li *ngFor="let item of bksImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="serverCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""></li>
+                  </ul>  
+              </div>  
+          </div>
+        </div>
+        <div nz-col nzSpan="3">
+          <div class="cornsilkBox">
+              <div style="margin-top: 50px;">
+                  <ul>
+                      <p>Central Data Storage</p>
+                      <li *ngFor="let item of cdsImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="storageCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""></li>
+                    </ul> 
+              </div> 
+          </div>
+        </div>
+        <div nz-col nzSpan="3">
+          <div class="yellowBox">
+           <div style="margin-top: 50px;">
+              <ul>
+                  <p>Fiber Channel Switch</p>
+                  <li *ngFor="let item of fcwImg; let indx = index"><img style="transform: rotate(90deg);" [src]="item.url" alt=""><img *ngIf="item.status == 0" class="serverCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""></li>
+              </ul>
+          </div>
+          </div>
+        </div>
+        <div nz-col nzSpan="1" style="border-right: 2px solid black;display: inline-block;text-align: center;">
+          <div class="vtlBox">
+              <ul>
+                <p>VTL</p>
+                <li *ngFor="let item of vtlImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="serverCancelImg" style="height: 15px;" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""></li>
+              </ul>  
+          </div>
+        </div>
+      </div>
+      <div nz-row class="borderRight">
+        <div nz-col nzSpan="4"><span style="position: absolute;bottom: 0;font-size: 20px;" class="text">NetWork A</span></div>
+        <div nz-col nzSpan="3"></div>
+        <div nz-col nzSpan="3"></div>
+        <div nz-col nzSpan="3"></div>
+        <div nz-col nzSpan="2"></div>
+        <div nz-col nzSpan="3"></div>
+        <div nz-col nzSpan="2"></div>
+        <div nz-col nzSpan="1"></div>
+      </div>
+      <div nz-row style="border-bottom:2px solid black;"></div>
+      <div nz-row class="borderRight">
+        <div nz-col nzSpan="2"></div>
+        <div nz-col nzSpan="3"></div>
+        <div nz-col nzSpan="4"></div>
+        <div nz-col nzSpan="3"></div>
+        <div nz-col nzSpan="4"></div>
+      </div>
+      <div nz-row>
+        <div nz-col nzSpan="3" nzOffset="1">
+            <div class="yellowBox">
+             <div style="margin-top: 50px;">
+                <ul>
+                    <li *ngFor="let item of nwtImg; let indx = index"><img src="../../../../assets/img/Images/SS_EventsTab/aw.png" alt=""><img *ngIf="item.status == 0" class="awCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""><span>{{indx + 1}}</span></li>
+                    <p>NMS Workstation</p>
+                </ul>
+            </div>
+            </div>
+        </div>
+        <div nz-col nzSpan="3">
+            <div class="lightblueBox">
+              <div style="margin-top: 50px;">
+                  <ul>
+                      <li *ngFor="let item of cesImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="serverCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""><span class="serverSpan">{{indx + 1}}</span></li>
+                      <p>CFELS</p>
+                  </ul>
+              </div>
+            </div>
+        </div>
+        <div nz-col nzSpan="3" nzOffset="1">
+            <div class="lightblueBox">
+              <div style="margin-top: 50px;">
+                  <ul>
+                      <li *ngFor="let item of mesImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="serverCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""><span class="serverSpan">{{indx + 1}}</span></li>
+                       <p>MFELS</p>
+                  </ul>
+              </div>
+            </div>
+        </div>
+        <div nz-col nzSpan="3">
+            <div class="linenBox">
+                <div style="margin-top: 50px;">
+                    <ul>
+                        <li *ngFor="let item of dbsImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="serverCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""><span class="serverSpan">{{indx + 1}}</span></li>
+                        <p>DB Server</p>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div nz-col nzSpan="4" nzOffset="1">
+            <div class="awBox">
+              <div style="margin-top: 50px;">
+                  <ul>
+                      <li *ngFor="let item of awtImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="awCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""><span>{{indx + 1}}</span></li>
+                      <p>AW</p>
+                  </ul>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="footerResult">
+          <p><img style="height: 25px;" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="" class="text"> :One or more module failures</p>
+      </div>
+    </div>
+</div>

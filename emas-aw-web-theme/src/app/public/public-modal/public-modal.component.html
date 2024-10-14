@@ -1,0 +1,117 @@
+<nz-modal *ngIf="flag" [(nzVisible)]="visible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+	(nzOnCancel)="handleCancel()" [nzWidth]="700">
+	<ng-template #modalTitle>
+		<img src="../../../../../assets/img/Images/SS_LoginLogout/ExpresswayLogo.png" alt="" style="width: 16px;">
+		EMAS AW HELP
+	</ng-template>
+
+	<ng-template #modalContent>
+
+		<div class="click">
+			<div (click)="click()">Click Here</div>
+			<p>&nbsp;to view the EMAS AW User Guide</p>
+		</div>
+
+		<div class="content">
+			<p class="title_1">1.1 Config :</p>
+			<p class="title_2">1.1.1 Pictogram</p>
+			<p class="title_3">Puspose:to view/update existing pictogram,or add pictogram</p>
+			<p class="title_2">1.1.2 Template</p>
+			<p class="title_3">Puspose:to viewavailable VMS Template</p>
+			<p class="title_2">1.1.3 Equipment</p>
+			<p class="title_3">Puspose:to view assent information</p>
+			<p class="title_2">1.1.4 FELS Parameters</p>
+			<p class="title_3">Purpose : to view/edit FELS parameters</p>
+		</div>
+
+		<div class="content">
+			<p class="title_1">1.2 Events :</p>
+			<p class="title_2">1.2.1 Traffic Measure</p>
+			<p class="title_3">Purpose : to view current traffic measures</p>
+			<p class="title_2">1.2.2 Traffic Alert</p>
+			<p class="title_3">Purpose : to view current traffic alert(s)</p>
+			<p class="title_2">1.2.3 Technical Alarm</p>
+			<p class="title_3">Purpose : to view current technical alarms</p>
+			<p class="title_2">1.2.4 System Health</p>
+			<p class="title_3">Purpose : to view current the EMAS hardware , software and field equipment status
+				diagrams</p>
+		</div>
+
+		<div class="content">
+			<p class="title_1">1.3 Equipment Control :</p>
+			<p class="title_2">1.3.1 VMS Control</p>
+			<p class="title_3">Purpose : to configure and send message to display on VMS.</p>
+			<p class="title_2">1.3.2 Dimming</p>
+			<p class="title_2">1.3.2.1 Dimming Time Table</p>
+			<p class="title_3">Purpose : to configure dimming level for VMS's Time Table dimming control</p>
+			<p class="title_2">1.3.2.2 Dimming Control</p>
+			<p class="title_3">Purpose : to configure and send dimming control parameters to EMAS VMS</p>
+			<p class="title_2">1.3.3 Reset</p>
+			<p class="title_3">Purpose : to reset VMS's local controller and display blank message on VMS</p>
+			<p class="title_2">1.3.4 LUS</p>
+			<p class="title_3">Purpose : to configure and send control commands to LUS equipment</p>
+			<p class="title_2">1.3.5 PMCS</p>
+			<p class="title_3">Purpose : to configure and send control commands to PMCS equipment</p>
+			<p class="title_2">1.3.6 Fire Alarm Panel</p>
+			<p class="title_3">Purpose : to display the operational status of Fire equipment types</p>
+			<p class="title_2">1.3.7 Fire Trafffic Plan</p>
+			<p class="title_3">Purpose : to control group of equipment with predefined plans</p>
+		</div>
+
+		<div class="content">
+			<p class="title_1">1.4 Reports :</p>
+			<p class="title_2">1.4.1 Traffic Measure</p>
+			<p class="title_3">Purpose : to generate traffic measure report</p>
+			<p class="title_2">1.4.2 Traffic Alert</p>
+			<p class="title_3">Purpose : to generate traffic alert report</p>
+			<p class="title_2">1.4.3 Technical Alarm</p>
+			<p class="title_3">Purpose : to generate technical alarm report</p>
+			<p class="title_2">1.4.4 Equipment Status</p>
+			<p class="title_3">Purpose : to generate Equipment Attributes Report</p>
+		</div>
+		<div class="content">
+			<p class="title_1">1.5 User Management :</p>
+			<p class="title_2">1.5.1 User Role</p>
+			<p class="title_3">Purpose : to view/edit user role's access right</p>
+			<p class="title_2">1.5.2 User Profile</p>
+			<p class="title_3">Purpose : to view/edit/add/delete AW GUI user accounts</p>
+		</div>
+		<div class="content">
+			<p class="title_1">1.6 Audit Trail :</p>
+			<p class="title_2">1.6.1 User Activity</p>
+			<p class="title_3">Purpose: to view past activities performed by user via AW GUI application</p>
+		</div>
+		<div class="content">
+			<p class="title_1">1.7 Password Management :</p>
+			<p class="title_2">1.7.1 Change Password</p>
+			<p class="title_3">Purpose : to change current user's password</p>
+			<p class="title_2">1.7.2 Reset Password</p>
+			<p class="title_3">Purpose : to reset AW user's password</p>
+		</div>
+
+	</ng-template>
+
+	<ng-template #modalFooter>
+		<button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+	</ng-template>
+</nz-modal>
+
+<nz-modal *ngIf="!flag" [(nzVisible)]="visible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+	(nzOnCancel)="handleCancel()" [nzWidth]="430">
+
+	<ng-template #modalTitle>
+		About EMAS Administrative Workstation GUI
+	</ng-template>
+
+	<ng-template #modalContent>
+		<P>EMAS Administrative Workstation GUI</P>
+		<P>Version V 2.0.0.7 20150618</P>
+		<P>Copyright © ST Electronics(Info-Comm Systems) 2013</P>
+		<P>All rights reserved</P>
+	</ng-template>
+
+	<ng-template #modalFooter>
+		<button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+	</ng-template>
+
+</nz-modal>

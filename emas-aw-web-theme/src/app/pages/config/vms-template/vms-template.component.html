@@ -1,0 +1,99 @@
+<div style="padding: 5px;">
+	<div class="pageHeader">
+
+		<div nz-row class="searchBar">
+			<form nz-form
+				  [formGroup]="validateForm"
+				  class="ant-advanced-search-form"
+				  (ngSubmit)="submitForm()">
+				<div nz-row [nzGutter]="24">
+					<div nz-col [nzSpan]="20">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Equip Type</nz-form-label>
+							<nz-form-control>
+								<nz-select
+									style="width: 150px;"
+									nzShowSearch
+									nzAllowClear
+									nzPlaceHolder="All"
+									formControlName="equipType"
+								>
+									<nz-option
+										*ngFor="let option of listEquipType"
+										[nzLabel]="option.label"
+										[nzValue]="option.value"
+									>
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="4" class="search-area">
+						<button nz-button [nzType]="'default'" class="headerButton"><img
+							src="../../../../assets/img/Images/SS_General/find.png" class="searchImg">Search
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<p style="margin-bottom: 15px;float: right;">Query Result: {{listOfData.length}} Records Found</p>
+	<nz-table
+		#basicTable
+		id="nzTable"
+		[nzShowPagination]="true"
+		[nzFrontPagination]="true"
+		nzBordered="true"
+		[nzData]="listOfData"
+		[(nzPageIndex)]="pageIndex"
+		(nzPageIndexChange)="pageChange($event)"
+	>
+		<thead (nzSortChange)="sort($event)" nzSingleSort>
+		<tr style="background:cornflowerblue">
+			<ng-container *ngFor="let item of renderHeader;">
+				<th class="listTitle" nzShowSort nzSortKey="{{item.value}}">
+					<div>{{item.name}}</div>
+				</th>
+			</ng-container>
+		</tr>
+		</thead>
+		<tbody>
+		<tr *ngFor="let data of basicTable.data;let idx = index" (dblclick)="showModalMiddle(data)" [ngClass]="">
+			<td>{{ data.templateId }}</td>
+			<td>{{ data.equipType }}</td>
+			<td>{{ data.phase }}</td>
+			<td>{{ data.height }}</td>
+			<td>{{ data.width}}</td>
+			<td>{{ data.templateName}}</td>
+			<td>
+				<div [ngStyle]="data.rightPartStyles">
+					<ng-container
+						>
+						<div *ngFor="let item of data.imgList; let indx = index" [ngStyle]="item" style="display: flex;align-items: center;justify-content: center;">
+							<ng-container *ngIf="item.width == item.height">
+								<img class="img-tem" style="width: 99%;height: 99%;position: absolute;"
+								 [src]="'data:image/png;base64,' + data?.vmsTemplatePicConfigDtoList[indx]?.vmsPictogramConfigDto.graphicContents"
+								 [title]="indx + 1">
+							</ng-container>
+							<ng-container *ngIf="item.width !== item.height">
+								<img class="img-tem" style="max-width: 99%;max-height: 99%;position: absolute;"
+								 [src]="'data:image/png;base64,' + data?.vmsTemplatePicConfigDtoList[indx]?.vmsPictogramConfigDto.graphicContents"
+								 [title]="indx + 1">
+							</ng-container>
+						</div>
+						<ul *ngFor="let item of data.textList; let indx = index" [ngStyle]="item">
+							<li *ngFor="let item of 'x'.repeat(data.textBox[indx]).split('')"
+								[ngStyle]="data?.textBoxStyle[indx]"
+								class="redBorder"></li>
+						</ul>
+					</ng-container>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</nz-table>
+</div>
+<ng-container>
+	<emas-template-detail *ngIf="isVisibleMiddle" [isVisibleMiddle]="isVisibleMiddle" (closeModal)="closeModal()"
+						  [selectItem]="selectItem"></emas-template-detail>
+</ng-container>

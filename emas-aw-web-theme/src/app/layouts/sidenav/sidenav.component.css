@@ -1,0 +1,75 @@
+.navbar {
+    height: 100vh;
+    overflow: auto;
+    background: #363636;
+}
+
+.nav-menu {
+    background: #363636;
+}
+
+.nav-submenu {
+    background: #2b2b2b;
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu a {
+    color: rgba(213, 219, 225, 1);
+}
+
+.nav-menu > li.active {
+    background: #238ce6;
+    color: #fff;
+}
+
+.nav-submenu > li.active a {
+    background: none;
+    color: #238ce6;
+}
+
+a.router-link-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+}
+
+.nav-submenu a.router-link-cover {
+    height: 100%;
+}
+
+.main-menu-title,
+.sub-menu-title {
+    /* font-family: SegoeUI; */
+    font-weight: 400;
+}
+
+.navbar .logo {
+    height: 80px;
+    font-weight: bold;
+    padding: 0 20px;
+    background: #1c1c1c;
+}
+
+.navbar .logo > a.logo-link {
+    display: block;
+    width: 226px;
+    white-space: nowrap;
+    font-size: 20px;
+    color: #fff;
+}
+
+.ant-layout-sider-collapsed .logo > a.logo-link {
+    display: none;
+}
+.ant-layout-sider-collapsed .nav-text {
+    display: none;
+}
+
+.navbar .logo-image {
+    vertical-align: -17px;
+}

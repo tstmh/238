@@ -1,0 +1,303 @@
+<div style="padding: 5px;">
+	<div class="pageHeader">
+
+	</div>
+	<div nz-row class='fieldsContents'>
+		<div nz-col [nzSpan]="22">
+			<div nz-row>
+				<!-- <div nz-col nzOffset="2"> -->
+				<div nz-col [nzSpan]="22">
+					<h3 style="text-align: center" class="headerTitle">System Software Health Status Diagram</h3>
+				</div>
+			</div>
+			<div style='width: 100%;height: 675px;'>
+				<div class="firstBox">
+					<ul style="display: flex; justify-content: center;">
+						<li *ngFor="let item of tapList">
+							<div><img *ngIf="item.status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">Traffic Data Analysis</p>
+							</div>
+						</li>
+						<li *ngFor="let item of dmaList">
+							<div><img *ngIf="item.status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">MS SQL DB</p>
+							</div>
+						</li>
+						<!-- <li *ngIf="nmsList && nmsList.length>0"
+							style="height: 100px;width: 100px;color: blue;background: lightcyan;margin: 0 10px;text-align: center;display: flex;align-items: center;justify-content: center;"> -->
+						<li *ngIf="nmsList && nmsList.length>0">
+							<div><img *ngIf="nmsList[0].status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="nmsList[0].status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">Argent SoftWare</p>
+							</div>
+						</li>
+						<li *ngFor="let item of lusList">
+							<div><img *ngIf="item.status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">LUS Application</p>
+							</div>
+						</li>
+						<li *ngFor="let item of pmcList">
+							<div><img *ngIf="item.status != 2" class="cancelImg" 
+								src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg" 
+								src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">PMCS Application</p>
+							</div>
+						</li>
+						<li *ngFor="let item of firList">
+							<div><img *ngIf="item.status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">FIRE Application</p>
+							</div>
+						</li>
+						<!-- <li>
+							<div><img class="cancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg"
+									alt="">
+								<p style="color: blue;">ITMS Application</p>
+							</div>
+						</li> -->
+						<!-- for Water Mist -->
+						<!-- <li *ngFor="let item of wmcList">
+							<div><img *ngIf="item.status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">WMCS Application</p>
+							</div>
+						</li> -->
+					</ul>
+				</div>
+				<div  style="border: 2px solid black;background: lightblue;margin-top: 20px;">
+					<p style="color: blue;" nz-row>CFELS</p>
+					<div style="margin-bottom: 40px;" nz-row>
+						<div nz-col nzSpan="4" nzOffset="9" style="text-align: center;">
+							<div class="secondBox">
+								<div class="boxContent" *ngFor="let item of eciList">
+									<img *ngIf="item.status != 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+									<img *ngIf="item.status == 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+									<p style="color: blue;">EMAS CSS Interface</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div  nz-row>
+						<div nz-col [nzSpan]="4" nzOffset="2" style="text-align: center;">
+							<div class="threadBox">
+								<div class="boxContent" *ngFor="let item of dciList">
+									<img *ngIf="item.status != 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+									<img *ngIf="item.status == 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+									<p style="color: blue;">DCSS Interface</p>
+								</div>
+							</div>
+						</div>
+						<div nz-col [nzSpan]="4" style="text-align: center;">
+							<div class="threadBox">
+								<div class="boxContent" *ngFor="let item of sciList">
+									<img *ngIf="item.status != 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+									<img *ngIf="item.status == 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+									<p style="color: blue;">SCSS Interface</p>
+								</div>
+							</div>
+						</div>
+						<div nz-col [nzSpan]="4" style="text-align: center;">
+							<div class="threadBox" *ngFor="let item of tciList">
+								<div class="boxContent">
+									<img *ngIf="item.status != 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+									<img *ngIf="item.status == 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+									<p style="color: blue;">TICSS Interface</p>
+								</div>
+							</div>
+						</div>
+						<div nz-col [nzSpan]="4" style="text-align: center;">
+							<div class="threadBox">
+								<div class="boxContent" *ngFor="let item of wciList">
+									<img *ngIf="item.status != 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+									<img *ngIf="item.status == 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+									<p style="color: blue;">WCSS Interface</p>
+								</div>
+							</div>
+						</div>
+						<div nz-col [nzSpan]="4" style="text-align: center;">
+							<div class="threadBox">
+								<div class="boxContent" *ngFor="let item of idiList">
+									<img *ngIf="item.status != 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+									<img *ngIf="item.status == 2" class="cancelImg"
+										src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+									<p style="color: blue;">IDSS Interface</p>
+								</div>
+							</div>
+						</div>
+						<div nz-col [nzSpan]="2"></div>
+					</div>
+					<div nz-row class="verticalLine">
+						<div nz-col nzSpan="3"></div>
+						<div nz-col nzSpan="4"></div>
+						<div nz-col nzSpan="2"></div>
+						<div nz-col nzSpan="3"></div>
+						<div nz-col nzSpan="4"></div>
+						<div nz-col nzSpan="4"></div>
+						<div nz-col nzSpan="4"></div>
+					</div>
+				</div>
+				<div nz-row class="verticalLine">
+					<div nz-col nzSpan="3"></div>
+					<div nz-col nzSpan="4"></div>
+					<div nz-col nzSpan="2"></div>
+					<div nz-col nzSpan="3"></div>
+					<div nz-col nzSpan="4"></div>
+					<div nz-col nzSpan="4"></div>
+					<div nz-col nzSpan="4"></div>
+				</div>
+				<div nz-row>
+					<div nz-col [nzSpan]="4" nzOffset="1" style="text-align: center;">
+						<div class="fourthBox">
+							<div class="boxContent" *ngFor="let item of dcaList">
+								<img *ngIf="item.status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">FLUX API</p>
+							</div>
+						</div>
+					</div>					
+					<div nz-col [nzSpan]="3" style="text-align: center;">
+						<div class="fourthBox">
+							<div class="boxContent" *ngFor="let item of cssList">
+								<img *ngIf="item.status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">CS Application</p>
+							</div>
+						</div>
+					</div>
+					<div nz-col [nzSpan]="3" style="text-align: center;">
+						<div class="fourthBox">
+							<div class="boxContent" *ngIf="hmaList && hmaList.length>0">
+								<img *ngIf="hmaList[0].status == 2" class="cancelImg" 
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<img *ngIf="hmaList[0].status != 2" class="cancelImg" 
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<p style="color: blue;">HMS Application</p>
+							</div>
+						</div>
+					</div>
+					<div nz-col [nzSpan]="3" style="text-align: center;">
+						<div class="fourthBox">
+							<div class="boxContent" *ngIf="meaList && meaList.length>0">
+								<img *ngIf="meaList[0].status != 2" class="cancelImg" 
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="meaList[0].status == 2" class="cancelImg" 
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">MFELS Application</p>
+							</div>
+						</div>
+					</div>
+					<div nz-col [nzSpan]="4" style="text-align: center;">
+						<div class="fourthBox">
+							<div class="boxContent" *ngFor="let item of imsList">
+								<img *ngIf="item.status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">Image Server</p>
+							</div>
+						</div>
+					</div>
+					<div nz-col [nzSpan]="4" style="text-align: center;">
+						<div class="fourthBox">
+							<div class="boxContent" *ngFor="let item of idaList"> 
+								<img *ngIf="item.status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">IDSS Application</p>
+							</div>
+						</div>
+					</div>
+					<div nz-col [nzSpan]="1"></div>
+				</div>
+				<div nz-row>
+					<div nz-col [nzSpan]="3" nzOffset="0" style="text-align: center;">
+						<div class="fifthBox">
+							<div class="boxContent" *ngFor="let item of da1List">
+								<img *ngIf="item.status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">AI Server1</p>
+							</div>
+						</div>
+					</div>
+					<div nz-col [nzSpan]="2" style="text-align: center;">
+						<div class="fifthBox">
+							<div class="boxContent" *ngFor="let item of da2List">
+								<img *ngIf="item.status != 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+								<img *ngIf="item.status == 2" class="cancelImg"
+									src="../../../../assets/img/Images/SS_General/assign.png" alt="">
+								<p style="color: blue;">AI Server2</p>
+							</div>
+						</div>
+					</div>									
+				</div>
+			</div>
+			<div class="footerResult">
+				<p><img style="height: 25px;" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""> :One or
+					more module failures</p>
+			</div>
+		</div>
+		<!-- <div nz-col [nzSpan]="11">
+			<h3 class="title">Application Status</h3>
+			<div>
+				<p class='itemStatus'><span class='greenBox'></span> Running</p>
+				<p class='itemStatus'><span class='yellowBox'></span>Not Running</p>
+			</div>
+			<p style="float: right">Query Result: {{basicTable.data.length}} Records Found</p>
+			<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false"
+				[nzData]="listOfData">
+				<thead>
+					<tr style="background:cornflowerblue">
+						<ng-container *ngFor="let item of renderHeader;">
+							<th class="listTitle">
+								<div>{{item.name}}</div>
+							</th>
+						</ng-container>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let data of basicTable.data;let idx = index">
+						<td>{{ data.application }}</td>
+						<td>{{ data.mainDesc }}  <span class='yellowBox' [ngClass]="{'green':data.status==='true'}"></span></td>
+						<td>{{ data.standByDesc }}  <span class='yellowBox' [ngClass]="{'green':data.standByStatus==='true'}"></span></td>
+						<td>{{ data.activeDateTime }}</td>
+					</tr>
+				</tbody>
+			</nz-table>
+		</div> -->
+	</div>
+</div>

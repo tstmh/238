@@ -1,0 +1,41 @@
+.click {
+	display: flex;
+	align-items: baseline;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.click>div {
+    font-size: 22px;
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.click div:hover {
+	color: red;
+	text-decoration: underline
+}
+
+.content {
+	margin-bottom: 10px;
+}
+
+.title_1 {
+	font-size: 22px;
+	font-weight: bold;
+	color: #9C2BE2;
+}
+
+.title_2 {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.title_3 {
+    font-size: 16px;
+    text-indent:40px
+}
+
+::ng-deep .ant-modal-close:focus {
+	outline: unset;
+}

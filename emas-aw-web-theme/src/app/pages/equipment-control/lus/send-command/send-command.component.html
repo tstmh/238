@@ -1,0 +1,53 @@
+<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzMaskClosable="false" [nzTitle]="modalTitle"
+	[nzContent]="modalContent" [(nzVisible)]="isVisibleMiddle" [nzFooter]="modalFooter" (nzOnCancel)="close()">
+
+	<ng-template #modalTitle>
+		<img src="../../../../../assets/img/Images/SS_LoginLogout/ExpresswayLogo.png" alt="" style="width: 16px;">
+		Send Command Window
+	</ng-template>
+
+	<ng-template #modalContent>
+		<div>
+			<div style="font-size: 16px;">Equip ID: {{selectItem.idAndLoca}}</div>
+			<!-- <div>
+				<span style="display:inline-block;
+				width:100px;
+				border-top:1px solid #cccccc;"></span>
+				<div style="vertical-align:-5px">Equipment Current Status</div>
+				<span style="display:inline-block;
+				width:100px;
+				border-top:1px solid #cccccc;"></span>
+			</div> -->
+			<nz-divider nzText="Equipment Current Status" nzOrientation="left"></nz-divider>
+			<div style="margin-left: 15px;">
+				<div style="display: flex;">
+					<p class="message">Current Graphics Code:</p>
+					<img [src]="imgMap[selectItem.radioValue]">
+				</div>
+				<p class="message">Operational State: {{this.newStatus}}</p>
+			</div>
+		</div>
+		<nz-divider nzText="Send Remote Command" nzOrientation="left"></nz-divider>
+		<nz-radio-group [(ngModel)]="radioValue" (ngModelChange)="radioChange($event)">
+			<div nz-row>
+				<div nz-col nzSpan="12"><img [src]="imgMap[0]"><label nz-radio nzValue="0">Green Down Arrow</label>
+				</div>
+				<div nz-col nzSpan="12"><img [src]="imgMap[1]"><label nz-radio nzValue="1">Red Cross</label></div>
+			</div>
+			<div nz-row>
+				<div nz-col nzSpan="12"><img [src]="imgMap[2]"><label nz-radio nzValue="2">Amber Cross</label></div>
+				<div nz-col nzSpan="12"><img [src]="imgMap[3]"><label nz-radio nzValue="3">Blank</label></div>
+			</div>
+		</nz-radio-group>
+	</ng-template>
+
+	<ng-template #modalFooter>
+		<div class="bottomBtn">
+			<button [disabled]="disabled" nz-button nzType="default" (click)="handleOkMiddle()">Apply</button>
+			<button [disabled]="disabled" nz-button nzType="default" (click)="handleCancelMiddle()">Clear</button>
+		</div>
+	</ng-template>
+
+</nz-modal>
+
+<emas-apply-modal [selectItem]="selectItem" [radioValue]="radioValue" [listOfData]="listOfData"></emas-apply-modal>

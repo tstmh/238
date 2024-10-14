@@ -1,0 +1,51 @@
+
+  
+.searchBar{
+	height: 40px;
+}
+
+.equipId {
+	height: 300px;
+	width: 200px;
+	background: white;
+	overflow-y: auto;
+}
+
+.equipId ul li {
+	color: black;
+    height: 25px;
+    margin-left: 2px;
+    margin-top: 1px;
+    line-height: 25px;
+}
+
+ul li:hover {
+	background: rgb(215, 232, 238);
+    border: 1px solid lightblue;
+}
+.active {
+    background: lightgray !important;
+}
+
+.measureLane ul li {
+	color: black;
+    height: 25px;
+    margin-left: 2px;
+    margin-top: 1px;
+    line-height: 25px;
+}
+
+.measureLane {
+	height: 100px;
+	width:90%;
+	/* width: 150px; */
+	background: white;
+	overflow-y: auto;
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

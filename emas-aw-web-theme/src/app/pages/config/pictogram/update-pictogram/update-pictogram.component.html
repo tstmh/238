@@ -1,0 +1,130 @@
+<nz-modal
+      nzWrapClassName="vertical-center-modal"
+      nzWidth = 600
+      nzMaskClosable="false"
+      [nzTitle]="modalTitle"
+      [nzContent]="modalContent"
+      [(nzVisible)]="isVisibleMiddle"
+      [nzFooter]="modalFooter"
+      (nzOnCancel)="handleCancelMiddle()"
+      zmMovableModal
+    >
+    <ng-template #modalTitle>
+        Update Pictogram
+      </ng-template>
+      <ng-template #modalContent>
+        <div nz-row style="background: lightblue;" class="update-pic">
+          <div nz-form>
+              <div nz-row>
+                <div nz-col nzSpan="12" style="margin-left: 20px;">
+                    <nz-form-item nzFlex>
+                        <nz-form-label style="color: black;"
+                          ><span>Pictogram Id</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                            <nz-input-number [(ngModel)]="selectItem.pictogramId" [nzSize]="'small'" [nzMin]="1" [nzStep]="1"></nz-input-number>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>File Name</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                            {{selectItem.picFileName}}
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>Group Id</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                <nz-select
+									style="width: 150px;"
+									nzShowSearch
+									nzAllowClear
+                  [nzPlaceHolder]="picGroupIdLabel"
+                  [nzDisabled]="true"
+								>
+									<nz-option
+										*ngFor="let option of listGroupID"
+										[nzLabel]="option.label"
+										[nzValue]="option.value"
+									>
+									</nz-option>
+								</nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nzFlex>
+                        <nz-form-label nzRequired class="colorWhite"
+                          ><span>Description</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                            <nz-mention>
+                                <textarea nz-input [nzAutosize]="{ minRows: 4, maxRows: 4 }" [(ngModel)]="selectItem.pictogramDesc" nzMentionTrigger style="color: black;">
+                                </textarea>
+                            </nz-mention>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>File Size(bytes)</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                            {{selectItem.size}}
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzSpan="11">
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>Height(pixels)</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                            {{selectItem.height}}
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>Height(pixels)</span>
+                        </nz-form-label>
+                        <nz-form-control nzSpan="12">
+                            {{selectItem.width}}
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item nzFlex>
+                        <nz-form-label class="colorWhite"
+                          ><span>Downloaded</span>
+                        </nz-form-label>
+                           <div class="download">
+                            <ul>
+                              <li *ngFor="let item of selectItem.equipIdList" (click)="choice(item)" [ngClass]="{'active':selectEquipId == item}" style="margin: 2px 2px;">
+                                <a style="color: black;">{{item}}</a>
+                              </li>
+                            </ul>
+                           </div>
+                    </nz-form-item>
+                    <!-- <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/" [nzBeforeUpload]="beforeUpload" style="margin-left: 100px;">
+                      <button nz-button><span>Browse Pictogram</span></button>
+                    </nz-upload> -->
+                    <!-- <input type="file" class="upImg" value="Browse Pictogram.." (change)="beforeUpload($event)"> -->
+                    <label for="uploadImg">
+                        <input type="button" id="browsePictogram" value="Browse Pictogram.." ><span id="text"></span>
+                        <input type="file" id="uploadImg" (change)="beforeUpload($event)">
+                    </label>
+                </div>
+              </div>
+              <div nz-row>
+                <div nz-col>
+                    <img [src]="'data:image/png;base64,' + selectItem.graphicContents" alt="" style="height: 150px;width: 150px;margin-left: 20px;">
+                </div>
+              </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #modalFooter>
+          <div class="bottomBtn">
+            <button nz-button nzType="default" (click)="handleOkMiddle()">Update</button>
+            <button nz-button nzType="default" (click)="handleCancelMiddle()">Cancel</button>
+          </div>
+      </ng-template>
+</nz-modal>

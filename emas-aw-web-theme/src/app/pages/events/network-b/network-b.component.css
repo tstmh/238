@@ -1,0 +1,104 @@
+* {
+    color: blue;
+}
+.emptyBar{
+	height: 60px;
+	width: 98%;
+	background-color: rgba(0,0,0,0.1);
+	margin: 20px;
+}
+.content {
+    display: inline;
+    text-align: center;
+}
+.content_1 {
+    display: inline-block;
+    text-align: center;
+    height: 62px;
+}
+ul li {
+   display: inline-block;
+   padding: 10px;
+}
+.tswitch li {
+   display: inline-block;
+   padding: 14px 10px;  
+}
+.content ul li span {
+    margin-left: 10px;
+}
+.cornsilkContent {
+    background: cornsilk;
+    text-align: center;
+    border: 2px double black;
+}
+.footerBox {
+    background: cornsilk;
+    text-align: center;
+    border: 2px double black;
+    height: 80px;
+    width: 80px;
+}
+.footerBox > div {
+    margin-top: 30px;
+}
+.darkgrayBox {
+    background: darkgray;
+    width: 50px;
+    height:63px;
+    display: inline-block;
+    border: 2px solid black;
+}
+.lightblueBox {
+    background: lightblue;
+    border: 2px solid black;
+}
+.lightpinkBox {
+    background: lightpink;
+    border: 2px solid black;
+}
+.verticalLine :nth-child(-n + 3) {
+    height: 40px;
+    border-right: 2px solid black;
+}
+.cancelImg {
+    height: 15px;
+    display: inline-block;
+    margin-left: -24px;
+    animation: scaleDraw 5s ease-in-out infinite;
+}
+.generalCancelImg {
+    height: 15px;
+    animation: scaleDraw 5s ease-in-out infinite;
+}
+.footerResult {
+    margin-top: 20px;
+}
+.footerResult p {
+    color: var(--cl);
+}
+@keyframes scaleDraw {  /*定义关键帧、scaleDrew是需要绑定到选择器的关键帧名称*/
+    0%{
+        transform: scale(1);  /*开始为原始大小*/
+    }
+    25%{
+        transform: scale(1.5); /*放大1.5倍*/
+    }
+    50%{
+        transform: scale(1);
+    }
+    75%{
+        transform: scale(1.5);
+    }
+}
+
+.text {
+    color: var(--cl);
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

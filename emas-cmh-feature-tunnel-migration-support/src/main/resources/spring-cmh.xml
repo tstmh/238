@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 					xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 				xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx" 					xmlns:jee="http://www.springframework.org/schema/jee"
+	   xmlns:jms="http://www.springframework.org/schema/jms"
+	   xmlns:cache="http://www.springframework.org/schema/cache"			xmlns:task="http://www.springframework.org/schema/task"			
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						   http://www.springframework.org/schema/mvc	 	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+						   http://www.springframework.org/schema/context	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+						   http://www.springframework.org/schema/tx 		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+						   http://www.springframework.org/schema/jee 		http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+						   http://www.springframework.org/schema/jms 		http://www.springframework.org/schema/jms/spring-jms.xsd
+						   http://www.springframework.org/schema/cache		http://www.springframework.org/schema/cache/spring-cache.xsd
+						   http://www.springframework.org/schema/task		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+						   
+	<bean id ="applicationContextProvider" class="com.stee.emas.cmh.common.ApplicationContextProvider"/>
+	<context:component-scan base-package="com.stee.emas"/>
+
+	<import resource="cmh-db.xml"/>
+	<import resource="cmh-scheduler.xml"/>
+		
+	<jee:jndi-lookup id="cmhJmsConnectionFactory" jndi-name="${jms.ConnectionFactory.JndiName}"/>
+	<jee:jndi-lookup id="EMASCCS_CMH_Q" jndi-name="${jms.EMASCCSCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="CMH_EMASCCS_Q" jndi-name="${jms.CMHEMASCCSQueueJndiName}"/>
+	<jee:jndi-lookup id="EMASITPT_CMH_Q" jndi-name="${jms.EMASITPTCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="CMH_EMASITPT_Q" jndi-name="${jms.CMHEMASITPTQueueJndiName}"/>
+	<jee:jndi-lookup id="DCSS_CMH_Q" jndi-name="${jms.DCSSCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="SCSS_CMH_Q" jndi-name="${jms.SCSSCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="TICSS_CMH_Q" jndi-name="${jms.TICSSCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="CMH_TICSS_Q" jndi-name="${jms.CMHTICSSQueueJndiName}"/>
+	<jee:jndi-lookup id="WCSS_CMH_Q" jndi-name="${jms.WCSSCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="IDSS_CMH_Q" jndi-name="${jms.IDSSCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="CMH_AW_Topic" jndi-name="${jms.CMHAWTopicJndiName}"/>
+
+	<jee:jndi-lookup id="CMH_WM_Queue" jndi-name="${jms.CMHWMCSQueueJndiName}"/>
+	<jee:jndi-lookup id="WM_CMH_Queue" jndi-name="${jms.WMCSCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="WMSS_CMH_Queue" jndi-name="${jms.WMSSCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="CMH_LUS_Queue" jndi-name="${jms.CMHLUSQueueJndiName}"/>
+	<jee:jndi-lookup id="LUS_CMH_Queue" jndi-name="${jms.LUSCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="CMH_AW_TUN_Topic" jndi-name="${jms.CMHAWTUNTopicJndiName}"/>
+	<jee:jndi-lookup id="CTETUN_CMH_Q" jndi-name="${jms.CTETUNCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="CMH_CTETUN_Q" jndi-name="${jms.CMHCTETUNQueueJndiName}"/>
+	<jee:jndi-lookup id="PMCS_CMH_Q" jndi-name="${jms.PMCSCMHQueueJndiName}"/>
+	<jee:jndi-lookup id="CMH_PMCS_Q" jndi-name="${jms.CMHPMCSQueueJndiName}"/>
+	<jee:jndi-lookup id="PA_CMH_Queue" jndi-name="${jms.PACMHQueueJndiName}"/>
+	
+	<task:executor id = "taskExecutor" pool-size="10" queue-capacity="25"/>
+	<task:annotation-driven executor="taskExecutor"/>
+	
+	<bean id ="startupListener" class="com.stee.emas.cmh.common.StartupListener" init-method="init"/>
+	<bean id ="congestionQueueManager" class="com.stee.emas.cmh.caid.CongestionQueueManager" init-method="init"/>
+	<bean id ="tpndManager" class="com.stee.emas.cmh.tpnd.TPNDManager" init-method="init"/>
+	
+	<bean id="wmcsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cmhJmsConnectionFactory"/>
+		<property name="defaultDestination" ref="CMH_WM_Queue"/>
+	</bean>
+
+	<bean id="lusTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cmhJmsConnectionFactory"/>
+		<property name="defaultDestination" ref="CMH_LUS_Queue"/>
+	</bean>
+
+	<bean id="awJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cmhJmsConnectionFactory"/>
+		<property name="defaultDestination" ref="CMH_AW_Topic"/>
+	</bean>
+	
+	<bean id="group1JmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cmhJmsConnectionFactory"/>
+		<property name="defaultDestination" ref="CMH_CTETUN_Q"/>
+	</bean>
+	
+	<bean id="pmcsJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cmhJmsConnectionFactory"/>
+		<property name="defaultDestination" ref="CMH_PMCS_Q"/>
+	</bean>
+	
+	<bean id="ticssJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cmhJmsConnectionFactory"/>
+		<property name="defaultDestination" ref="CMH_TICSS_Q"/>
+	</bean>
+	
+	<bean id="emasccsJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cmhJmsConnectionFactory"/>
+		<property name="defaultDestination" ref="CMH_EMASCCS_Q"/>
+	</bean>
+	
+	<bean id="emasitptJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="cmhJmsConnectionFactory"/>
+		<property name="defaultDestination" ref="CMH_EMASITPT_Q"/>
+	</bean>
+
+	<bean id ="cmhMessageSender" class="com.stee.emas.cmh.integration.CMHMessageSender">
+		<property name="wmcsTemplate" ref="wmcsTemplate" />
+		<property name="lusTemplate" ref="lusTemplate" />
+		<property name="awJmsTemplate" ref="awJmsTemplate"/>
+		<property name="group1JmsTemplate" ref="group1JmsTemplate"/>
+		<property name="pmcsJmsTemplate" ref="pmcsJmsTemplate"/>
+		<property name="ticssJmsTemplate" ref="ticssJmsTemplate"/>
+		<property name="emasccsJmsTemplate" ref="emasccsJmsTemplate"/>
+		<property name="emasitptJmsTemplate" ref="emasitptJmsTemplate"/>
+	</bean>
+	
+	<bean id="mfelsMessageReceiver" class="com.stee.emas.cmh.integration.MFELSMessageReceiver"/>
+	<bean id="emasccsMessageReceiver" class="com.stee.emas.cmh.integration.EMASCCSMessageReceiver"/>
+	<bean id="emasitptMessageReceiver" class="com.stee.emas.cmh.integration.EMASITPTMessageReceiver"/>
+	<bean id="dcssMessageReceiver" class="com.stee.emas.cmh.integration.DCSSMessageReceiver"/>
+	<bean id="scssMessageReceiver" class="com.stee.emas.cmh.integration.SCSSMessageReceiver"/>
+	<bean id="wcssMessageReceiver" class="com.stee.emas.cmh.integration.WCSSMessageReceiver"/>
+	<bean id="idssMessageReceiver" class="com.stee.emas.cmh.integration.IDSSMessageReceiver"/>
+	<bean id="group1MessageReceiver" class="com.stee.emas.cmh.integration.Group1FELSMessageReceiver"/>
+	<bean id="pmcsMessageReceiver" class="com.stee.emas.cmh.integration.PmcsMessageReceiver"/>
+	<bean id="wmcsMessageReceiver" class="com.stee.emas.cmh.integration.WMCSMessageReceiver"/>
+	<bean id="lusMessageReceiver" class="com.stee.emas.cmh.integration.LUSMessageReceiver"/>
+	<bean id="wmssMessageReceiver" class="com.stee.emas.cmh.integration.WMSSMessageReceiver"/>	
+	<bean id="destinationResolver" class="org.springframework.jms.support.destination.BeanFactoryDestinationResolver"/>
+	<bean id="paMessageReceiver" class="com.stee.emas.cmh.integration.PAMessageReceiver"/>
+	
+	<jms:listener-container
+		connection-factory="cmhJmsConnectionFactory"
+		concurrency="5-10"
+		destination-resolver="destinationResolver">
+		<jms:listener destination="EMASCCS_CMH_Q" ref="emasccsMessageReceiver" method="onMessage"/>
+		<jms:listener destination="EMASITPT_CMH_Q" ref="emasitptMessageReceiver" method="onMessage"/>
+		<jms:listener destination="DCSS_CMH_Q" ref="dcssMessageReceiver" method="onMessage"/>
+		<jms:listener destination="SCSS_CMH_Q" ref="scssMessageReceiver" method="onMessage"/>
+		<jms:listener destination="TICSS_CMH_Q" ref="mfelsMessageReceiver" method="onMessage"/>
+		<jms:listener destination="WCSS_CMH_Q" ref="wcssMessageReceiver" method="onMessage"/>
+		<jms:listener destination="IDSS_CMH_Q" ref="idssMessageReceiver" method="onMessage"/>
+		<jms:listener destination="CTETUN_CMH_Q" ref="group1MessageReceiver" method="onMessage"/>
+		<jms:listener destination="PMCS_CMH_Q" ref="pmcsMessageReceiver" method="onMessage"/>
+		<jms:listener destination="WM_CMH_Queue" ref="wmcsMessageReceiver" method="onMessage"/>
+		<jms:listener destination="LUS_CMH_Queue" ref="lusMessageReceiver" method="onMessage"/>
+		<jms:listener destination="PA_CMH_Queue" ref="paMessageReceiver" method="onMessage"/>
+	</jms:listener-container>
+
+	<!-- <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL"> <value>${brokerURL}</value> </property> </bean>
+		<bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="LocatorQueue"/> </bean> <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" /> <property name="defaultDestination"
+		ref="destination" /> </bean> -->
+	<!-- Configuration for MINA application -->
+</beans>

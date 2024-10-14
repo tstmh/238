@@ -1,0 +1,164 @@
+<div style="padding: 5px;">
+	<div class="pageHeader">
+
+		<div nz-row class="searchBar">
+			<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+				<div nz-row [nzGutter]="24">
+					<div nz-col [nzSpan]="4">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Sub System </nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 150px;" nzShowSearch nzAllowClear (ngModelChange)="setEquipType()"
+										   nzPlaceHolder="Select a subSystem" formControlName="subSystemId">
+									<nz-option *ngFor="let option of subSystemList" [nzLabel]="option.label"
+											   [nzValue]="option.value">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="4" *ngIf="validateForm.value.subSystemId !=='group1' && validateForm.value.subSystemId !=='newctetun'">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Location </nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 150px;" nzPlaceHolder="Select a Location"
+										   formControlName="location" (ngModelChange)="changeLocation($event)">
+									<nz-option *ngFor="let option of listLocation" [nzLabel]="option.label"
+											   [nzValue]="option.value">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="4" *ngIf="validateForm.value.subSystemId !=='group1' && validateForm.value.subSystemId !=='newctetun'">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Exp Way </nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 150px;" nzShowSearch nzAllowClear
+										   nzPlaceHolder="Select a expWay" formControlName="expWay">
+									<nz-option *ngFor="let option of expwayCodeList " [nzLabel]="option.label"
+											   [nzValue]="option.value">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="4" *ngIf="validateForm.value.subSystemId ==='group1'">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">FELS Code </nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 150px;" nzShowSearch nzAllowClear (ngModelChange)="setEquipType()"
+										   nzPlaceHolder="Select a FELS Code" formControlName="felsCode">
+									<nz-option *ngFor="let option of felsCodeList " [nzLabel]="option.description"
+											   [nzValue]="option.felsCode">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="4" *ngIf="validateForm.value.subSystemId ==='newctetun'">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">FELS Code </nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 150px;" nzShowSearch nzAllowClear (ngModelChange)="setEquipType()"
+										   nzPlaceHolder="Select a FELS Code" formControlName="cteCode">
+									<nz-option *ngFor="let option of cteCodeList " [nzLabel]="option.description"
+											   [nzValue]="option.felsCode">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="4">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Equip Type </nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 150px;" nzShowSearch nzAllowClear
+										   nzPlaceHolder="Select a equipType" formControlName="equipType">
+									<nz-option *ngFor="let option of equipTypeList" [nzLabel]="option.label"
+											   [nzValue]="option.value">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="6" class="search-area">
+						<button nz-button [nzType]="'default'" class="headerButton">
+							<img src="../../../../assets/img/Images/SS_General/find.png"
+								 class="searchImg">Search</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<p style="float: right;">Query Result: {{displayListOfData.length}} Records Found</p>
+<nz-spin [nzSpinning]="isLoading" nzTip="Loading...">
+	<nz-table style="margin-top: 35px;" #basicTable id="nzTable" [nzPageSize]="12" [nzData]="displayListOfData" (nzPageIndexChange)="pageChange($event)" nzBordered="true">
+		<thead (nzSortChange)="sort($event)" nzSingleSort>
+			<tr style="background:cornflowerblue">
+				<th class="listTitle">
+					<div>
+						<label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="updateAllChecked()"
+							   [nzIndeterminate]="indeterminate">
+						</label>
+						Select All
+					</div>
+				</th>
+				<ng-container *ngFor="let item of renderHeader;">
+					<th class="listTitle" nzShowSort nzSortKey="{{item.value}}">
+						<div>{{item.name}}</div>
+					</th>
+				</ng-container>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let data of basicTable.data;let idx = index" (click)="choice(data)">
+				<td>
+					<label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="updateSingleChecked(data.alarmId)"></label>
+				</td>
+				<td>{{ data.equipId }}</td>
+				<td>{{ data.expWay?data.expWay:'-NA-' }}</td>
+				<td>{{ data.kmMarking?data.kmMarking:'-NA-' }}</td>
+				<td>{{ data.direction?data.direction:'-NA-'}}</td>
+				<td>{{ data.startDate | date:'dd/MM/yyyy hh:mm:ss a' }}</td>
+				<td>{{ data.alarmDescription}}</td>
+				<td *ngIf="data.ackDate">{{data.ackDate|date:'dd/MM/yyyy hh:mm:ss a'}}</td>
+				<td *ngIf="!data.ackDate">-NA-</td>
+				<td>{{ data.status==1?'Raised':(data.status==0?'Acked':'Cleared')}}</td>
+			</tr>
+		</tbody>
+		<!--<tfoot>-->
+		<!--<tr>-->
+		<!--<td [attr.colspan]="renderHeader.length+1" style="padding: 30px;">-->
+		<!---->
+		<!--</td>-->
+		<!--</tr>-->
+		<!--</tfoot>-->
+	</nz-table>
+</nz-spin>
+	<div nz-row style="margin-top: 25px;">
+		<button nz-button [nzType]="'default'" [disabled]="buttonStatus" class="footerButton"(click)="buttonAck()">Ack</button>
+		<button nz-button [nzType]="'default'" *ngIf="isAdmin" [disabled]="isTunnel" class="footerButton" (click)="buttonClear()">Clear</button>
+	</div>
+	<nz-modal zmMovableModal *ngIf='isVisibleMiddle' 
+            nzWrapClassName="vertical-center-modal"
+            [nzBodyStyle]="{background: 'rgba(0,0,0,.65)'}"
+            nzMaskClosable="false"
+            [nzTitle]="modalTitle"
+            [(nzVisible)]="isVisibleMiddle"
+            [nzFooter]="null"
+            (nzOnCancel)="handleCancelMiddle()"
+          >
+            <ng-template #modalTitle>
+                Confirm Clear Alarms
+              </ng-template>
+              <div nz-row [nzGutter]="16" style="color:white;font-size:15px;text-align:center;margin-bottom:25px">
+                Do you really wish to clear the selected alarm(s)?
+              </div>
+                  <div class="footerBtn" style="text-align: center;" >
+                    <button style="color:#000;margin-right:10px" nz-button nzType="default" (click)="handleOkMiddle()"><img src="../../../../../assets/img/Images/SS_General/assign.png" style="width: 25px;height:25px;">Update</button>
+                    <span style="display: inlie-block;width:15px;"></span>
+                    <button style="color:#000" nz-button nzType="default" (click)="handleCancelMiddle()"><img src="../../../../../assets/img/Images/SS_General/cancel.jpg" style="width: 25px;height:25px;">Cancel</button>
+                  </div>
+          </nz-modal>
+</div>

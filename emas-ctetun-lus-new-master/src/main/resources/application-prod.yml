@@ -1,0 +1,51 @@
+server:
+  port: 8099
+
+spring:
+  datasource:
+    jdbc-url: jdbc:sqlserver://138.72.1.5:1533;databaseName=eectetun2db
+    username: emasuser
+    password: ENC(jcLB0QpMY4wOOAYpYDuEBYkaOykgkvrp)
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 8
+
+  datasource-emasdb:
+    jdbc-url: jdbc:sqlserver://138.72.1.5:1533;databaseName=eefelsdb
+    username: emasuser
+    password: ENC(jcLB0QpMY4wOOAYpYDuEBYkaOykgkvrp)
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 8
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+    open-in-view: false
+  jms:
+    pub-sub-domain: true
+
+logging:
+  config: classpath:logback-spring-prod.xml
+
+stee:
+  # JMS
+  jms-enable: false
+  jms-username: weblogic
+  jms-password: P@ssw0rd12345
+  jms-qos-enable: true
+  jms-message-time-to-live: 30000
+  jndi-jms-factory: jms/TT238ConnectionFactory
+  jms-cmh-lus-queue: jms/cmh_lus_queue
+  jms-lus-cmh-queue: jms/lus_cmh_queue
+  jms-lus-lusold-queue: jms/lus_lusold_queue
+
+  # JNDI
+  jndi-url: t3://138.71.5.6:7001
+
+  lus-interface-code: lus_02
+  lus-refresh-status-rate: 60000
+  lus-response-valid-time: 10

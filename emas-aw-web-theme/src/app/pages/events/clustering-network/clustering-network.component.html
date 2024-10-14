@@ -1,0 +1,100 @@
+<div style="padding: 5px;">
+    <div class="pageHeader">
+      <div nz-row class="emptyBar">
+      </div>
+      
+<div>
+    <h3 style="text-align: center;margin-bottom:40px;margin-top:20px" class="text">Clustering Network Health Status Diagram</h3>
+    <div>
+      <div nz-row>
+        <div nz-col [nzSpan]="2" nzOffset="5" class="cornsilkContent" style="padding-bottom:54px; ">
+          <div class="content">
+            <p>ICSCI Switch</p>
+            <ul>
+              <li *ngFor="let item of iswList; let indx = index">
+                <span>{{indx + 1}}</span>
+                <img src="../../../../assets/img/Images/SS_EventsTab/switch.png" alt="">
+                <img *ngIf="item.status == 0" class="switchCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""></li>
+            </ul>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="2" nzOffset="4" class="cornsilkContent">
+          <div class="content">
+              <p>Central Data Storage</p>
+             <ul>
+               <li *ngFor="let item of cdsList;let indx = index">
+                 <img src="../../../../assets/img/Images/SS_EventsTab/storage.png" alt="">
+                <img *ngIf="item.status == 0" class="storageCancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+                </li>
+             </ul>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="2" nzOffset="4" class="cornsilkContent" style="padding-bottom: 43px;">
+          <div class="content1">
+            <ul>
+              <li *ngFor="let item of dmcList; let indx = index"><span class="spanNum">{{indx + 1}}</span>
+                <img src="../../../../assets/img/Images/SS_EventsTab/server.png" alt="">
+                <img *ngIf="item.status == 0" class="cancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+              </li>
+              <span class="domainSpan">Domain</span>
+              <span class="controlerSpan">Controller</span>
+            </ul>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="4"></div>
+      </div>
+      <div nz-row>
+        <div nz-col [nzSpan]="6" nzOffset="6" class="verticalLine_1"></div>
+        <div nz-col [nzSpan]="6" class="verticalLine_2"></div>
+        <div nz-col [nzSpan]="6"></div>
+      </div>
+      <div nz-row style="border: 2px solid black;"></div>
+      <div nz-row>
+        <div nz-col [nzSpan]="2" nzOffset="3"><h4 style="margin-top: 20px;" class="text">ISCSI LAN</h4></div>
+        <div nz-col [nzSpan]="8" class="verticalLine_1"></div>
+        <div nz-col [nzSpan]="6" class="verticalLine_2"></div>
+        <div nz-col [nzSpan]="5"></div>
+      </div>
+      <div nz-row>
+        <div nz-col [nzSpan]="2" nzOffset="4" class="lightblueContent">
+          <div class="content">
+            <ul>
+              <li *ngFor="let item of cesList; let indx = index"><span class="spanNum">{{indx + 1}}</span>
+                <img src="../../../../assets/img/Images/SS_EventsTab/server.png" alt="">
+                <img *ngIf="item.status == 0" class="cancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+              </li>
+            </ul>
+            <p style="margin-bottom: 20px;">CFELS</p>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="3" nzOffset="6" class="lightblueContent">
+          <div class="content">
+            <ul>
+              <li *ngFor="let item of mesList; let indx = index"><span class="spanNum">{{indx + 1}}</span>
+                <img src="../../../../assets/img/Images/SS_EventsTab/server.png" alt="">
+                <img *ngIf="item.status==0" class="cancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+              </li>
+            </ul>
+            <p style="margin-bottom: 20px;">MFELS</p>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="2" nzOffset="3" class="mistyroseContent">
+          <div class="content1">
+            <ul>
+              <li *ngFor="let item of dbsList;let indx = index"><span class="spanNum">{{indx + 1}}</span>
+                <img src="../../../../assets/img/Images/SS_EventsTab/server.png" alt="">
+                <img *ngIf="item.status==0" class="cancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+              </li>
+            </ul>
+            <p style="margin-bottom: 20px;">DB Server</p>
+          </div>
+        </div>
+        <div nz-col [nzSpan]="4"></div>
+      </div>
+    </div>
+  </div>
+  <div class="footerResult">
+    <p><img style="height: 25px;" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""> :One or more module failures</p>
+  </div>
+    </div>
+</div>

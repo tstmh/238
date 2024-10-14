@@ -1,0 +1,24 @@
+#copyright {
+    font-size: 10px;
+}
+
+#footer {
+    height: 40px;
+    position: unset;
+    bottom: 0;
+    width: 100%;
+    background: var(--bg);
+}
+
+.text {
+    color: var(--cl);
+    text-align: center;
+}
+:host-context([data-theme-style="dark"]) {
+    --bg: black;
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --bg: white;
+    --cl: black;
+}

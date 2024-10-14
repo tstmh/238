@@ -1,0 +1,32 @@
+nz-content {
+      height: 60px;
+        background-color: rgba(0,0,0,0.1);
+    
+}
+
+#tab-router .ant-tabs-close-x {
+    color: red;
+}
+
+:host ::ng-deep .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+    background: var(--bg);
+}
+:host ::ng-deep .ant-tabs{
+    color:var(--ft);
+}
+
+:host ::ng-deep .ant-tabs-nav .ant-tabs-tab-active {
+    background:var(--abg) !important;
+    color :black !important;
+}
+
+:host-context([data-theme-style="dark"]) {
+    --ft: white;
+    --bg: #363636;
+    --abg: white;
+}
+:host-context([data-theme-style="light"]) {
+    --ft: black;
+    --bg: white;
+    --abg: #bbddfa;
+}

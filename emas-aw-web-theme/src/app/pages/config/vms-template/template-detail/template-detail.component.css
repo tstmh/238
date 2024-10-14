@@ -1,0 +1,18 @@
+::ng-deep .vertical-center-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+::ng-deep .vertical-center-modal .ant-modal {
+        top: 0;
+      }
+.detail {
+  padding-bottom: 50px;
+}
+.detail li {
+    padding: 10px;
+    font-size: 12px;
+    color: white;
+    font-weight: bold;
+}
+

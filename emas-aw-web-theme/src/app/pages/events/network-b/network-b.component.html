@@ -1,0 +1,229 @@
+<div style="padding: 5px;">
+	<div class="pageHeader">
+		<div nz-row>
+			<h3 nz-col nzSpan="24" style="text-align: center;margin-bottom: 20px;margin-top:20px" class="text">NetWork-B
+				Health Status Diagram</h3>
+			<div nz-col [nzSpan]="4" nzOffset="12" class="lightpinkBox">
+				<div class="content">
+					<ul>
+						<li *ngFor="let item of nfwImg; let indx = index"><img [src]="item.url" alt=""><img
+								*ngIf="item.status == 0" class="cancelImg"
+								src="../../../../assets/img/Images/SS_General/cancel.jpg"
+								alt=""><span>{{indx + 1}}</span></li>
+					</ul>
+					<p>Front End NCE FW</p>
+				</div>
+			</div>
+		</div>
+		<div nz-row class="verticalLine">
+			<div nz-col [nzSpan]="14"></div>
+		</div>
+		<div nz-row>
+			<!-- <div nz-col [nzSpan]="2" nzOffset="9" style="text-align: center">
+          <div style="background: cornsilk;width: 100px;height:62px;display: inline-block;padding-bottom:20px;border: 2px solid black;">
+            <img *ngIf="ticssList.length == 0 || ticssList[0].status == 0" style="height: 15px;" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""><p style="margin-top: 5px;">TICSS</p>
+          </div>
+        </div> -->
+			<div nz-col [nzSpan]="4" nzOffset="12" class="lightblueBox">
+				<div class="content">
+					<ul>
+						<li *ngFor="let item of fewImg; let indx = index"><img [src]="item.url" alt=""><img
+								*ngIf="item.status == 0" class="cancelImg"
+								src="../../../../assets/img/Images/SS_General/cancel.jpg"
+								alt=""><span>{{indx + 1}}</span></li>
+					</ul>
+					<p>Front End FW Switch</p>
+				</div>
+			</div>
+		</div>
+		<div nz-row class="verticalLine">
+			<!-- <div nz-col [nzSpan]="10"></div> -->
+			<div nz-col [nzSpan]="4" nzOffset="10"></div>
+		</div>
+		<div nz-row>
+			<!-- <div nz-col nzSpan="2" nzOffset="7" class="cornsilkContent">
+          <div class="content_1">
+              <img *ngIf="cfelsImg[0].status == 0" style="height: 15px;" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""><p style="margin-top: 5px;">CTE TUnnels Transmission</p>
+          </div>
+        </div>
+        <div nz-col nzSpan="2" style="text-align: center;">
+            <div class="darkgrayBox">       
+               <p>RCS</p>
+               <img *ngIf="rcsImg[0].status == 0" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="" style="height:15px;">
+            </div>
+        </div> -->
+			<div nz-col [nzSpan]="2" nzOffset="9" style="text-align: center">
+				<div
+					style="background: cornsilk;width: 100px;height:65px;display: inline-block;padding-bottom:20px;border: 2px solid black;">
+					<img *ngIf="ticssList.length == 0 || ticssList[0].status == 0" class="generalCancelImg"
+						src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+					<p style="margin-top: 5px;">TICSS</p>
+				</div>
+			</div>
+			<div nz-col nzSpan="4" nzOffset="1" class="cornsilkContent">
+				<div class="content_1">
+					<img *ngIf="scssImg[0].status == 0" class="generalCancelImg"
+						src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+					<p style="margin-top: 15px;">Tunneling NetWork</p>
+				</div>
+			</div>
+		</div>
+		<div nz-row class="verticalLine">
+			<!-- <div nz-col nzSpan="8"></div> -->
+			<div nz-col nzSpan="2" nzOffset="8"></div>
+			<div nz-col nzSpan="4"></div>
+		</div>
+		<div nz-row>
+			<!-- <div nz-col nzSpan="4" nzOffset="7" class="lightblueBox">
+            <div class="content">
+                <ul>
+                  <li *ngFor="let item of eswImg; let indx = index"><img [src]="item.url" alt=""><img *ngIf="item.status == 0" class="cancelImg" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt=""><span>{{indx + 1}}</span></li>
+                </ul>
+                <p>External SubSystem Switch</p>
+            </div>
+        </div> -->
+			<div nz-col nzSpan="2" nzOffset="7" class="cornsilkContent">
+				<div class="content_1">
+					<img *ngIf="cfelsImg[0].status == 0" class="generalCancelImg"
+						src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="">
+					<p style="margin-top: 5px;">CTE TUnnels Transmission</p>
+				</div>
+			</div>
+			<div nz-col nzSpan="2" style="text-align: center;">
+				<div class="darkgrayBox">
+					<p>RCMS</p>
+					<!-- <img *ngIf="rcsImg[0].status == 0" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="" style="height:15px;"> -->
+				</div>
+			</div>
+			<div nz-col nzSpan="4" nzOffset="1" class="lightblueBox">
+				<div class="content">
+					<ul class="tswitch">
+						<li *ngFor="let item of tcwImg; let indx = index"><img [src]="item.url" alt=""><img
+								*ngIf="item.status == 0" class="cancelImg"
+								src="../../../../assets/img/Images/SS_General/cancel.jpg"
+								alt=""><span>{{indx + 1}}</span></li>
+					</ul>
+					<p>Transceiver Switch</p>
+				</div>
+			</div>
+		</div>
+		<div nz-row class="verticalLine">
+			<div nz-col nzSpan="2" nzOffset="6"></div>
+			<div nz-col nzSpan="1" nzOffset="1"></div>
+			<div nz-col nzSpan="4"></div>
+		</div>
+		<div nz-row>
+			<div nz-col nzSpan="4" nzOffset="7" class="lightblueBox">
+				<div class="content">
+					<ul>
+						<li *ngFor="let item of eswImg; let indx = index"><img [src]="item.url" alt=""><img
+								*ngIf="item.status == 0" class="cancelImg"
+								src="../../../../assets/img/Images/SS_General/cancel.jpg"
+								alt=""><span>{{indx + 1}}</span></li>
+					</ul>
+					<p>External SubSystem Switch</p>
+				</div>
+			</div>
+			<div nz-col nzSpan="1" style="margin-top: 50px;border-top: 2px solid black;"></div>
+			<div nz-col nzSpan="4" nzOffset="0" class="lightpinkBox">
+				<div class="content">
+					<ul>
+						<li *ngFor="let item of bfwImg; let indx = index"><img [src]="item.url" alt=""><img
+								*ngIf="item.status == 0" class="cancelImg"
+								src="../../../../assets/img/Images/SS_General/cancel.jpg"
+								alt=""><span>{{indx + 1}}</span></li>
+						<p>NW-B Core FW</p>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div nz-row>
+			<div nz-col nzSpan="4">
+				<h4 style="margin-left:20px;" class="text">NetWork-B</h4>
+			</div>
+			<div nz-col nzSpan="10" style="height: 40px;border-right: 2px solid black;"></div>
+		</div>
+		<div nz-row style="border-bottom: 2px solid black;"></div>
+		<div nz-row>
+			<div nz-col nzSpan="4" nzOffset="6" style="background: lightblue;margin-top:20px;border: 2px solid black;">
+				<div class="content">
+					<ul>
+						<li *ngFor="let item of bcwImg; let indx = index"><img [src]="item.url" alt=""><img
+								*ngIf="item.status == 0" class="cancelImg"
+								src="../../../../assets/img/Images/SS_General/cancel.jpg"
+								alt=""><span>{{indx + 1}}</span></li>
+					</ul>
+					<p style="margin-top: 12px;">NW-B Core Switch</p>
+				</div>
+			</div>
+			<div nz-col nzSpan="1" style="margin-top: 50px;border-top: 2px solid black;">
+			</div>
+			<div nz-col nzSpan="4" style="background: lightpink;margin-top:20px;border: 2px solid black;">
+				<div class="content">
+					<ul>
+						<li *ngFor="let item of jfwImg; let indx = index"><img [src]="item.url" alt=""><img
+								*ngIf="item.status == 0" class="cancelImg"
+								src="../../../../assets/img/Images/SS_General/cancel.jpg"
+								alt=""><span>{{indx + 1}}</span></li>
+						<p>EMASJ-Eyes FW</p>
+					</ul>
+				</div>
+			</div>
+			<div nz-col nzSpan="1" style="margin-top: 50px;border-top: 2px solid black;"></div>
+			<div nz-col nzSpan="1" style="margin-top:20px;">
+				<div class="darkgrayBox">
+					<p>J-Eyes</p>
+					<!-- <img *ngIf="jeyesImg[0].status == 0" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="" style="height:15px;"> -->
+				</div>
+			</div>
+		</div>
+		<div nz-row class="verticalLine">
+			<div nz-col nzSpan="8"></div>
+		</div>
+		<div nz-row>
+			<div nz-col [nzSpan]="10" nzOffset="6" style="height: 40px;border-top: 2px solid black;"></div>
+		</div>
+		<div nz-row style="margin-bottom: 20px;">
+			<div nz-col [nzSpan]="1" nzOffset="7" class="footerBox">
+				<div>
+					<div class="content">
+						<img *ngIf="dcssImg[0].status == 0" src="../../../../assets/img/Images/SS_General/cancel.jpg"
+							alt="" class="generalCancelImg">
+						<p>DCSS</p>
+					</div>
+				</div>
+			</div>
+			<div nz-col [nzSpan]="1" nzOffset="1" class="footerBox">
+				<div>
+					<div class="content">
+						<img *ngIf="scssImg[0].status == 0" src="../../../../assets/img/Images/SS_General/cancel.jpg"
+							alt="" class="generalCancelImg">
+						<p>SCSS</p>
+					</div>
+				</div>
+			</div>
+			<div nz-col [nzSpan]="1" nzOffset="1" class="footerBox">
+				<div>
+					<div class="content">
+						<img *ngIf="wcssImg[0].status == 0" src="../../../../assets/img/Images/SS_General/cancel.jpg"
+							alt="" class="generalCancelImg">
+						<p>WCSS</p>
+					</div>
+				</div>
+			</div>
+			<div nz-col [nzSpan]="1" nzOffset="1" class="footerBox">
+				<div>
+					<div class="content">
+						<img *ngIf="group1Img[0].status == 0" src="../../../../assets/img/Images/SS_General/cancel.jpg"
+							alt="" class="generalCancelImg">
+						<p> CTE Tunnel</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footerResult">
+			<p><img style="height: 25px;" src="../../../../assets/img/Images/SS_General/cancel.jpg" alt="" class="text"> :One or more
+				module failures</p>
+		</div>
+	</div>
+</div>

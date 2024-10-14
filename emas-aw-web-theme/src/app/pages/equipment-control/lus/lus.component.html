@@ -1,0 +1,124 @@
+<div style="padding: 5px;">
+	<div class="pageHeader">
+
+		<div nz-row class="searchBar">
+			<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+				<div nz-row [nzGutter]="16">
+					<div nz-col [nzSpan]="6">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Equip Type
+							</nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 200px;" nzShowSearch nzAllowClear
+									nzPlaceHolder="Select a equipType" formControlName="equipType"
+									[(ngModel)]="equipType" (ngModelChange)="equipTypeChange()">
+									<nz-option *ngFor="let option of equipTypeList" [nzLabel]="option.description"
+										[nzValue]="option.description">
+									</nz-option>
+								</nz-select>
+								<!-- <input
+            nz-input
+            placeholder="placeholder"
+            formControlName="subSystem"
+            style='color:#000'
+          /> -->
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- 新增grid 布局 -->
+	<div style="width: 100%;height: 1px;background: white;margin:0 0 24px 0"></div>
+	<!-- <nz-divider></nz-divider> -->
+	<div nz-row>
+		<div nz-col nzSpan="14">
+			<div class="leftPicture">
+				<img src='{{this.imgUrl}}' alt="">
+			</div>
+		</div>
+		<div nz-col nzSpan="10">
+			<!-- <p style="margin-bottom: 15px;">Query Result: {{basicTable.data.length}} Record Found</p> -->
+			<!-- <div style="display: flex;margin-bottom: 10px">
+				<p style="font-size: 16px">Query Result:</p>
+				<div style="width:5px"></div>
+				<p style="color:#0A0CFF;font-size: 16px">{{basicTable.data.length}} Records Found</p>
+			</div> -->
+			<p style="margin-bottom: 15px;font-size: 14px;" class="labelText">Query Result: {{basicTable.data.length}} Records Found</p>
+			<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false"
+				[nzData]="listOfDisplayData" [nzScroll]="{ y: '490px' }" nzBordered="true">
+				<thead (nzSortChange)="sort($event)" nzSingleSort>
+					<!-- <tr style="background:cornflowerblue">
+						<ng-container *ngFor="let item of renderHeader">
+							<th class="listTitle">
+								<div>{{ item.name }}</div>
+							</th>
+						</ng-container>
+					</tr> -->
+					<tr style="background:cornflowerblue">
+						<th style="width: 295px" nzShowSort nzSortKey='Equip ID And Location'>Equip ID And Location</th>
+						<th style="width: 125px" nzShowSort nzSortKey='Status'>Status</th>
+						<th style="flex: 1;" nzShowSort nzSortKey='Time'>Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let data of basicTable.data;let idx = index" (click)="clickTr(idx,data)"
+						[ngClass]="{'active': data.equipmentId == trActive}">
+						<!-- [ngClass]="{'active':selectItemId == data.equipIdLocation}" -->
+						<td style="width: 295px">{{ data.idAndLoca }}</td>
+						<td style="width: 125px" *ngIf="data.attrValue === '2'">
+							<p class='itemStatus'><span class='greenBox'></span></p>
+						</td>
+						<td style="width: 125px" *ngIf="data.attrValue === '0'">
+							<p class='itemStatus'><span class='redBox'></span></p>
+						</td>
+						<td>{{ data.lastModified | date:'dd/MM/yyyy hh:mm:ss a'}}</td>
+					</tr>
+				</tbody>
+				<tfoot>
+				</tfoot>
+			</nz-table>
+			<!-- <div nz-col nzSpan="12">
+					<div nz-row style="display: flex">
+						<div nz-col nzSpan="20">
+							<p class='itemStatus'><span class='greenBox'></span> Operational</p>
+							<p class='itemStatus'><span class='redBox'></span>Not Operational</p>
+						</div>
+						<div nz-col nzSpan="14" class="search-area" style="display: flex;align-items:center">
+							<button nz-button [disabled]="disabled" [nzType]="'default'" style="color:#000"
+								(click)="showModalMiddle()">Select</button>
+						</div>
+					</div>
+					<div nz-row>
+						<div nz-col nzSpan="10"></div>
+						<div nz-col nzSpan="14" class="search-area">
+							<button nz-button [nzType]="'default'" style="color:#000"
+								(click)="showModalMiddle()">Select</button>
+						</div>
+					</div>
+				</div> -->
+		</div>
+	</div>
+	<div style="display: block;bottom: 0;">
+		<div nz-row>
+			<div nz-col nzSpan="14"></div>
+			<div nz-col nzSpan="10">
+				<div nz-row style="display: flex">
+					<div nz-col nzSpan="20">
+						<p class='itemStatus'><span class='greenBox'></span> Operational</p>
+						<p class='itemStatus'><span class='redBox'></span>Not Operational</p>
+					</div>
+					<div nz-col nzSpan="4" class="search-area" style="display: flex;align-items:center">
+						<button nz-button [disabled]="disabled" [nzType]="'default'" style="color:#000"
+							(click)="showModalMiddle()">Select</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<ng-container>
+	<emas-send-command *ngIf='isVisibleMiddle' [isVisibleMiddle]="isVisibleMiddle" (closeModal)='closeModal($event)'
+		[selectItem]="selectItem" [listOfData]="listOfData"></emas-send-command>
+</ng-container>

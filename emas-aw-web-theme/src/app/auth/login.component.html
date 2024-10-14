@@ -1,0 +1,121 @@
+<div class="auth-module">
+	<div class="login-header flex flex-row flex-items-center flex-justify-end">
+
+		<!-- <div class="time-box text-ellipsis">{{systemService.time}}</div> -->
+
+		<!-- <div class="lang-box"
+      style="margin-right:0.3rem">
+      <nz-dropdown [nzPlacement]="'bottomLeft'">
+        <button nz-button
+          nz-dropdown
+          class="lang-label">{{systemService.langLabel}}</button>
+        <ul nz-menu>
+          <li nz-menu-item
+            *ngFor="let lang of systemService.langs"
+            (click)="systemService.changeLang(lang.value)">{{lang.label}}</li>
+        </ul>
+      </nz-dropdown>
+    </div> -->
+		<!-- <div class="other-box" style="margin-left: 20px;margin-right:20px;">
+			<img src="/assets/img/Images/SS_Header/logo.png" alt="logo">
+		</div> -->
+	</div>
+
+	<div class="login-main flex flex-justify-center flex-items-center">
+		<div class="login-content">
+			<div class="login-right-part flex flex-column">
+				<div style="display: flex;">
+					<div class="login-logo-title">
+						<img src="/assets/img/Images/SS_LoginLogout/ExpresswayLogo.png" alt="LOGO" class="smallLogoImg">
+					</div>
+					<div class="login-title-emas">EMAS</div>
+				</div>
+				<div class="login-title-name">
+					<!--<p>Maintenance of EMAS</p>-->
+					<p>Expressway Monitoring and Advisory System</p>
+				</div>
+				<div class="login-logo">
+					<img src="/assets/img/Images/SS_LoginLogout/emasLogin.png" alt="LOGO" class="logoImg">
+				</div>
+				<div class="login-project-name">
+					<p>Administrative Workstation</p>
+				</div>
+			</div>
+			<div class="login-left-part flex flex-column flex-justify-start">
+				<div class="login-title login-font-family"></div>
+				<form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="login()">
+					<div nz-row>
+						<div nz-col [nzSpan]="5">
+							<div class="loginTitle">User Name: </div>
+						</div>
+						<div nz-col [nzSpan]="7">
+							<nz-form-item>
+								<nz-form-control>
+									<nz-input-group [nzPrefix]="user">
+										<input type="text" nz-input formControlName="username" autocomplete="off"
+											placeholder="{{'auth.login.userName' | translate}}">
+										<!-- <input type="text" name="newpassword" οnfοcus="this.type='password'" placeholder="请重新设置登陆密码" disableautocomplete autocomplete="off" οnblur="showValue('password',this.value)" /> -->
+										<!-- <input type="text" formControlName="username" disableautocomplete autocomplete="off" style="border:none;width:0;height:0;" /> -->
+
+									</nz-input-group>
+									<ng-template #user><i nz-icon nzType="user"></i></ng-template>
+									<nz-form-control
+										*ngIf="loginForm.get('username')?.dirty && loginForm.get('username')?.errors">
+										{{'auth.login.inputUserName' | translate}}
+									</nz-form-control>
+								</nz-form-control>
+							</nz-form-item>
+						</div>
+						<div nz-col [nzSpan]="4">
+							<div class="loginTitle">Password: </div>
+						</div>
+						<div nz-col [nzSpan]="8">
+							<nz-form-item>
+								<nz-form-control>
+									<nz-input-group [nzPrefix]="lock">
+										<input type="password" nz-input formControlName="password"
+											autocomplete="new-password"
+											placeholder="{{'auth.login.password' | translate}}">
+									</nz-input-group>
+									<ng-template #lock><i nz-icon nzType="lock"></i></ng-template>
+									<nz-form-control
+										*ngIf="loginForm.get('password')?.dirty && loginForm.get('password')?.errors">
+										{{'auth.login.inputPassword' | translate}}
+									</nz-form-control>
+								</nz-form-control>
+							</nz-form-item>
+						</div>
+					</div>
+					<nz-form-item>
+						<!-- <nz-form-control>
+                <div class="flex flex-justify-between" style="width:367px;">
+                  <label nz-checkbox formControlName="remember">
+                    <span class="login-font-family login-remember-line">{{'auth.login.rememberMe' | translate}}</span>
+                  </label>
+                  <span class="login-font-family login-remember-line">{{'auth.login.forgotPassword' | translate}}</span>
+                </div>
+              </nz-form-control> -->
+					</nz-form-item>
+					<nz-form-item>
+						<div class="loginCancel">
+							<button nz-button class="login-form-button" nzType="default">Login</button>
+							<button nz-button class="cancel-form-button" nzType="default" type="button"
+								(click)="logOut()">Cancel</button>
+						</div>
+					</nz-form-item>
+				</form>
+				<div>
+					<p style='color: red;font-size: 18px;font-weight: bold;'>Warning :</p>
+					<p style="font-weight: bold;font-size: 14px;">The system is restricted to LTA authorized users for
+						business purposes only.</p>
+					<p style="font-weight: bold;font-size: 14px;">By proceeding,you acknowledge that you consent to the
+						company policy and the law.</p>
+				</div>
+				<ng-template #prefixLock><i class="iconfont icon-lock"></i></ng-template>
+			</div>
+		</div>
+	</div>
+</div>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Password Expiry Alert" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+	<div>{{alertMsg}}</div>
+</nz-modal>

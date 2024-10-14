@@ -1,0 +1,31 @@
+::ng-deep .vertical-center-modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+::ng-deep .vertical-center-modal .ant-modal {
+	top: 0;
+}
+
+.message {
+	padding: 5px;
+	font-size: 14px;
+}
+
+/* 单选框样式 */
+nz-radio-group img {
+	width: 25px;
+	height: 25px;
+	margin-right: 5px;
+}
+
+nz-radio-group>div {
+	margin-bottom: 15px;
+	width: 400px;
+}
+
+.bottomBtn {
+	display: flex;
+	justify-content: center;
+}

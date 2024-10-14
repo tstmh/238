@@ -1,0 +1,131 @@
+<nz-spin [nzSpinning]="isSpinning" nzTip="Command Sending...">
+<header class="itmp-header">
+	<div class="header-container flex flex-row flex-items-center">
+		<div>
+			<button nz-button [nzType]="'link'" (click)="onShowSider()">
+				<i nz-icon nzType="menu" nzTheme="outline" class="icons"></i>
+			</button>
+		</div>
+		<div *ngIf="theme == 'light'" class="logo-box">
+			<img src="../../../assets/img/Images/SS_Header/emasLogoWhite.png" alt="emasLogo" style="width: 80%">
+			<!-- <nz-input-group [nzSuffix]="suffixIconSearch">
+					<input type="text" nz-input placeholder="input search text" class="font-14-rem" />
+				</nz-input-group>
+				<ng-template #suffixIconSearch>
+					<i nz-icon type="search" class="font-20-rem"></i>
+				</ng-template> -->
+		</div>
+		<div *ngIf="theme == 'dark'" class="logo-box">
+			<img src="../../../assets/img/Images/SS_Header/emasLogo.png" alt="emasLogo" style="width: 80%">			
+		</div>
+		<div class="userinfo-box flex flex-row flex-items-center user-select">
+			<div class="user-head">
+				<i class="iconfont icon-user user-head-no-login cur-p"></i>
+			</div>
+			<div class="user-info flex" style="margin-right:10px">
+				<div class="user-name text-ellipsis">User Id: {{userName}}</div>
+				<div class="user-role text-ellipsis">Role: {{roleName}}</div>
+			</div>
+
+		</div>
+		<!--<div class="alert-box"> -->
+		<div class="tools-box flex flex-row flex-items-center">
+			<div class="lingdang" style="margin-top: -1%;" *ngIf="displayListOfData.length > 0">
+				<a href="/#/emas/equipment-control/fire-traffic-plan">
+					<img src="../../../assets/img/Images/SS_Header/lingdang.png" width="20px" alt="">
+				</a>
+			</div>
+			<div *ngIf="displayListOfData.length > 0">
+				<span class="measureText">{{measureMin}}:{{measureSec}}</span>
+				<button nz-button [nzType]="'default'" nzShape="circle" style="margin-left:5px" (click)="remoteButton(0)" 
+				nz-tooltip nzTooltipPlacement="bottomLeft" [nzTooltipTitle]="'Send Stop Command'" nzDanger>
+					<span nz-icon style="vertical-align: 0;" nzType="poweroff"></span>
+				</button>
+				<button nz-button [nzType]="'default'" nzShape="circle" style="margin-left:5px" (click)="remoteButton(1)"
+				nz-tooltip nzTooltipPlacement="bottomLeft" [nzTooltipTitle]="'Send Reset Command'" nzDanger>
+					<span nz-icon style="vertical-align: 0;" nzType="reload"></span>
+				</button>
+			</div>			
+			<span class="statusBarText" *ngIf="statusBarText.length > 0"> {{statusBarText}}</span>
+		</div>
+		<div class="tools-box flex flex-row flex-items-center">
+
+			<i nz-tooltip nzTooltipTitle="warning" nzTooltipPlacement="bottom"
+				class="iconfont icon-jinggao font-20-px cur-p"></i>
+			<i nz-tooltip nzTooltipTitle="radar" nzTooltipPlacement="bottom"
+				class="iconfont icon-xinhaoche1 font-20-px cur-p"></i>
+			<i nz-tooltip nzTooltipTitle="warning" nzTooltipPlacement="bottom"
+				class="iconfont icon-jinggao1 font-20-px cur-p"></i>
+			<i nz-tooltip nzTooltipTitle="setup" nzTooltipPlacement="bottom"
+				class="iconfont icon-shezhi font-20-px cur-p"></i>
+			<i nz-tooltip nzTooltipTitle="map" nzTooltipPlacement="bottom" class="iconfont icon-ditu1 font-20-px cur-p"
+				(click)="openGIS()" *ngIf="!openGisLoading && gisAccess"></i>
+			<ng-template #indicatorTemplate><i nz-icon type="loading" style="font-size:20px;"></i> </ng-template>
+			<nz-spin nzSimple [nzIndicator]="indicatorTemplate" *ngIf="openGisLoading && gisAccess"> </nz-spin>
+		</div>
+		<div class="lang-box" style="margin-right:30px">
+			<!-- <nz-dropdown [nzPlacement]="'bottomLeft'"> -->
+			<!-- <button nz-button nz-dropdown class="lang-label">{{systemService.langLabel}}</button> -->
+			<!-- <ul nz-menu> -->
+			<!-- <li nz-menu-item *ngFor="let lang of systemService.langs"
+							(click)="systemService.changeLang(lang.value)">{{lang.label}}</li> -->
+			<!-- </ul> -->
+			<!-- </nz-dropdown> -->
+		</div>
+
+		<div class="time-box text-ellipsis">
+			{{systemService.time.date}} {{systemService.time.time}}
+
+		</div>
+		<!-- <div style="color:white;font-size:16px;width:80px;">
+			<nz-dropdown [nzPlacement]="'bottomLeft'">
+				<button nz-button nz-dropdown class="lang-label">File</button>
+				<div>{{systemService.langLabel}}</div>
+				<ul nz-menu>
+					<li nz-menu-item *ngFor="let lang of systemService.langs"
+						(click)="systemService.changeLang(lang.value)">{{lang.label}}</li>
+				</ul>
+			</nz-dropdown>
+		</div> -->
+
+		<div class="file">
+			<a nz-dropdown [nzDropdownMenu]="menu" nz-button [nzPlacement]="'bottomLeft'"
+				style="font-weight: bold;">File</a>
+			<nz-dropdown-menu #menu="nzDropdownMenu">
+				<ul nz-menu>
+					<div style="display: flex;padding: 5px;" (click)="print()">
+						<img src="../../../assets/img/Images/SS_General/print.png" alt=""
+							style="height:35px;width: 35px;">
+						<li nz-menu-item>Print</li>
+					</div>
+					<div style="display: flex;padding: 5px;" (click)="help()">
+						<img src="../../../assets/img/Images/SS_General/help.png" alt=""
+							style="height:35px;width: 35px;">
+						<li nz-menu-item>Help</li>
+					</div>
+					<div style="display: flex;padding: 5px;" (click)="confirm()">
+						<img src="../../../assets/img/Images/SS_LoginLogout/logout.png" alt=""
+							style="height:35px;width: 35px;">
+						<li nz-menu-item>Logout</li>
+					</div>
+					<div style="padding: 5px 5px 5px 40px;" (click)="about()">
+						<li nz-menu-item>About</li>
+					</div>
+				</ul>
+			</nz-dropdown-menu>
+		</div>
+		<!-- <div style="color:white;font-size:16px;width:80px;">
+			<a nz-popconfirm [nzIcon]="iconTpl" (nzOnConfirm)="confirm()" (nzOnCancel)="cancel()">Log Out</a>
+			<ng-template #iconTpl style="display:none">
+				<i nz-icon nzType="question-circle-o" style="color: red;display:none"></i>
+			</ng-template>
+		</div> -->		
+		<button nz-button class="theme-button" nzType="dashed" (click)="changeTheme()">{{theme}}</button>
+		<div class="other-box" style="margin-left: 20px">
+			<!-- <button nz-button nzSize="small" nzType="primary" (click)="ls.logOut()">Logout</button> -->
+			<img src="../../../assets/img/Images/SS_Header/logo.png" alt="logo">
+		</div>
+	</div>
+</header>
+<emas-public-modal [(visible)]="isVisible" [flag]='flag'></emas-public-modal>
+</nz-spin>

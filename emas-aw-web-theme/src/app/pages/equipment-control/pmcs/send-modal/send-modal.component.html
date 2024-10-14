@@ -1,0 +1,367 @@
+<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzMaskClosable="false" [nzTitle]="modalTitle"
+	[nzContent]="modalContent" [(nzVisible)]="isVisibleMiddle" [nzFooter]="modalFooter" (nzOnCancel)="close()"
+	nzWidth="600px">
+
+	<ng-template #modalTitle>
+		<img src="../../../../../assets/img/Images/SS_LoginLogout/ExpresswayLogo.png" alt="" style="width: 16px;">
+		Send Command Window
+	</ng-template>
+
+	<ng-template #modalContent>
+		<div>
+			<div style="font-size: 16px;">Equip ID: {{selectItem.equipmentId}}</div>
+			<nz-divider nzText="Equipment Current Status" nzOrientation="left"></nz-divider>
+			<!-- <p class="message">Earthing Switch Status(ste):{{selectItem.equipmentId}}</p> -->
+			<div style="margin-left: 18px;">
+				<div class="message">
+					<div>Operational State(ope):</div>
+					<div>{{selectItem.attrValueDesc}}</div>
+				</div>
+				<div *ngIf="venl" class="message">
+					<div>Ventilation Level(stv):</div>
+					<div>{{selectItem.stvValueDesc}}</div>
+				</div>
+				<div *ngIf="runi" class="message">
+					<div>Running Indicator(str):</div>
+					<div>{{selectItem.strValueDesc}}</div>
+				</div>
+				<div *ngIf="runs" class="message">
+					<div>Running Status(sts):</div>
+					<div>{{selectItem.stsValueDesc}}</div>
+				</div>
+				<div *ngIf="upsi" class="message">
+					<div>UPS in Operation(sto):</div>
+					<div>{{selectItem.stoValueDesc}}</div>
+				</div>
+				<div *ngIf="upsm" class="message">
+					<div>UPS Main in Operation(stm)</div>
+					<div>{{selectItem.stmValueDesc}}</div>
+				</div>
+				<div *ngIf="doos" class="message">
+					<div>Door Status(std):</div>
+					<div>{{selectItem.stdValueDesc}}</div>
+				</div>
+				<div *ngIf="stns" class="message">
+					<div>STN Status(stn):</div>
+					<div>{{selectItem.stnValueDesc}}</div>
+				</div>
+				<div *ngIf="stas" class="message">
+					<div>Start/Stop Status(sts):</div>
+					<div>{{selectItem.stsValueDesc}}</div>
+				</div>
+				<div *ngIf="sysb" class="message">
+					<div>System B in Control Mode(std):</div>
+					<div>{{selectItem.stdValueDesc}}</div>
+				</div>
+				<div *ngIf="sysa" class="message">
+					<div>System A in Control Mode(sta):</div>
+					<div>{{selectItem.staValueDesc}}</div>
+				</div>
+				<div *ngIf="wasi" class="message">
+					<div>Wash/Wipe Indicator(stw):</div>
+					<div>{{selectItem.stwValueDesc}}</div>
+				</div>
+				<div *ngIf="ligc" class="message">
+					<div>Lighting Control(cdg):</div>
+					<div>{{selectItem.cdgValueDesc}}</div>
+				</div>
+				<div *ngIf="wese" class="message">
+					<div>West Exit Light(stw):</div>
+					<div>{{selectItem.stwValueDesc}}</div>
+				</div>
+				<div *ngIf="ease" class="message">
+					<div>East Exit Light(ste):</div>
+					<div>{{selectItem.steValueDesc}}</div>
+				</div>
+				<div *ngIf="genr" class="message">
+					<div>Generator Running Indicator(str):</div>
+					<div>{{selectItem.strValueDesc}}</div>
+				</div>
+				<div *ngIf="gena" class="message">
+					<div>Generator Automatic Mode(stg):</div>
+					<div>{{selectItem.stgValueDesc}}</div>
+				</div>
+				<div *ngIf="linl" class="message">
+					<div>Line Lighting Control Status(stl):</div>
+					<div>{{selectItem.stlValueDesc}}</div>
+				</div>
+				<div *ngIf="linp" class="message">
+					<div>Lighting Panel Power(sts):</div>
+					<div>{{selectItem.stsValueDesc}}</div>
+				</div>
+				<div *ngIf="onop" class="message">
+					<div>On/Off Power Indicator(sts):</div>
+					<div>{{selectItem.stsValueDesc}}</div>
+				</div>
+				<div *ngIf="este" class="message">
+					<div>ES telephone handset off hook status(stt):</div>
+					<div>{{selectItem.sttValueDesc}}</div>
+				</div>
+				<div *ngIf="tund" class="message">
+					<div>Tunnel door status(stt):</div>
+					<div>{{selectItem.sttValueDesc}}</div>
+				</div>
+				<div *ngIf="strd" class="message">
+					<div>Street door status(stt):</div>
+					<div>{{selectItem.sttValueDesc}}</div>
+				</div>
+				<div *ngIf="mode" class="message">
+					<div>Mode(stc):</div>
+					<div>{{selectItem.stcValueDesc}}</div>
+				</div>
+				<div *ngIf="dews" class="message">
+					<div>De-watering sump level switch(sts):</div>
+					<div>{{selectItem.stsValueDesc}}</div>
+				</div>
+				<div *ngIf="mais" class="message">
+					<div>Main sump water level(stw):</div>
+					<div>{{this.maisValue}}</div>
+				</div>
+				<div *ngIf="cirb" class="message">
+					<div>Circuit Breaker Status(stc):</div>
+					<div>{{selectItem.stcValueDesc}}</div>
+				</div>
+				<div *ngIf="keyc" class="message">
+					<div>Key/Switch Control(stk):</div>
+					<div>{{selectItem.stkValueDesc}}</div>
+				</div>
+				<div *ngIf="diss" class="message">
+					<div>Disconnector Status(std):</div>
+					<div>{{selectItem.stdValueDesc}}</div>
+				</div>
+				<div *ngIf="ears" class="message">
+					<div>Earthing Switch Status(ste):</div>
+					<div>{{selectItem.steValueDesc}}</div>
+				</div>
+				<div *ngIf="gateway">
+					<div class="message">
+						<div style="width: 1000px;">Gateway 1 to plant controller 1 communication healthy(st0):</div>
+						<div>{{this.gateway1Value}}</div>
+					</div>
+					<div class="message">
+						<div style="width: 1000px;">Gateway 1 to plant controller 2 communication healthy(st1):</div>
+						<div>{{this.gateway1Value}}</div>
+					</div>
+					<div class="message">
+						<div style="width: 1000px;">Gateway 1 to plant controller 3 communication healthy(st2):</div>
+						<div>{{this.gateway1Value}}</div>
+					</div>
+					<div class="message">
+						<div style="width: 1000px;">Gateway 1 to plant controller 4 communication healthy(st3):</div>
+						<div>{{this.gateway1Value}}</div>
+					</div>
+					<div class="message">
+						<div style="width: 1000px;">Gateway 1 to plant controller 5 communication healthy(st4):</div>
+						<div>{{this.gateway1Value}}</div>
+					</div>
+					<div class="message">
+						<div style="width: 1000px;">Gateway 2 to plant controller 1 communication healthy(st5):</div>
+						<div>{{this.gateway2Value}}</div>
+					</div>
+					<div class="message">
+						<div style="width: 1000px;">Gateway 2 to plant controller 2 communication healthy(st6):</div>
+						<div>{{this.gateway2Value}}</div>
+					</div>
+					<div class="message">
+						<div style="width: 1000px;">Gateway 2 to plant controller 3 communication healthy(st7):</div>
+						<div>{{this.gateway2Value}}</div>
+					</div>
+					<div class="message">
+						<div style="width: 1000px;">Gateway 2 to plant controller 4 communication healthy(st8):</div>
+						<div>{{this.gateway2Value}}</div>
+					</div>
+					<div class="message">
+						<div style="width: 1000px;">Gateway 2 to plant controller 5 communication healthy(st9):</div>
+						<div>{{this.gateway2Value}}</div>
+					</div>
+				</div>
+				<div *ngIf="numo" class="message">
+					<div>Number of Boost Light Burning(stl):</div>
+					<div>{{selectItem.stlValueDesc}}</div>
+				</div>
+				<div *ngIf="airf" class="message">
+					<div>Air flow direction(cdg):</div>
+					<div>{{selectItem.cdgValueDesc}}</div>
+				</div>
+				<div class="message">
+					<div>Tagging Mode(cdg):</div>
+					<div>{{this.taggingValue}}</div>
+				</div>
+			</div>
+		</div>
+		<nz-divider *ngIf="senr" nzText="Send Remote Command" nzOrientation="left"></nz-divider>
+		<nz-radio-group *ngIf="senr" [(ngModel)]="radioValue" (ngModelChange)="radioChange($event)">
+			<div>
+				<div *ngIf="stat" style="margin-bottom: 10px;margin-left:22px;">
+					<label nz-radio nzValue="cdt-1">Start the test session(cdt)</label>
+				</div>
+				<div *ngIf="staco" style="margin-bottom: 10px;margin-left:22px;display: flex;">
+					<label nz-radio nzValue="cds">Start/Stop control(cds):</label>
+					<div>
+						<nz-select style="width: 250px;" nzShowSearch nzAllowClear nzPlaceHolder="Select a equipType"
+							[(ngModel)]="start" (ngModelChange)="startChange($event)">
+							<nz-option *ngFor="let option of startList" [nzLabel]="option.label"
+								[nzValue]="option.value">
+							</nz-option>
+						</nz-select>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="bool">
+				<div style="margin-bottom: 10px;margin-left:22px;">
+					<label nz-radio nzValue="cdl">Boost light level(cdl):</label>
+					<nz-select style="width: 250px;" nzShowSearch nzAllowClear nzPlaceHolder="Select a equipType"
+						[(ngModel)]="boost" (ngModelChange)="boostChange($event)">
+						<nz-option *ngFor="let option of boostList" [nzLabel]="option.label" [nzValue]="option.value">
+						</nz-option>
+					</nz-select>
+				</div>
+				<div style="margin-bottom: 10px;margin-left:22px;display: flex;">
+					<!--<nz-radio-group [(ngModel)]="radioValue">
+						<div style="margin-bottom: 10px;">
+							<label nz-radio [(ngModel)]="StartStop" nzValue="cde">Boost light maiual control(cde)</label>
+						</div>
+						<div style="margin-left: 30px;margin-bottom: 10px;">
+							<label nz-radio [(ngModel)]="start" (ngModelChange)="sta($event)" nzValue="cde-1">Enable</label>
+							<label nz-radio [(ngModel)]="stop" (ngModelChange)="sto($event)" nzValue="cde-0">Disable</label>
+						</div>
+					</nz-radio-group>-->
+					<div style="margin-bottom: 10px; font-size: 14px;">
+						<label nzValue="cde">Boost light maiual control(cde):</label>
+					</div>
+					<div style="margin-left: 30px;margin-bottom: 10px;">
+						<label nz-radio nzValue="cde-1">Enable</label>
+						<label nz-radio nzValue="cde-0">Disable</label>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="rest" style="margin-bottom: 10px;margin-left:22px;">
+				<label nz-radio nzValue="cdr-1">Reset the Run Time(cdr)</label>
+			</div>
+			<div *ngIf="tesb" style="margin-bottom: 10px;margin-left:22px;">
+				<label nz-radio nzValue="cdb-1">Reset Burning Hours(cdb)</label>
+			</div>
+			<div *ngIf="wasw" style="margin-bottom: 10px;margin-left:22px;">
+				<label nz-radio nzValue="cdw-1">Wash wipe camera command(cdw)</label>
+			</div>
+			<div *ngIf="stac" style="margin-bottom: 10px;margin-left:22px;">
+				<!--<nz-radio-group [(ngModel)]="radioValue">
+					<div style="margin-bottom: 10px;">
+						<label nz-radio [(ngModel)]="StartStop" nzValue="cds">Start/Stop Control(cds)</label>
+					</div>
+					<div style="margin-left: 30px;margin-bottom: 10px;">
+						<label nz-radio [(ngModel)]="start" (ngModelChange)="sta($event)" nzValue="Start">Start</label>
+						<label nz-radio [(ngModel)]="stop" (ngModelChange)="sto($event)" nzValue="Stop">Stop</label>
+					</div>
+				</nz-radio-group>-->
+				<div style="margin-bottom: 10px;font-size: 14px;">
+					<label nzValue="cds">Start/Stop Control(cds):</label>
+				</div>
+				<div style="margin-left: 30px;margin-bottom: 10px;">
+					<label nz-radio nzValue="cds-1">Start</label>
+					<label nz-radio nzValue="cds-0">Stop</label>
+				</div>
+				<div>
+					<label nz-radio nzValue="cdr-1">Reset the run time(cdr)</label>
+				</div>
+			</div>
+			<div *ngIf="onsi" style="margin-bottom: 10px;margin-left:22px;">
+				<!--<nz-radio-group [(ngModel)]="radioValue">
+					<div style="margin-bottom: 10px;">
+						<label nz-radio [(ngModel)]="StartStop" nzValue="cde">On signal to pedestrian east exit light(cde)</label>
+					</div>
+					<div style="margin-left: 30px;margin-bottom: 10px;">
+						<label nz-radio [(ngModel)]="start" (ngModelChange)="sta($event)" nzValue="Start">On</label>
+						<label nz-radio [(ngModel)]="stop" (ngModelChange)="sto($event)" nzValue="Stop">Off</label>
+					</div>
+				</nz-radio-group>
+				<nz-radio-group [(ngModel)]="radioValue">
+					<div style="margin-bottom: 10px;">
+						<label nz-radio [(ngModel)]="StartStop" nzValue="cdw">On signal to pedestrian west exit light(cdw)</label>
+					</div>
+					<div style="margin-left: 30px;margin-bottom: 10px;">
+						<label nz-radio [(ngModel)]="start" (ngModelChange)="sta($event)" nzValue="Start">On</label>
+						<label nz-radio [(ngModel)]="stop" (ngModelChange)="sto($event)" nzValue="Stop">Off</label>
+					</div>
+				</nz-radio-group>-->
+				<div style="margin-bottom: 10px;font-size: 14px;">
+					<label nzValue="cde">On signal to pedestrian east exit light(cde):</label>
+				</div>
+				<div style="margin-left: 30px;margin-bottom: 10px;">
+					<label nz-radio nzValue="cde-1">On</label>
+					<label nz-radio nzValue="cde-0">Off</label>
+				</div>
+				<div style="margin-bottom: 10px;">
+					<label nzValue="cdw">On signal to pedestrian west exit light(cdw):</label>
+				</div>
+				<div style="margin-left: 30px;margin-bottom: 10px;">
+					<label nz-radio nzValue="cdw-1">On</label>
+					<label nz-radio nzValue="cdw-0">Off</label>
+				</div>
+			</div>
+			<div *ngIf="dooc" style="display: flex;margin-bottom: 10px;margin-left:22px;">
+				<div style="margin-right: 25px; font-size: 14px;">Door Control(cdd):</div>
+				<div>
+					<label nz-radio nzValue="cdd-0">Close</label>
+					<label nz-radio nzValue="cdd-1">Open</label>
+				</div>
+			</div>
+			<div *ngIf="venle" style="display: flex;margin-bottom: 10px;margin-left:22px;">
+				<label nz-radio nzValue="stv">Ventilation Level(stv):</label>
+				<nz-select style="width: 250px;" nzShowSearch nzAllowClear nzPlaceHolder="Select a equipType"
+					[nzDropdownMatchSelectWidth]="false" [(ngModel)]="ventilation"
+					(ngModelChange)="ventilationChange($event)">
+					<nz-option *ngFor="let option of ventilationList" [nzLabel]="option.label" [nzValue]="option.value">
+					</nz-option>
+				</nz-select>
+			</div>
+			<div *ngIf="opec" style="margin-bottom: 10px;margin-left:22px;">
+				<div tyle="display: flex;">
+					<div style="margin-right: 25px;font-size: 14px;">Open/Close Circuit Breaker(cdc):</div>
+					<div>
+						<label nz-radio nzValue="cdc-1">Open</label>
+						<label nz-radio nzValue="cdc-0">Close</label>
+					</div>
+				</div>
+				<div tyle="display: flex;">
+					<div style="margin-right: 25px;font-size: 14px;">Door Control(cdd):</div>
+					<div>
+						<label nz-radio nzValue="cdd-1">Start</label>
+						<label nz-radio nzValue="cdd-0">Stop</label>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="aute" style="display: flex;margin-bottom: 10px;margin-left:22px;">
+				<div style="margin-right: 25px;font-size: 14px;">Auto-process enable state(cde):</div>
+				<div>
+					<label nz-radio nzValue="cde-1">enable auto-process</label>
+					<label nz-radio nzValue="cde-0">disable auto-process/stand</label>
+				</div>
+			</div>
+			<div *ngIf="opecb" style="display: flex;margin-bottom: 10px;margin-left:22px;">
+				<div style="margin-right: 25px;font-size: 14px;">Open/Close Circuit Breaker(cdc):</div>
+				<div>
+					<label nz-radio nzValue="cdc-0">Close</label>
+					<label nz-radio nzValue="cdc-1">Open</label>
+				</div>
+			</div>
+			<div *ngIf="linlc" style="display: flex;margin-bottom: 10px;margin-left:22px;">
+				<div style="margin-right: 25px;font-size: 14px;">Line Lighting Control(cdl):</div>
+				<div>
+					<label nz-radio nzValue="cdl-1">Enable</label>
+					<label nz-radio nzValue="cdl-0">Disable</label>
+				</div>
+			</div>
+		</nz-radio-group>
+	</ng-template>
+
+	<ng-template #modalFooter>
+		<div class="bottomBtn">
+			<button [disabled]="disabled" nz-button nzType="default" (click)="apply()">Apply</button>
+			<button [disabled]="disabled" nz-button nzType="default" (click)="clear()">Clear</button>
+		</div>
+	</ng-template>
+
+</nz-modal>
+
+<emas-apply-window [selectItem]="selectItem" [listOfData]="listOfData"></emas-apply-window>

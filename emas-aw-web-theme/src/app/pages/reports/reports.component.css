@@ -1,0 +1,25 @@
+::ng-deep .report-modal {
+	display: flex;
+	align-items: center;
+}
+::ng-deep form {
+	width: 100%;
+}
+::ng-deep .report-modal .ant-modal {
+    position: unset;
+}
+
+::ng-deep .report-modal .ant-modal-body {
+	overflow-y: auto;
+	height: 86vh;
+}
+
+:host::ng-deep .vertical-center-modal .ant-modal {
+	top: 0;
+}
+
+:host ::ng-deep .vertical-center-modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

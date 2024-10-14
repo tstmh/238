@@ -1,0 +1,224 @@
+<div style="padding: 5px;">
+	<div class="pageHeader">
+
+		<div nz-row class="searchBar">
+			<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+				<div nz-row [nzGutter]="24">
+					<div nz-col [nzSpan]="4">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Exp Way </nz-form-label>
+							<nz-form-control>
+								<nz-select formControlName="expwayCode" style='width: 160px;'
+									(ngModelChange)="changeExpWay($event)">
+									<nz-option *ngFor="let option of expwayCodeList" [nzValue]="option.value"
+										[nzLabel]="option.description"></nz-option>
+								</nz-select>
+
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<!-- <div nz-col [nzSpan]="6">
+					<nz-form-item nzFlex>
+					  <nz-form-label class="colorWhite">Equip Type</nz-form-label>
+					  <nz-form-control>
+							<nz-select 
+							formControlName="equipType" 
+							style='width: 160px;'
+							nzPlaceHolder="select a equipType"
+							
+							>
+						   <nz-option 
+							   *ngFor="let option of equipTypeList" 
+							   [nzValue]="option.equipType"
+							   [nzLabel]="option.equipType"
+							   
+							   >
+						   </nz-option>
+						   </nz-select>
+					  </nz-form-control>
+					</nz-form-item>
+				  </div> -->
+					<div nz-col [nzSpan]="4">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Equip ID</nz-form-label>
+							<nz-form-control>
+								<nz-select formControlName="equipId" style='width: 160px;'
+									nzPlaceHolder="select a equipId" (ngModelChange)=changeType($event)>
+
+									<nz-option *ngFor="let option of listOfEquid" [nzValue]="option.equipId"
+										[nzLabel]="option.equipId?option.equipId:' '">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<!-- <div nz-col [nzSpan]="3">
+							<nz-form-item nzFlex >
+								<div style="margin-top:8px;font-size:14px">Equip ID : {{EquipId}}</div>
+							</nz-form-item>
+						</div>					 -->
+					<div nz-col [nzSpan]="6" class="search-area" style="">
+						<button nz-button [nzType]="'default'" style="color: #000;" class="headerButton"
+							[disabled]='buttonStatus'><img src="../../../../assets/img/Images/SS_General/find.png"
+								class="searchImg">Search</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- <div>
+		<div *ngFor="let item of OneMinList;let idx = index">Equip ID: {{item.equipId}}</div>
+	</div> -->
+	<br>
+	<br>
+	<p style="float:right;margin-bottom: 15px;">*Lane ID = 0 for Carriageway</p>
+
+	<p style="float: left;margin:0px;margin-right: 15px;">1 min data </p>
+	<p *ngIf="showData" style="margin-left:15px">{{oneData | date:'dd/MM/yyyy hh:mm:ss a'}}</p>
+	<nz-table #basicTable id="nzTable" [nzData]="displayListOne" [nzShowPagination]="false" [nzFrontPagination]="false" style="margin-bottom: 15px;" nzBordered="true">
+		<thead (nzSortChange)="sort($event)" nzSingleSort>
+			<tr style="background:cornflowerblue">
+				<ng-container *ngFor="let item of renderHeader;">
+					<th class="listTitle" nzShowSort nzSortKey="{{item.value}}">
+						<div>{{item.name}}</div>
+					</th>
+				</ng-container>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let data of displayListOne;let idx = index">
+				<td>{{ data.laneId}}</td>
+				<!-- <td>{{ data.laneType }}</td> -->
+				<td>{{ data.volume }}</td>
+				<td>{{ data.speed }}</td>
+				<td>{{ data.occupancy}}</td>
+				<td>{{ data.headway}}</td>
+				<td>{{ data.delay }}</td>
+				<td>{{ data.vehLength  }}</td>
+				<td>{{ data.class1Count }}</td>
+				<td>{{ data.class2Count }}</td>
+				<td>{{ data.class3Count }}</td>
+				<td>{{ data.class4Count }}</td>
+				<td>{{ data.class5Count }}</td>
+				<td>{{ data.totalClass  }}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<!-- <td [attr.colspan]="renderHeader.length+1" style="padding: 10px;">
+				</td> -->
+			</tr>
+		</tfoot>
+	</nz-table>
+	<p style="float: left;margin:0px;margin-right:15px">5 min data</p>
+	<p *ngIf="showData">{{fiveData | date:'dd/MM/yyyy hh:mm:ss a'}}</p>
+
+	<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false"
+		[nzData]="displayListFive" nzBordered="true" style="margin-bottom: 15px;">
+		<thead (nzSortChange)="sortTwo($event)" nzSingleSort>
+			<tr style="background:cornflowerblue">
+				<ng-container *ngFor="let item of renderHeader;">
+					<th class="listTitle" nzShowSort nzSortKey="{{item.value}}">
+						<div>{{item.name}}</div>
+					</th>
+				</ng-container>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let data of displayListFive;let idx = index">
+
+				<td>{{ data.laneId }}</td>
+				<!-- <td>{{ data.laneType }}</td> -->
+				<td>{{ data.volume }}</td>
+				<td>{{ data.speed }}</td>
+				<td>{{ data.occupancy}}</td>
+				<td>{{ data.headway}}</td>
+				<td>{{ data.delay }}</td>
+				<td>{{ data.vehLength  }}</td>
+				<td>{{ data.class1Count }}</td>
+				<td>{{ data.class2Count }}</td>
+				<td>{{ data.class3Count }}</td>
+				<td>{{ data.class4Count }}</td>
+				<td>{{ data.class5Count }}</td>
+				<td>{{ data.totalClass  }}</td>
+
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<!-- <td [attr.colspan]="renderHeader.length+1" style="padding: 10px;">
+				</td> -->
+			</tr>
+		</tfoot>
+	</nz-table>
+	<p style="float: left;margin:0px;margin-right: 15px;">1 hour data</p>
+	<p *ngIf="showData">{{hourData | date:'dd/MM/yyyy hh:mm:ss a'}}</p>
+
+	<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false"
+		[nzData]="displayListSixty" nzBordered="true">
+		<thead (nzSortChange)="sortThree($event)" nzSingleSort>
+			<tr style="background:cornflowerblue">
+				<ng-container *ngFor="let item of renderHeader;">
+					<th class="listTitle" nzShowSort nzSortKey="{{item.value}}">
+						<div>{{item.name}}</div>
+					</th>
+				</ng-container>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let data of displayListSixty;let idx = index">
+				<td>{{ data.laneId }}</td>
+				<!-- <td>{{ data.laneType }}</td> -->
+				<td>{{ data.volume }}</td>
+				<td>{{ data.speed }}</td>
+				<td>{{ data.occupancy}}</td>
+				<td>{{ data.headway}}</td>
+				<td>{{ data.delay }}</td>
+				<td>{{ data.vehLength  }}</td>
+				<td>{{ data.class1Count }}</td>
+				<td>{{ data.class2Count }}</td>
+				<td>{{ data.class3Count }}</td>
+				<td>{{ data.class4Count }}</td>
+				<td>{{ data.class5Count }}</td>
+				<td>{{ data.totalClass  }}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<!-- <td [attr.colspan]="renderHeader.length+1" style="padding: 10px;">
+				</td> -->
+			</tr>
+		</tfoot>
+	</nz-table>
+	<!--<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false" [nzData]="listOfData">
+		<thead>
+			<tr style="background:cornflowerblue">
+				<ng-container *ngFor="let item of renderHeader;">
+					<th class="listTitle">
+						<div>{{item.name}}</div>
+					</th>
+				</ng-container>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let data of basicTable.data;let idx = index">
+				<td>{{ data.ackTime | date:'yyyy/MM/dd HH:mm' }}</td>
+				<td>{{ data.ackTime }}</td>
+				<td>{{ data.ackTime }}</td>
+				<td>{{ data.ackTime }}</td>
+				<td>{{ data.ackTime}}</td>
+				<td>{{ data.ackTime}}</td>
+				<td>{{ data.ackTime }}</td>
+				<td>{{ data.ackTime | date:'yyyy/MM/dd HH:mm' }}</td>
+				<td>{{ data.ackTime }}</td>
+				<td>{{ data.ackTime }}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td [attr.colspan]="renderHeader.length+1" style="padding: 10px;">
+				</td>
+			</tr>
+		</tfoot>
+	</nz-table>-->
+</div>

@@ -1,0 +1,21 @@
+::ng-deep .vertical-center-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+::ng-deep .vertical-center-modal .ant-modal {
+        top: 0;
+      }
+.content {
+    display: inline-block;
+    text-align: center;
+    width: 800px;
+}
+.content img{
+  width: 100%;
+  height: auto;
+  max-height: 750px;
+}
+.content p {
+    font-size: 14px;
+}

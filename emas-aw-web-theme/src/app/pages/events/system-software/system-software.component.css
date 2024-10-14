@@ -1,0 +1,129 @@
+*{
+	color: var(--cl);
+}
+  
+.searchBar{
+	height: 100px;
+}
+.fieldsContents{
+	display: flex;
+	justify-content: space-around;
+}
+.itemStatus{
+	height: 20px;
+	line-height: 20px;
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 5px;
+}
+.greenBox{
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	background-color: green;
+	margin-right: 10px;
+}
+.yellowBox{
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	background-color: yellow;
+	margin-right: 10px;
+}
+.green{
+	background-color: green;
+}
+.title{
+    display: flex;
+    justify-content: center;
+}
+.firstBox ul li {
+	height: 100px;
+	width: 150px;
+	color: blue;
+	background: cornsilk;
+	margin: 0 10px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid black;
+}
+.secondBox {
+	width:150px;
+	height:100px;
+	background: linen;
+	display: inline-block;
+	border: 2px solid black;
+}
+
+.threadBox {
+	width:150px;
+	height:100px;
+	background: lightgoldenrodyellow;
+	display: inline-block;
+	border: 2px solid black;
+}
+
+.fourthBox {
+	width:120px;
+	height:80px;
+	background: cornsilk;
+	display: inline-block;
+	border: 2px solid black;
+}
+
+.fifthBox {
+	width:90px;
+	height:60px;
+	background: cornsilk;
+	display: inline-block;
+	border: 2px solid black;
+}
+
+.boxContent{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.verticalLine :nth-child(-n+6) {
+	height: 50px;
+	border-right: 2px solid black;
+}
+.headerTitle {
+	margin-top: 10px;
+	color: var(--cl);
+	/* margin-bottom: 50px; */
+}
+.footerResult {
+    color: var(--cl);
+    margin-top: 20px;
+}
+
+.cancelImg {
+	height: 15px;
+    animation: scaleDraw 5s ease-in-out infinite;
+}
+@keyframes scaleDraw {  /*定义关键帧、scaleDrew是需要绑定到选择器的关键帧名称*/
+    0%{
+        transform: scale(1);  /*开始为原始大小*/
+    }
+    25%{
+        transform: scale(1.5); /*放大1.5倍*/
+    }
+    50%{
+        transform: scale(1);
+    }
+    75%{
+        transform: scale(1.5);
+    }
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

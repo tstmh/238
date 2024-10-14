@@ -1,0 +1,78 @@
+/* *{
+	color: #fff
+} */
+
+.searchBar {
+	height: 100px;
+}
+
+.fieldsContents {
+	display: flex;
+	justify-content: space-around;
+}
+
+.itemStatus {
+	height: 20px;
+	line-height: 20px;
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 5px;
+	color: var(--cl);
+}
+
+.greenBox {
+	width: 18px;
+	height: 18px;
+	display: block;
+	background-color: green;
+	margin-right: 10px;
+}
+
+.redBox {
+	width: 18px;
+	height: 18px;
+	display: block;
+	background-color: red;
+	margin-right: 10px;
+}
+
+.leftPicture {
+	height: 65.5vh;
+	width: 90%;
+	/* overflow: scroll; */
+	position: relative;
+}
+#pic{
+	height: 600px;
+	width: 95.1%;
+	overflow: scroll;
+	position: relative;
+}
+#img{
+	/* overflow: scroll; */
+	/* height: 800px;
+	width: 800px; */
+	position: absolute;
+}
+
+#mask {
+	position: absolute;
+	overflow: hidden;
+	display: none;
+	height: 160px;
+	width: 160px;
+	border-radius: 100px;
+	/* border: 1px black solid; */
+	/* background-image: url('../../../../assets/img/Images/SS_EventsTab/AYE_DCSS.png'); */
+}
+
+.text {
+    color: var(--cl);
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

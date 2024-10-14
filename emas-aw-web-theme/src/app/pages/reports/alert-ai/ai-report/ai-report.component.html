@@ -1,0 +1,180 @@
+<nz-modal zmMovableModal nzWrapClassName="report-modal" nzWidth=1000 nzMaskClosable="false" [nzTitle]="modalTitle"
+	[nzContent]="modalContent" [(nzVisible)]="isVisibleMiddle" [nzFooter]="null" (nzOnCancel)="handleCancelMiddle()">
+	<ng-template #modalTitle>
+		Traffic Alert Result Report
+	</ng-template>
+	<ng-template #modalContent>
+		<div class="topBar">
+			<button nz-button nzType="link" nzSize="small" [disabled]="firstPageDisable" (click)="goFirstPage()"><img
+					src="../../../../../assets/img/Images/SS_General/removeall.png" alt=""
+					[class.active]="firstPageDisable"></button>
+			<button nz-button nzType="link" nzSize="small" [disabled]="preDisable" (click)="preChange()"><img
+					src="../../../../../assets/img/Images/SS_General/remove.png" alt=""
+					[class.active]="preDisable"></button>
+			<nz-input-number nzSize="small" [(ngModel)]="pageNum" (ngModelChange)="pageNumModelChange($event)"
+				[nzMin]="1" [nzMax]="10" [nzStep]="1" style="width: 50px;color: black;"></nz-input-number>
+			<span>of</span>
+			<span>{{totalPage}}</span>
+			<button nz-button nzType="link" nzSize="small" [disabled]="nextDisable" (click)="nextChange()"><img
+					src="../../../../../assets/img/Images/SS_General/add.png" alt=""
+					[class.active]="nextDisable"></button>
+			<button nz-button nzType="link" nzSize="small" [disabled]="lastPageDisable" (click)="goLastPage()"><img
+					src="../../../../../assets/img/Images/SS_General/addall.png" alt=""
+					[class.active]="lastPageDisable"></button>
+			<nz-divider nzType="vertical"></nz-divider>
+			<button nz-button nzType="link" nzSize="small" title="refresh" (click)="refresh()"><img
+					style="height: 20px;" src="../../../../../assets/img/re.png" alt=""></button>
+			<nz-divider nzType="vertical"></nz-divider>
+			<export-btn [renderHeader]="renderHeader" [reportValue]="reportValue" [listOfData]="listOfData"
+				reportId="ai-report" (changePagination)="pagination = $event"></export-btn>
+		</div>
+		<div id="ai-report">
+			<div class="topTitle">
+				<h4>Traffic Alert Result Report</h4>
+			</div>
+			<div class="tichnical-alarm" style="padding: 20px;">
+				<div class="pageHeader">
+					<div nz-row>
+						<form nz-form class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+							<div nz-row [nzGutter]="24">
+								<div nz-col nzSpan="10">
+									<nz-form-item nzFlex>
+										<div nz-col [nzSpan]="8">
+											<nz-form-label class="colorWhite">Start Date
+											</nz-form-label>
+										</div>
+										<div nz-col [nzSpan]="10">
+											<nz-form-control>
+												{{reportValue.startDate | date:'dd/MM/yyyy hh:mm:ss a'}}
+											</nz-form-control>
+										</div>
+									</nz-form-item>
+								</div>
+
+								<div nz-col [nzSpan]="10">
+									<nz-form-item nzFlex>
+										<div nz-col [nzSpan]="8">
+											<nz-form-label class="colorWhite">End Date
+											</nz-form-label>
+										</div>
+										<div nz-col [nzSpan]="10">
+											<nz-form-control>
+												{{reportValue.endDate | date:'dd/MM/yyyy hh:mm:ss a'}}
+											</nz-form-control>
+										</div>
+									</nz-form-item>
+								</div>
+							</div>
+							<div nz-row [nzGutter]="24">
+								<div nz-col [nzSpan]="10">
+									<nz-form-item nzFlex>
+										<div nz-col nzSpan="8">
+											<nz-form-label class="colorWhite">Equip Type
+											</nz-form-label>
+										</div>
+										<div nz-col nzSpan="10">
+											<nz-form-control>
+												{{reportValue.equipType}}
+											</nz-form-control>
+										</div>
+									</nz-form-item>
+								</div>
+								<div nz-col [nzSpan]="10">
+									<nz-form-item nzFlex>
+										<div nz-col nzSpan="8">
+											<nz-form-label class="colorWhite">Result Type
+											</nz-form-label>
+										</div>
+										<div nz-col nzSpan="10">
+											<nz-form-control>
+												<ul>
+													<li>{{tempAlert}}</li>
+												</ul>
+												<!-- {{reportValue.alertType}} -->
+											</nz-form-control>
+										</div>
+									</nz-form-item>
+								</div>
+							</div>
+							<div nz-row [nzGutter]="24">
+								<div nz-col [nzSpan]="10">
+									<nz-form-item nzFlex>
+										<div nz-col nzSpan="8">
+											<nz-form-label class="colorWhite">Equip ID
+											</nz-form-label>
+										</div>
+										<div nz-col nzSpan="10">
+											<nz-form-control>
+												{{reportValue.equipID}}
+											</nz-form-control>
+										</div>
+									</nz-form-item>
+								</div>
+								<div nz-col [nzSpan]="10">
+									<nz-form-item nzFlex>
+										<div nz-col nzSpan="8">
+											<nz-form-label class="colorWhite">Exp Way
+											</nz-form-label>
+										</div>
+										<div nz-col nzSpan="10">
+											<nz-form-control>
+												{{reportValue.expWay}}
+											</nz-form-control>
+										</div>
+									</nz-form-item>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<nz-spin [nzSpinning]="isLoading" nzTip="Loading...">
+				<nz-table #basicTable id="nzTable" [nzShowPagination]="pagination" [nzFrontPagination]="pagination"
+					[nzData]="listOfData" [nzPageSize]=10 [(nzPageIndex)]="pageNum"
+					(nzPageIndexChange)="pageChange($event)" style="overflow: auto;" nzBordered="true">
+					<thead *ngIf="listOfData.length > 0">
+						<tr style="background:cornflowerblue">
+							<ng-container *ngFor="let item of renderHeader">
+								<th class="listTitle">
+									<div>{{ item.name }}</div>
+								</th>
+							</ng-container>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let data of basicTable.data;let idx = index">
+							<td>{{ renderHeader[0].get(data) }}</td>
+							<td>{{ renderHeader[1].get(data) }}</td>
+							<td>{{ renderHeader[2].get(data) }}</td>
+							<td>{{ renderHeader[3].get(data) }}</td>
+							<td>{{ renderHeader[4].get(data) }}</td>
+							<td>{{ renderHeader[5].get(data) }}</td>
+              				<td>{{ renderHeader[6].get(data) | date:'dd/MM/yyyy hh:mm:ss a' }}</td>
+							<td>{{ renderHeader[7].get(data) }}</td>
+							<td>{{ renderHeader[8].get(data) }}</td>
+							<td>{{ renderHeader[9].get(data) }}</td>
+							<td>{{ renderHeader[10].get(data) }}</td>
+						</tr>
+					</tbody>
+				</nz-table>
+				</nz-spin>
+			</div>
+			<div nz-row>
+				<div nz-col nzSpan="6">
+					<div *ngIf="listOfData == 0">
+						<p style="margin-left: 15px;font-size: 14px;">No Records Found</p>
+					</div>
+				</div>
+				<div nz-col nzSpan="6">
+					<div *ngIf="listOfData == 0">
+						<p style="margin-left: 15px;font-size: 14px;">No Data Available</p>
+					</div>
+				</div>
+				<div nz-col nzSpan="12">
+					<div *ngIf="reportValue.withChart" echarts [options]="chartOption" class="demo-chart"></div>
+					<img id="echartsImg0" alt="">
+					<!-- <p style="color: red;margin-left: 200px;">NFP*-Not Functioning Properly</p> -->
+				</div>
+			</div>
+		</div>
+	</ng-template>
+</nz-modal>

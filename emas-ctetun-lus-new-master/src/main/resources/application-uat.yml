@@ -1,0 +1,59 @@
+server:
+  port: 8099
+
+spring:
+  datasource:
+    jdbc-url: jdbc:sqlserver://192.168.100.130:1533;databaseName=eectetun2db
+    username: emasuser
+    password: ENC(jcLB0QpMY4wOOAYpYDuEBYkaOykgkvrp)
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 8
+
+  datasource-emasdb:
+    jdbc-url: jdbc:sqlserver://192.168.100.130:1533;databaseName=eefelsdb
+    username: emasuser
+    password: ENC(jcLB0QpMY4wOOAYpYDuEBYkaOykgkvrp)
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 8
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+    open-in-view: false
+  jms:
+    pub-sub-domain: true
+
+logging:
+  config: classpath:logback-spring-uat.xml
+
+stee:
+  # JMS
+  jms-enable: true
+  jms-username: weblogic
+  jms-password: P@ssw0rd12345
+  jms-qos-enable: true
+  jms-message-time-to-live: 30000
+  jndi-jms-factory: jms/TT238ConnectionFactory
+  jms-cmh-lus-queue: jms/cmh_lus_queue
+  jms-lus-cmh-queue: jms/lus_cmh_queue
+  jms-lus-lusold-queue: jms/lus_lusold_queue
+
+  # JNDI
+  jndi-url: t3://192.168.100.120:7001
+
+  lus-interface-code: lus_01
+  lus-refresh-status-rate: 60000
+  lus-response-valid-time: 10
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    password: r78Y2$G#J^@oP9!d
+    provider-name: SunJCE
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+    salt-generator-classname: org.jasypt.salt.RandomSaltGenerator

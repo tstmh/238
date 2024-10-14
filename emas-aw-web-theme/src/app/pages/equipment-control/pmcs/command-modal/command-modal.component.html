@@ -1,0 +1,41 @@
+<nz-modal zmMovableModal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+	(nzOnCancel)="handleCancel()" nzWidth="700px">
+	<ng-template #modalTitle>
+		Command Response View
+	</ng-template>
+
+	<ng-template #modalContent>
+		<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false" [nzData]="listOfData"
+			[nzScroll]="{ y: '460px' }" style="height: 500px"  nzBordered="true">
+			<thead>
+				<tr style="background:cornflowerblue">
+					<ng-container *ngFor="let item of this.renderHeader">
+						<th nzWidth = "200px">
+							<!-- <div *ngIf="item.value === Equip ID And Location">{{item.value}}</div> -->
+							<div>{{item.value}}</div>
+						</th>
+					</ng-container>
+					<!-- <th style="width: 310px">Equip ID And Location</th>
+					<th>Command Description</th>
+					<th>Status</th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let data of basicTable.data;let idx = index" [class.active]="data.active">
+					<!-- (click)="clickTr(idx,data)" -->
+					<td>{{ data.idAndLoca }}</td>
+					<td>{{ data.command }}</td>
+					<td>{{ data.status }}</td>
+				</tr>
+			</tbody>
+			<tfoot>
+			</tfoot>
+		</nz-table>
+	</ng-template>
+
+	<ng-template #modalFooter>
+		<!-- <span>Modal Footer: </span>
+        <button nz-button nzType="default" (click)="handleCancel()">Custom Callback</button>
+        <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">Custom Submit</button> -->
+	</ng-template>
+</nz-modal>

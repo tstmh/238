@@ -1,0 +1,58 @@
+<nz-modal zmMovableModal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+	(nzOnCancel)="handleCancel()" nzStyle="" nzWidth="700px" nzMask="false">
+
+	<ng-template #modalTitle>
+		Apply Message Window
+	</ng-template>
+
+	<ng-template #modalContent>
+		<nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+			<p class="center-title">Equipment Type:vis</p>
+			<div class="content">
+				<div>
+					<div style="font-size: 16px;font-weight: bold;">Available Equipment List:</div>
+					<div class="content_table">
+						<ul *ngFor="let item of availableList;index as i" [class.active]="item.active"
+							style="overflow: hidden;">
+							<li class="li" (click)="addLi(i, $event)">{{item.idAndLoca}}</li>
+						</ul>
+					</div>
+					<div style="font-size: 16px;font-weight: bold;">Equipment Id And Location</div>
+				</div>
+				<div style="display:flex;justify-content:center;align-items:center">
+					<div class="middleBtn">
+						<button nz-button [disabled]="addDisabled" (click)="add()"> Add<img
+								src="../../../../assets/img/Images/SS_General/add.png" alt="add"></button>
+						<button nz-button [disabled]="addAllDisabled" (click)="addAll()"> Add All<img
+								src="../../../../assets/img/Images/SS_General/addall.png" alt="addall"></button>
+						<button nz-button [disabled]="removeDisabled" (click)="remove()"><img
+								src="../../../../assets/img/Images/SS_General/remove.png" alt="remove"> Remove</button>
+						<button nz-button [disabled]="removeAllDisabled" (click)="removeAll()"><img
+								src="../../../../assets/img/Images/SS_General/removeall.png" alt="removeAll"> Remove
+							All</button>
+					</div>
+				</div>
+				<div>
+					<div style="font-size: 16px;font-weight: bold;">Selected Equipment List:</div>
+					<div class="content_table">
+						<ul *ngFor="let item of selectedList;index as i" [class.active]="item.active"
+							style="overflow: hidden;">
+							<li class="li" (click)="removeLi(i, $event)">{{item.idAndLoca}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nz-spin>
+	</ng-template>
+
+	<ng-template #modalFooter>
+		<div style="display: flex;justify-content:center">
+			<button nz-button (click)="Send()" style="margin-right: 20px">Send</button>
+			<button nz-button (click)="Cancel()" [nzLoading]="isConfirmLoading"
+				style="margin-left: 20px">Cancel</button>
+		</div>
+	</ng-template>
+
+</nz-modal>
+
+<emas-command-modal [selectedList]="selectedList"></emas-command-modal>

@@ -1,0 +1,120 @@
+<nz-spin  [nzSpinning]="isLoading">
+	<div style="padding: 5px;">
+		<div class="pageHeader">
+			<div nz-row class="searchBar">
+				<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+					<div nz-row [nzGutter]="16">
+						<div nz-col [nzSpan]="6">
+							<nz-form-item nzFlex>
+								<nz-form-label class="labelText">Group ID
+								</nz-form-label>
+								<nz-form-control>
+									<nz-select style="width: 150px;" nzShowSearch nzAllowClear nzPlaceHolder="All"
+										formControlName="groupID" (ngModelChange)="groupIdChange()">
+										<nz-option *ngFor="let option of listGroupID" [nzLabel]="option.label"
+											[nzValue]="option.value">
+										</nz-option>
+									</nz-select>
+									<!-- <input
+            nz-input
+            placeholder="placeholder"
+            formControlName="subSystem"
+            style='color:#000'
+          /> -->
+								</nz-form-control>
+							</nz-form-item>
+						</div>
+						<div nz-col [nzSpan]="6">
+							<nz-form-item nzFlex>
+								<nz-form-label class="labelText">Size
+								</nz-form-label>
+								<nz-form-control>
+									<nz-select style="width: 150px;" nzShowSearch nzAllowClear nzPlaceHolder="All"
+										formControlName="size">
+										<nz-option *ngFor="let option of listSize" [nzLabel]="option.label"
+											[nzValue]="option.value">
+										</nz-option>
+									</nz-select>
+									<!-- <input
+            nz-input
+            placeholder="placeholder"
+            formControlName="equipType"
+            style='color:#000'
+          /> -->
+								</nz-form-control>
+							</nz-form-item>
+						</div>
+						<div nz-col [nzSpan]="8" class="search-area">
+							<button nz-button [nzType]="'default'" class="headerButton"><img
+									src="../../../../assets/img/Images/SS_General/find.png"
+									class="searchImg">Search</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<p style="margin-bottom: 15px;float: right;">Query Result: {{listOfData.length}} Records Found</p>
+
+		<nz-table #basicTable id="nzTable" [nzShowPagination]="true" [nzFrontPagination]="true" [nzBordered]="true"
+			[nzData]="listOfData" [(nzPageIndex)]="pageIndex" (nzPageIndexChange)="pageChange($event)">
+			<thead (nzSortChange)="sort($event)" nzSingleSort>
+				<tr style="background:cornflowerblue">
+					<ng-container *ngFor="let item of renderHeader">
+						<th class="listTitle" nzShowSort nzSortKey="{{item.value}}">
+							<div>{{ item.name }}</div>
+						</th>
+					</ng-container>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let data of basicTable.data;let idx = index" (click)="choice(data)"
+					(dblclick)="showModalMiddle(data)" [ngClass]="{'active':choiceItemID == data.pictogramId}">
+					<td>{{ data.pictogramId }}</td>
+					<td>{{ data.picGroupId }}</td>
+					<td><img [src]="'data:image/png;base64,' + data.graphicContents" alt=""></td>
+					<td>{{ data.picFileName }}</td>
+					<td>{{ data.height }}</td>
+					<td>{{ data.width }}</td>
+					<td>{{ data.size }}</td>
+					<td>{{ data.pictogramDesc }}</td>
+					<td>
+						<ul style="width:100px;height: 80px;background: #fff;overflow-y: auto;">
+							<li style="color: black;" *ngFor="let item of data.equipIdList; let indx = index"
+								(click)="choiceEquipIdList(indx, data)"
+								[ngClass]="{'active1':choiceEquipId == indx && choiceItemID == data.pictogramId}">
+								<a>{{item}}</a></li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</nz-table>
+		<div>
+			<tr>
+				<td style="padding: 30px;">
+					<div nz-col [nzSpan]="2" class="search-area">
+						<button nz-button [nzType]="'default'" class="headerButton"
+							(click)="addShowModalMiddle()">Add</button>
+					</div>
+				</td>
+				<td style="padding: 30px;">
+					<div nz-col [nzSpan]="2" class="search-area">
+						<button nz-button [nzType]="'default'" class="headerButton" [disabled]="downloadStatu"
+							(click)="downloadShowModalMiddle()">Download</button>
+					</div>
+				</td>
+			</tr>
+		</div>
+	</div>
+	<ng-container>
+		<emas-update-pictogram *ngIf="isVisibleMiddle" [isVisibleMiddle]="isVisibleMiddle" (closeModal)="closeModal()"
+			[selectItem]="choiceItem" [listGroupID]="listGroupID"></emas-update-pictogram>
+	</ng-container>
+	<ng-container>
+		<emas-add-pictogram *ngIf="addIsVisibleMiddle" [addIsVisibleMiddle]="addIsVisibleMiddle"
+			(closeModal)="closeModal()" [listGroupID]="listGroupID"></emas-add-pictogram>
+	</ng-container>
+	<ng-container>
+		<emas-download-pictogram *ngIf="downloadVisibleMiddle" [downloadVisibleMiddle]="downloadVisibleMiddle"
+			(closeModal)="closeModal()" [selectItem]="choiceItem" [listGroupID]="listGroupID"></emas-download-pictogram>
+	</ng-container>
+</nz-spin>

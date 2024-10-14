@@ -1,0 +1,573 @@
+<div style="padding: 5px;">
+  <div class="pageHeader">
+    <div nz-row class="emptyBar"></div>
+    <div nz-row>
+      <form
+        nz-form
+        [formGroup]="validateForm"
+        class="ant-advanced-search-form"
+        (ngSubmit)="submitForm()"
+      >
+        <div nz-row [nzGutter]="16">
+          <div nz-col [nzSpan]="3">
+            <nz-form-item nzFlex>
+              <nz-form-label class="colorWhite"
+                >User ID
+              </nz-form-label>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="5">
+              <nz-form-item nzFlex>
+                <nz-form-control>
+                  <input
+                   nz-input
+                   placeholder="userID"
+                   formControlName="userId"
+                   style='color:#000'
+                 />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          <div nz-col [nzSpan]="3">
+            <nz-form-item nzFlex>
+              <nz-form-label class="colorWhite"
+                >Role
+              </nz-form-label>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="5">
+              <nz-form-item nzFlex>
+                <nz-form-control>
+                  <nz-select
+                    style="width: 150px;"
+                    nzShowSearch
+                    nzAllowClear
+                    nzPlaceHolder="Select a role"
+                    formControlName="roleId"
+                    (ngModelChange)="changeRole($event)"
+                  >
+                    <nz-option
+                      *ngFor="let option of AllRoleList"
+                      [nzLabel]="option.description"
+                      [nzValue]="option.value"
+                    >
+                    </nz-option>
+                  </nz-select>
+                  
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="16">
+            <div nz-col [nzSpan]="3">
+              <nz-form-item nzFlex>
+                <nz-form-label class="colorWhite"
+                  >User Name
+                </nz-form-label>
+                
+              </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="5" >
+                <nz-form-item nzFlex>
+                  <nz-form-control >
+                    <input
+                     nz-input
+                     placeholder="userName"
+                     formControlName="username"
+                     style='color:#000'
+                   />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            <div nz-col [nzSpan]="3">
+              <nz-form-item nzFlex>
+                <nz-form-label class="colorWhite"
+                  >Division
+                </nz-form-label>
+              </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="5" >
+                <nz-form-item nzFlex>
+                  <nz-form-control >
+                    <nz-select
+                      style="width: 150px;"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder="Select a dvision"
+                      formControlName="companyName"
+                    >
+                      <nz-option
+                        *ngFor="let option of DivisionList"
+                        [nzLabel]="option.companyName"
+                        [nzValue]="option.value"
+                      >
+                      </nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            <div nz-col [nzSpan]="4" class="search-area" style="margin-left:3%;margin-top:4px">
+              <button nz-button [nzType]="'default'" style="color: #000;"><img src="../../../../assets/img/Images/SS_General/find.png" class="">Search</button>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>
+  <nz-table *ngIf="Profiledata==1"
+    #basicTable
+    [nzHideOnSinglePage] = "true"
+    id="nzTable"
+    [nzData]="displayOfDateList"
+    (nzPageIndexChange)="changePage($event)"
+    nzBordered="true"
+  >
+    <thead (nzSortChange)="sort($event)" nzSingleSort>
+      <tr style="background:cornflowerblue"> 
+        <th
+          nzShowCheckbox
+          [nzSelections]="listOfSelection"
+          [(nzChecked)]="isAllDisplayDataChecked"
+          [nzIndeterminate]="isIndeterminate"
+          (nzCheckedChange)="checkAll($event)"
+        >
+        Select All
+      </th>
+        <ng-container *ngFor="let item of renderHeader">
+          <th class="listTitle" nzShowSort nzSortKey="{{item.value}}">
+            <div>{{ item.name }}</div>
+          </th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data;let idx = index" (dblclick)="showModal(data)">
+          <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.userId]" (nzCheckedChange)="refreshStatus()"></td>
+          <td>{{ data.userId }}</td>
+          <td>{{ data.username }}</td>
+          <td>{{ data.companyName }}</td>
+          <td>{{ data.roleList? data.roleList[0].description:'' }}</td>
+          <td>{{ data.contact }}</td>
+          <td>{{ data.email }}</td>
+          <!-- <td>{{ data.enabled=='true'?'Active':'Inactive'}}</td> -->
+          <td>{{ data.enabled=='true'?'Enable':'Disable'}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <!-- <td [attr.colspan]="renderHeader.length+1" style="">
+          </td> -->
+        </tr>
+      </tfoot>
+  </nz-table>
+  <hr *ngIf="Profiledata==3" style="margin-top:-3px" size="4" color="#ffffff">
+  <div *ngIf="Profiledata==3">
+      <form
+      nz-form
+      [formGroup]="updateUserForm"
+      class="ant-advanced-search-form"
+      (ngSubmit)="submitUpdateForm()"
+    >
+    <div nz-row [nzGutter]="16">
+        <div nz-col [nzSpan]="3">
+            <nz-form-item nzFlex>
+                <nz-form-label class="colorWhite">
+                    User ID
+                </nz-form-label>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="5" style="font-size:14px;margin-top:9px">
+              {{updateId}}
+            </div>
+            <div nz-col [nzSpan]="3">
+                <nz-form-item nzFlex>
+                  <nz-form-label class="colorWhite"
+                    >Role
+                  </nz-form-label>
+                </nz-form-item>
+              </div>
+              <div nz-col [nzSpan]="5">
+                <nz-form-item nzFlex>
+                  <nz-form-control>
+                    <nz-select
+                      style="width: 150px;"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder="Select a role"
+                      formControlName="role"
+                      (ngModelChange)="changeRole($event)"
+                    >
+                      <nz-option
+                        *ngFor="let option of updateRoleList"
+                        [nzLabel]="option.description"
+                        [nzValue]="option.roleId"
+                      >
+                      </nz-option>
+                    </nz-select>
+                    
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+    </div>
+    <div nz-row [nzGutter]="16" >
+        <div nz-col [nzSpan]="3" >
+          <nz-form-item nzFlex>
+              <nz-form-label class="colorWhite">
+              User Name
+              </nz-form-label>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="5" style="font-size:14px;margin-top:9px">
+          {{updateName}}
+        </div>
+        <div nz-col [nzSpan]="3">
+            <nz-form-item nzFlex>
+              <nz-form-label class="colorWhite"
+                >Division
+              </nz-form-label>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="5" >
+            <nz-form-item nzFlex>
+              <nz-form-control >
+                <nz-select
+                  style="width: 150px;"
+                  nzShowSearch
+                  nzAllowClear
+                  nzPlaceHolder="Select a dvision"
+                  formControlName="companyName"
+                >
+                  <nz-option
+                    *ngFor="let option of updateDivisionList"
+                    [nzLabel]="option.companyName"
+                    [nzValue]="option.value"
+                  >
+                  </nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          
+    </div>
+    <div nz-row [nzGutter]="16">
+      <div nz-col [nzSpan]="3">
+        <nz-form-item nzFlex>
+          <nz-form-label class="colorWhite"
+            >Email
+          </nz-form-label>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="5" >
+          <nz-form-item nzFlex>
+              <nz-form-control nzHasFeedback style="font-size:14px;" nzErrorTip="The input is not valid E-mail!">
+                <input nz-input style="color: black;" formControlName="email" [(ngModel)]="email" id="email" type="email"/>
+              </nz-form-control>
+            </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="3" >
+        <nz-form-item nzFlex>
+            <nz-form-label class="colorWhite"
+              >Contact
+            </nz-form-label>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="5" style="font-size:14px">
+          <nz-form-item nzFlex style="width: 150px;">
+              <nz-form-control nzHasFeedback style="font-size:14px;" nzErrorTip="The input is not valid Phone Number!">
+                <!-- <input nz-input name="Contact" [(ngModel)]="contact" type="number" id="contact"/> -->
+                <input nz-input style="color: black;" formControlName="contact" [(ngModel)]="contact" id="contact" type="number"/>
+              </nz-form-control>
+            </nz-form-item>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="16"  >
+        <div nz-col [nzSpan]="3" >
+          <nz-form-item nzFlex>
+              <nz-form-label class="colorWhite">
+                  Account Status
+              </nz-form-label>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="5" style="font-size:14px;margin-top:9px">
+            <nz-radio-group formControlName="enabled">
+                <label nz-radio nzValue="true">Enable</label>
+                <label nz-radio nzValue="false">Disable</label>
+              </nz-radio-group>
+        </div>
+        <div nz-col [nzSpan]="3">
+            <nz-form-item nzFlex>
+              <nz-form-label class="colorWhite"
+                >Last Login Date
+              </nz-form-label>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="5" >
+              <nz-form-item nzFlex>
+                  <nz-form-control style="font-size:14px">
+                      {{ lastLoginDate | date:'dd/MM/yyyy hh:mm:ss a'}}
+                  </nz-form-control>
+                </nz-form-item>
+          </div>
+          
+    </div>
+    <div nz-row [nzGutter]="16">
+        <div nz-col [nzSpan]="3" >
+          <nz-form-item nzFlex>
+              <nz-form-label class="colorWhite"
+                >Account Create Date
+              </nz-form-label>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="5" style="font-size:14px">
+            <nz-form-item nzFlex>
+                <nz-form-control style="font-size:14px" >
+                    {{ createdDate | date:'dd/MM/yyyy hh:mm:ss a'}}
+                </nz-form-control>
+              </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="3">
+            <nz-form-item nzFlex>
+              <nz-form-label class="colorWhite"
+                >Password update Date
+              </nz-form-label>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="5" >
+              <nz-form-item nzFlex>
+                  <nz-form-control style="font-size:14px" >
+                      {{ passwordLastModDate | date:'dd/MM/yyyy hh:mm:ss a'}}
+                  </nz-form-control>
+                </nz-form-item>
+          </div>
+          
+    </div>
+  
+    <div nz-col [nzSpan]="2" class="search-area" style="margin-right:22px">
+      <button nz-button [nzType]="'default'"  style="color:#000"><img src="../../../../assets/img/Images/SS_General/assign.png" class="add">Update</button>
+    </div>
+    <div nz-col [nzSpan]="2" class="search-area" (click)="Profiledata=1" >
+        <button nz-button [nzType]="'default'" style="color:#000"><img src="../../../../assets/img/Images/SS_General/cancel.jpg" class="delete">Cancel</button>
+    </div>
+</form>
+  </div>
+  <hr *ngIf="Profiledata==2" style="margin-top:-3px" size="4" color="#ffffff">
+  <div *ngIf="Profiledata==2">
+    
+    <div nz-row>
+      <form
+        nz-form
+        [formGroup]="addUserForm"
+        class="ant-advanced-search-form"
+        (ngSubmit)="submitAddForm()"
+      >
+        <div nz-row [nzGutter]="16">
+          <div nz-col [nzSpan]="3">
+            <nz-form-item nzFlex>
+              <div class="colorWhite" style="font-size:14px">
+                User ID
+              </div>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="5">
+              <nz-form-item nzFlex>
+                <nz-form-control>                
+                  <input
+                   nz-input
+                   placeholder="userID"
+                   formControlName="adduserID"
+                   readonly onfocus="this.removeAttribute('readonly');"
+                   style='color:#000'
+                 />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          <div nz-col [nzSpan]="3">
+            <nz-form-item nzFlex>
+              <nz-form-label class="colorWhite"
+                >Role
+              </nz-form-label>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="5">
+              <nz-form-item nzFlex>
+                <nz-form-control>
+                  <nz-select
+                    style="width: 150px;"
+                    nzShowSearch
+                    nzAllowClear
+                    nzPlaceHolder="Select a role"
+                    formControlName="addRole"
+                    (ngModelChange)="changeAddRole($event)"
+                  >
+                    <nz-option
+                      *ngFor="let option of addRoleList"
+                      [nzLabel]="option.description"
+                      [nzValue]="option.value"
+                    >
+                    </nz-option>
+                  </nz-select>
+              
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="16">
+            <div nz-col [nzSpan]="3">
+              <nz-form-item nzFlex>
+                <nz-form-label class="colorWhite"
+                  >User Name
+                </nz-form-label>
+              </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="5">
+                <nz-form-item nzFlex>
+                  <nz-form-control>
+                    <input
+                     nz-input
+                     placeholder="userName"
+                     readonly onfocus="this.removeAttribute('readonly');"
+                     formControlName="addUserName"
+                     style='color:#000'
+                   />
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+            <div nz-col [nzSpan]="3">
+              <nz-form-item nzFlex>
+                <nz-form-label class="colorWhite"
+                  >Division
+                </nz-form-label>
+              </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="5">
+                <nz-form-item nzFlex>
+                  <nz-form-control>
+                    <nz-select
+                      style="width: 150px;"
+                      nzShowSearch
+                      nzAllowClear
+                      nzPlaceHolder="Select a dvision"
+                      formControlName="AddDvision"
+                      [(ngModel)]="flesSelect"
+                    >
+                      <nz-option
+                        *ngFor="let option of addDivisionList"
+                        [nzLabel]="option.companyName"
+                        [nzValue]="option.value"
+                      >
+                      </nz-option>
+                    </nz-select>
+                   
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+          </div>
+          <div nz-row [nzGutter]="16">
+            <div nz-col [nzSpan]="3">
+              <nz-form-item nzFlex>
+                <nz-form-label class="colorWhite"
+                  >Contact
+                </nz-form-label>
+              </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="5">
+              <nz-form-item nzFlex>
+                <nz-form-control>
+                  <input
+                    nz-input
+                    placeholder="Contact"
+                    readonly onfocus="this.removeAttribute('readonly');"
+                    formControlName="addContact"
+                    style='color:#000' type="number"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row [nzGutter]="16">
+            <div nz-col [nzSpan]="3">
+              <nz-form-item nzFlex>
+                <nz-form-label class="colorWhite"
+                  >Email
+                </nz-form-label>
+              </nz-form-item>
+            </div>
+            <div nz-col [nzSpan]="5">
+              <nz-form-item nzFlex>
+                <nz-form-control>
+                  <input
+                   nz-input
+                   placeholder="Email"
+                   readonly onfocus="this.removeAttribute('readonly');"
+                   formControlName="addEmail"
+                   style='color:#000' type="email"
+                 />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row [nzGutter]="16">
+              <div nz-col [nzSpan]="3">
+                <nz-form-item nzFlex>
+                  <nz-form-label class="colorWhite"
+                    >Password
+                  </nz-form-label>
+                </nz-form-item>
+              </div>
+              <div nz-col [nzSpan]="5">
+                  <nz-form-item nzFlex>
+                    <nz-form-control>                
+                      <input
+                       nz-input
+                       type="password"
+                       placeholder="Password"
+                       formControlName="Password"
+                       readonly onfocus="this.removeAttribute('readonly');"
+                       style='color:#000'
+                     />
+                    </nz-form-control>
+                  </nz-form-item>
+              </div>
+          </div>
+          <div nz-row [nzGutter]="16">
+              <div nz-col [nzSpan]="3">
+                <nz-form-item nzFlex>
+                  <nz-form-label class="colorWhite"
+                    >Re-enter Password
+                  </nz-form-label>
+                </nz-form-item>
+              </div>
+              <div nz-col [nzSpan]="5">
+                  <nz-form-item nzFlex>
+                    <nz-form-control>                
+                      <input
+                      type="password"
+                       nz-input
+                       placeholder="Re-enter Password"
+                       formControlName="RePassword"
+                       readonly onfocus="this.removeAttribute('readonly');"
+                       style='color:#000'
+                     />
+                    </nz-form-control>
+                  </nz-form-item>
+              </div>
+          </div>
+          <div nz-col [nzSpan]="2" class="search-area"  >
+              <button nz-button [nzType]="'default'" [disabled]="adduser" style="color:#000"><img src="../../../../assets/img/Images/SS_General/assign.png" class="add">Add</button>
+          </div>
+          <div nz-col [nzSpan]="2" class="search-area" (click)="Profiledata=1" >
+              <button nz-button [nzType]="'default'" style="color:#000"><img src="../../../../assets/img/Images/SS_General/cancel.jpg" class="delete">Cancel</button>
+          </div>
+      </form>
+    </div>
+  </div>
+  <div nz-row style="margin-top: 15px">
+      <div nz-col [nzSpan]="2" class="search-area" (click)="Profiledata=2" *ngIf="Profiledata==1" (click)="addShow()">
+          <button nz-button [nzType]="'default'" style="color:#000"><img src="../../../../assets/img/Images/SS_General/assign.png" class="add">Add</button>
+      </div>
+
+      <div nz-col [nzSpan]="2" class="search-area" *ngIf="Profiledata==1">
+          <button nz-button  nzType="dashed"  (click)="showDeleteConfirm()" [disabled]="deleteSelect" style="color:#000"><img src="../../../../assets/img/Images/SS_General/cancel.jpg" class="delete">delete</button>
+      </div>
+  </div>
+
+</div>

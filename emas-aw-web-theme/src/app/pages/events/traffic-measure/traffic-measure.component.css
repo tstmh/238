@@ -1,0 +1,30 @@
+* {
+	color: var(--cl);
+}
+
+.searchBar {
+	height: 40px;
+}
+
+.searchImg {
+	width: 20px;
+	height: 20px;
+}
+
+.search-area {
+	position: relative;
+	line-height: 40px;
+	zoom: 1;
+}
+
+.headerButton {
+	color: black;
+	width: 100px;
+}
+
+:host-context([data-theme-style="dark"]) {
+    --cl: white;
+}
+:host-context([data-theme-style="light"]) {
+    --cl: black;
+}

@@ -1,0 +1,96 @@
+<nz-modal
+      nzWrapClassName="vertical-center-modal"
+      [nzBodyStyle]="{background: 'rgba(0,0,0,.65)'}"
+      nzMaskClosable="false"
+      [nzTitle]="modalTitle"
+      [(nzVisible)]="isVisibleMiddle"
+      [nzFooter]="null"
+      (nzOnCancel)="handleCancelMiddle()"
+      zmMovableModal
+    >
+    <ng-template #modalTitle>
+        Update Equipment
+      </ng-template>
+    <form
+				nz-form
+				[formGroup]="validateForm"
+				class="ant-advanced-search-form"
+				(ngSubmit)="submitForm()"
+      >
+      <div nz-row [nzGutter]="16">
+        <div nz-col [nzSpan]="12">
+            <nz-form-item nzFlex>
+                <div nz-col [nzSpan]="8">
+                <nz-form-label class="colorWhite"
+                  >Equip ID 
+                </nz-form-label>
+                </div>
+                <nz-form-control>
+                   <p style="color: #fff;font-size: 14px;">{{selectItem.equipID}}</p>
+                </nz-form-control>
+              </nz-form-item>
+        </div>
+      </div>
+      <div nz-row [nzGutter]="16">
+        <div nz-col [nzSpan]="16">
+          <nz-form-item nzFlex>
+              <div nz-col [nzSpan]="16">
+            <nz-form-label
+              >Equip ID 
+            </nz-form-label>
+            </div>
+            <nz-form-control>
+         <div nz-col [nzSpan]="8">
+        <input
+          style="width: 150px;"
+          nz-input
+          placeholder=""
+          formControlName="EquipID"
+        />
+        </div>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div nz-row [nzGutter]="16">
+					<div nz-col [nzSpan]="16">
+						<nz-form-item nzFlex>
+							<div nz-col [nzSpan]="16">
+							<nz-form-label
+								>Enable/Disable OPE Status
+							</nz-form-label>
+							</div>
+							<nz-form-control>
+								<div nz-col [nzSpan]="8">
+								<nz-select
+									style="width: 150px;"
+									nzShowSearch
+									nzAllowClear
+									nzPlaceHolder=""
+									formControlName="status"
+								>
+									<nz-option
+										*ngFor="let option of listStatus"
+										[nzLabel]="option.label"
+										[nzValue]="option.value"
+									>
+									</nz-option>
+								</nz-select>
+								</div>
+								<!-- <input
+            nz-input
+            placeholder="placeholder"
+            formControlName="subSystem"
+            style='color:#000'
+          /> -->
+							</nz-form-control>
+						</nz-form-item>
+          </div>
+          </div>
+          </form>
+          <div class="footerBtn">
+            <button nz-button nzType="default" (click)="handleOkMiddle()"><img src="../../../../../assets/img/Images/SS_General/assign.png" style="width: 25px;height:25px;">Update</button>
+            <span style="display: inlie-block;width:15px;"></span>
+            <button nz-button nzType="default" (click)="handleCancelMiddle()"><img src="../../../../../assets/img/Images/SS_General/cancel.jpg" style="width: 25px;height:25px;">Cancel</button>
+          </div>
+  </nz-modal>

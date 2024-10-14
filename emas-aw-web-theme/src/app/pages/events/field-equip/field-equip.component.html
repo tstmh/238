@@ -1,0 +1,110 @@
+<div style="padding: 5px;">
+	<div class="pageHeader">
+
+		<div nz-row>
+			<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form" (ngSubmit)="submitForm()">
+				<div nz-row [nzGutter]="24">
+					<div nz-col [nzSpan]="8">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Subsystem</nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 150px;" nzShowSearch nzAllowClear nzPlaceHolder=""
+									formControlName="subSystem" (ngModelChange)="ngModelChange()"
+									[(ngModel)]="subSystem">
+									<nz-option *ngFor="let option of listSubSystem" [nzLabel]="option"
+										[nzValue]="option">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+				</div>
+				<div nz-row [nzGutter]="24">
+					<div nz-col [nzSpan]="4">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite" style="width: 86px;">Exp Way </nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 150px;" nzShowSearch nzAllowClear nzPlaceHolder=""
+									formControlName="expWay" [(ngModel)]="expWay" (ngModelChange)="setImgUrl()">
+									<nz-option *ngFor="let option of listExpWay" [nzLabel]="option.label"
+										[nzValue]="option.value">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="4">
+						<nz-form-item nzFlex>
+							<nz-form-label class="colorWhite">Equip Type </nz-form-label>
+							<nz-form-control>
+								<nz-select style="width: 150px;" nzShowSearch nzAllowClear nzPlaceHolder="All"
+									formControlName="equipType" [(ngModel)]="equipTypes">
+									<nz-option *ngFor="let option of listEquipType" [nzLabel]="option.label"
+										[nzValue]="option.label">
+									</nz-option>
+								</nz-select>
+							</nz-form-control>
+						</nz-form-item>
+					</div>
+					<div nz-col [nzSpan]="2" class="search-area" style="margin-top:4px;text-align: center;">
+						<button nz-button [nzType]="'default'" style="color: #000;" (click)="search()"><img
+								src="../../../../assets/img/Images/SS_General/find.png" class="">Search</button>
+					</div>
+					<div nz-col [nzSpan]="2" class="search-area" style="margin-top:4px;text-align: center;">
+						<button nz-button [nzType]="'default'" style="color: #000;width: 100px;" (click)="print()"><img
+								src="../../../../assets/img/Images/SS_General/print.png" class="">Print</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- <nz-divider></nz-divider> -->
+	<div style="width: 100%;height: 1px;background: white;margin:0 0 24px 0"></div>
+	<div nz-row class='fieldsContents'>
+		<div nz-col [nzSpan]="11" class="zoom">
+				
+			<div class="leftPicture" id="pic" (mouseover)='over()' (mouseout)="out()" (mousemove)="move($event)" (mousewheel)="wheel($event)">
+				<!--startprint-->
+				<img class="leftImg" id="img" [src]='this.imgUrl' style="zoom: 15%;width: 100%;min-height: 100%;" alt="">
+				<!--endprint-->
+				<span id="mask"></span>
+				<!-- <span id="lay"></span> -->
+			</div>
+			<!-- <div id="bigBox">  
+				<img  [src]='this.imgUrl' />  
+			</div> -->
+		</div>
+		<div nz-col [nzSpan]="11">
+			<p style="margin-bottom: 15px;font-size: 14px;" class="text">Query Result: {{basicTable.data.length}} Records
+				Found</p>
+			<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false"
+				[nzData]="listOfDisplayData" [nzScroll]="{ y: '460px' }">
+				<thead (nzSortChange)="sort($event)" nzSingleSort>
+					<tr style="background:cornflowerblue">
+						<ng-container *ngFor="let item of renderHeader;">
+							<th class="listTitle" nzShowSort nzSortKey='{{item.name}}'>
+								<div>{{item.name}}</div>
+							</th>
+						</ng-container>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let data of basicTable.data;let idx = index">
+						<td style="min-width: 260px">{{ data.equipId }}</td>
+						<td style="min-width: 260px">{{ data.statusCode }}</td>
+						<td style="min-width: 180px" *ngIf="data.status === '2'"><span class='greenBox'></span></td>
+						<td style="min-width: 180px" *ngIf="data.status === '0'"><span class='redBox'></span></td>
+						<td>{{ data.dateTime|date:'dd/MM/yyyy hh:mm:ss a'}}</td>
+					</tr>
+				</tbody>
+				<tfoot>
+
+				</tfoot>
+			</nz-table>
+			<div style="bottom: -20px; position: absolute;">
+				<p class='itemStatus'><span class='greenBox'></span> Operational</p>
+				<p class='itemStatus'><span class='redBox'></span>Not Operational</p>
+			</div>
+		</div>
+	</div>
+</div>

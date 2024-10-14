@@ -1,0 +1,357 @@
+<nz-modal zmMovableModal nzWrapClassName="vertical-center-modal" nzMaskClosable="false" [nzTitle]="modalTitle"
+	[nzContent]="modalContent" [(nzVisible)]="isVisibleMiddle" [nzFooter]="modalFooter" (nzOnCancel)="close()"
+	nzWidth="600px">
+
+	<ng-template #modalTitle>
+		<img src="../../../../../assets/img/Images/SS_LoginLogout/ExpresswayLogo.png" alt="" style="width: 16px;">
+		Send Command Window
+	</ng-template>
+
+	<ng-template #modalContent>
+		<div class="standard-font">
+			<div style="font-size: 16px;">Equip ID: {{selectItem.equipId}}</div>
+			<nz-divider nzText="Equipment Current Status" nzOrientation="left"></nz-divider>
+			<!-- <p class="message">Earthing Switch Status(ste):{{selectItem.equipmentId}}</p> -->
+			<div *ngIf="thisEquipType!='cdt' && thisEquipType!='wis'" style="margin-left: 18px;">
+				<div class="message">
+					<div>Operational State(ope):</div>
+					<div *ngIf="selectItem.opeValue === 2">Operational</div>
+					<div *ngIf="selectItem.opeValue === 0">Not Operational</div>
+					<div *ngIf="selectItem.opeValue !== 0 && selectItem.opeValue !== 2">Unknown Status</div>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='elp'||thisEquipType=='jop'" style="margin-left: 20px; display:flex;">
+				<div style="flex: 1;">
+					<div style="padding: 2px">Pump Status:</div>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stsValue==1">
+					<nz-tag [nzColor]="'blue'">Run</nz-tag>
+					<nz-tag [nzColor]="'default'">Stop</nz-tag>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stsValue==0">
+					<nz-tag [nzColor]="'default'">Run</nz-tag>
+					<nz-tag [nzColor]="'red'">Stop</nz-tag>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='jop'" style="margin-left: 20px; padding-top: 3px; display:flex;">
+				<div style="flex: 1;">
+					<div style="padding: 2px">Pump Mode:</div>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stoValue==1">
+					<nz-tag [nzColor]="'red'">Off</nz-tag>
+					<nz-tag [nzColor]="'default'">Manual</nz-tag>
+					<nz-tag [nzColor]="'default'">Automatic</nz-tag>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stmValue==1">
+					<nz-tag [nzColor]="'default'">Off</nz-tag>
+					<nz-tag [nzColor]="'blue'">Manual</nz-tag>
+					<nz-tag [nzColor]="'default'">Automatic</nz-tag>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stmValue==0">
+					<nz-tag [nzColor]="'default'">Off</nz-tag>
+					<nz-tag [nzColor]="'default'">Manual</nz-tag>
+					<nz-tag [nzColor]="'blue'">Automatic</nz-tag>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='wmv'" style="margin-left: 20px;">
+				<div style="display: flex;">
+					<div style="flex: 1;">
+						<div style="padding: 2px">Isolation Valve(Inlet):</div>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stiValue==1">
+						<nz-tag [nzColor]="'blue'">Open</nz-tag>
+						<nz-tag [nzColor]="'default'">Close</nz-tag>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stiValue==0">
+						<nz-tag [nzColor]="'default'">Open</nz-tag>
+						<nz-tag [nzColor]="'red'">Close</nz-tag>
+					</div>
+				</div>
+				<div style="display: flex;">
+					<div style="flex: 1;">
+						<div style="padding: 2px">Isolation Valve(Outlet):</div>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stlValue==1">
+						<nz-tag [nzColor]="'blue'">Open</nz-tag>
+						<nz-tag [nzColor]="'default'">Close</nz-tag>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stlValue==0">
+						<nz-tag [nzColor]="'default'">Open</nz-tag>
+						<nz-tag [nzColor]="'red'">Close</nz-tag>
+					</div>
+				</div>
+				<div style="display: flex;">
+					<div style="flex: 1;">
+						<div style="padding: 2px">Pressure Switch:</div>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stpValue==1">
+						<nz-tag [nzColor]="'blue'">Pressure</nz-tag>
+						<nz-tag [nzColor]="'default'">No Pressure</nz-tag>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stpValue==0">
+						<nz-tag [nzColor]="'default'">Pressure</nz-tag>
+						<nz-tag [nzColor]="'red'">No Pressure</nz-tag>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='wiv'" style="margin-left: 20px;">
+				<div style="display: flex;">
+					<div style="flex: 1;">
+						<div style="padding: 2px">Isolation Valve Status:</div>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stoValue==1">
+						<nz-tag [nzColor]="'blue'">Open</nz-tag>
+						<nz-tag [nzColor]="'default'">Close</nz-tag>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stoValue==0">
+						<nz-tag [nzColor]="'default'">Open</nz-tag>
+						<nz-tag [nzColor]="'red'">Close</nz-tag>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='lcp'" style="margin-left: 20px; display: flex;">
+				<div style="flex: 1;">
+					<div style="padding: 2px">Selector Switch Position:</div>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.strValue==0">
+					<nz-tag [nzColor]="'blue'">Local</nz-tag>
+					<nz-tag [nzColor]="'default'">Remote</nz-tag>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.strValue==1">
+					<nz-tag [nzColor]="'default'">Local</nz-tag>
+					<nz-tag [nzColor]="'red'">Remote</nz-tag>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='mcp'" style="margin-left: 20px; display: flex;">
+				<div style="flex: 1;">
+					<div style="padding: 2px">Selector Switch Position:</div>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.staValue==1">
+					<nz-tag [nzColor]="'blue'">Local</nz-tag>
+					<nz-tag [nzColor]="'default'">Remote</nz-tag>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.staValue==0">
+					<nz-tag [nzColor]="'default'">Local</nz-tag>
+					<nz-tag [nzColor]="'red'">Remote</nz-tag>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='fcp'" style="margin-left: 20px; display: flex;">
+				<div style="flex: 1;">
+					<div style="padding: 2px">Selector Switch Position:</div>
+				</div>
+				<div style="flex: 1;" class="statuslabel"
+					*ngIf="selectItem.stcValue==0&&selectItem.stdValue==0&&selectItem.steValue==0">
+					<nz-tag [nzColor]="'default'">EMAS</nz-tag>
+					<nz-tag [nzColor]="'default'">FCP</nz-tag>
+					<nz-tag [nzColor]="'default'">WS</nz-tag>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stcValue==1">
+					<nz-tag [nzColor]="'blue'">EMAS</nz-tag>
+					<nz-tag [nzColor]="'default'">FCP</nz-tag>
+					<nz-tag [nzColor]="'default'">WS</nz-tag>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stdValue==1">
+					<nz-tag [nzColor]="'default'">EMAS</nz-tag>
+					<nz-tag [nzColor]="'blue'">FCP</nz-tag>
+					<nz-tag [nzColor]="'default'">WS</nz-tag>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.steValue==1">
+					<nz-tag [nzColor]="'default'">EMAS</nz-tag>
+					<nz-tag [nzColor]="'default'">FCP</nz-tag>
+					<nz-tag [nzColor]="'blue'">WS</nz-tag>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='wmp'||thisEquipType=='fcp'" style="margin-left: 20px;">
+				<div style="display: flex; margin-top: 2px;">
+					<div style="flex: 1;">
+						<div style="padding: 2px">PLC A in Control Mode:</div>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.staValue==1">
+						<nz-tag [nzColor]="'blue'">Control</nz-tag>
+						<nz-tag [nzColor]="'default'">Not in Control</nz-tag>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.staValue==0">
+						<nz-tag [nzColor]="'default'">Control</nz-tag>
+						<nz-tag [nzColor]="'red'">Not in Control</nz-tag>
+					</div>
+				</div>
+				<div style="display: flex; margin-top: 2px;">
+					<div style="flex: 1;">
+						<div style="padding: 2px">PLC B in Control Mode:</div>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stbValue==1">
+						<nz-tag [nzColor]="'blue'">Control</nz-tag>
+						<nz-tag [nzColor]="'default'">Not in Control</nz-tag>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stbValue==0">
+						<nz-tag [nzColor]="'default'">Control</nz-tag>
+						<nz-tag [nzColor]="'red'">Not in Control</nz-tag>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='mcp'" style="margin-left: 20px;">
+				<div style="display: flex; margin-top: 2px;">
+					<div style="flex: 1;">
+						<div style="padding: 2px">PLC A in Control Mode:</div>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stcValue==1">
+						<nz-tag [nzColor]="'blue'">Control</nz-tag>
+						<nz-tag [nzColor]="'default'">Not in Control</nz-tag>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stcValue==0">
+						<nz-tag [nzColor]="'default'">Control</nz-tag>
+						<nz-tag [nzColor]="'red'">Not in Control</nz-tag>
+					</div>
+				</div>
+				<div style="display: flex; margin-top: 2px;">
+					<div style="flex: 1;">
+						<div style="padding: 2px">PLC B in Control Mode:</div>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stdValue==1">
+						<nz-tag [nzColor]="'blue'">Control</nz-tag>
+						<nz-tag [nzColor]="'default'">Not in Control</nz-tag>
+					</div>
+					<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stdValue==0">
+						<nz-tag [nzColor]="'default'">Control</nz-tag>
+						<nz-tag [nzColor]="'red'">Not in Control</nz-tag>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='fcp'||thisEquipType=='mcp'" style="margin-left: 20px; display: flex;">
+				<div style="flex: 1;">
+					<div style="padding: 2px">Water Mist Sys Zones Restriction Status:</div>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stsValue==1">
+					<nz-tag [nzColor]="'blue'">Restriction</nz-tag>
+					<nz-tag [nzColor]="'default'">No Restriction</nz-tag>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stsValue==0">
+					<nz-tag [nzColor]="'default'">Restriction</nz-tag>
+					<nz-tag [nzColor]="'red'">No Restriction</nz-tag>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='cdt'" style="margin-left: 20px; display: flex;">
+				<div style="flex: 1;">
+					<div style="padding: 2px">Count Down Timer Activated Status:</div>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.staValue==1">
+					<nz-tag [nzColor]="'blue'">Activated</nz-tag>
+					<nz-tag [nzColor]="'default'">Not Activated</nz-tag>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.staValue==0">
+					<nz-tag [nzColor]="'default'">Activated</nz-tag>
+					<nz-tag [nzColor]="'red'">Not Activated</nz-tag>
+				</div>
+			</div>
+			<div *ngIf="thisEquipType=='wis'" style="margin-left: 20px; display: flex;">
+				<div style="flex: 1;">
+					<div style="padding: 2px">Isolation Status:</div>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stiValue==1">
+					<nz-tag [nzColor]="'blue'">Isolated</nz-tag>
+					<nz-tag [nzColor]="'default'">Not Isolated</nz-tag>
+				</div>
+				<div style="flex: 1;" class="statuslabel" *ngIf="selectItem.stiValue==0">
+					<nz-tag [nzColor]="'default'">Isolated</nz-tag>
+					<nz-tag [nzColor]="'red'">Not Isolated</nz-tag>
+				</div>
+			</div>
+			<hr>
+			<div style="margin-left: 18px; padding: 2px; margin-top: -10px;">
+				<div>Alarms:</div>
+				<div *ngIf="this.alarmList.length != 0" style="margin-right: 3.0rem;">
+					<nz-table #basicTable id="nzTable" [nzShowPagination]="false" [nzFrontPagination]="false"
+						[nzBordered]="true" [nzData]="alarmList" nzSize="small">
+						<thead>
+							<tr>
+								<th class="listTitle" style="background:cornflowerblue">Alarm Description</th>
+								<th class="listTitle" style="background:cornflowerblue">Alarm Time</th>
+								<!-- <th style="color: rgba(0,0,0,.65);">Alarm Description</th>
+								<th style="color: rgba(0,0,0,.65);">Alarm Time</th> -->
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let data of basicTable.data;let idx = index">
+								<td>{{ data.description }}</td>
+								<td>{{ data.startDate }}</td>
+							</tr>
+						</tbody>
+					</nz-table>
+					<!-- <textarea style="resize: none; width: 100%; font-size: 12px;" disabled="true"
+						placeholder="No Alarms">{{selectItem.alarm}}</textarea> -->
+				</div>
+				<div *ngIf="this.alarmList.length == 0" style="margin-right: 3.0rem; border-width: 1px; border-style:solid; 
+					border-color: #dfdada; padding: 5px; height: 50px;">
+					<span style="color: #bdbdbd;">No Alarms</span>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="thisEquipType=='jop'||thisEquipType=='cdt'" style="margin-left: 18px;">
+			<nz-divider nzText="Measure" nzOrientation="left"></nz-divider>
+			<div *ngFor="let data of measureList" class="message">
+				<div>{{data.measureDescription}}:</div>
+				<div style="width: 100px;">{{data.measureValue}}</div>
+			</div>
+		</div>
+		<div *ngIf="thisEquipType=='wmv'||thisEquipType=='wiv'">
+			<nz-divider nzText="Remote Control" nzOrientation="left"></nz-divider>
+			<nz-radio-group [(ngModel)]="radioValue" nzButtonStyle="solid" nzSize="large" (ngModelChange)="radioChange($event)">
+				<div style="display: flex;margin-bottom: 10px;margin-left:22px;">
+					<div style="margin-right: 25px; font-size: 14px;">Valve Command(Open/Close):</div>
+					<div>
+						<label nz-radio-button nzValue="cdo">Open</label>&nbsp;
+						<label nz-radio-button nzValue="cdc">Close</label>
+					</div>
+				</div>
+			</nz-radio-group>
+		</div>
+		<div *ngIf="thisEquipType=='jop'">
+			<nz-divider nzText="Remote Control" nzOrientation="left"></nz-divider>
+			<nz-radio-group [(ngModel)]="radioValue" nzButtonStyle="solid" nzSize="large" (ngModelChange)="radioChange($event)">
+				<div style="display: flex;margin-bottom: 10px;margin-left:22px;">
+					<div style="margin-right: 25px; font-size: 14px;">Pump Command(Run/Stop):</div>
+					<div>
+						<label nz-radio-button nzValue="cdr">Run</label>&nbsp;
+						<label nz-radio-button nzValue="cds">Stop</label>
+					</div>
+				</div>
+			</nz-radio-group>
+		</div>
+		<div *ngIf="thisEquipType=='elp'">
+			<nz-divider nzText="Remote Control" nzOrientation="left"></nz-divider>
+			<nz-radio-group [(ngModel)]="radioValue" nzButtonStyle="solid" nzSize="large" (ngModelChange)="radioChange($event)">
+				<div style="display: flex;margin-bottom: 10px;margin-left:22px;">
+					<div style="margin-right: 25px; font-size: 14px;">Pump Command(Run/Stop):</div>
+					<div>
+						<label nz-radio-button nzValue="cdr">Run</label>
+					</div>
+				</div>
+			</nz-radio-group>
+		</div>
+		<div *ngIf="thisEquipType=='cdt'">			
+			<nz-divider nzText="Remote Control" nzOrientation="left"></nz-divider>
+			<nz-radio-group [(ngModel)]="radioValue" (ngModelChange)="radioChange($event)">
+				<div style="display: flex;margin-bottom: 10px;margin-left:22px;">
+					<div style="margin-right: 25px; font-size: 14px;">Count Down Timer Command(Reset/Stop):</div>
+					<div>
+						<label nz-radio nzValue="cdr">Reset</label>
+						<label nz-radio nzValue="cds">Stop</label>
+					</div>
+				</div>
+			</nz-radio-group>
+		</div>
+	</ng-template>
+
+	<ng-template #modalFooter>
+		<div class="bottomBtn">
+			<div *ngIf="enabled" style="margin-right: 10px;">
+				<button [disabled]="selectItem.opeValue !== 2 || disabled" nz-button nzType="default" (click)="apply()">Apply</button>
+			</div>			
+			<!-- <button [disabled]="disabled" nz-button nzType="default" (click)="clear()">Clear</button> -->
+			<button nz-button nzType="default" (click)="refresh()">Refresh</button>
+		</div>
+	</ng-template>
+
+</nz-modal>
+
+<emas-apply-command [selectItem]="selectItem" [radioValue]="radioValue" [listOfData]="listOfData"></emas-apply-command>
